@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="ATE.Rental — Fashion Sharing Community ส่งต่อความสวยในชุดที่มีเรื่องเล่า กรองตามสี ไซส์ แบรนด์ และวันที่ต้องการเช่า">
+  <title>Fashion Sharing Community — ATE.Rental</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="rental.css">
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <nav id="navbar" class="scrolled">
+    <div class="container">
+      <a href="index.html" class="logo">ATE<span>.Rental</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">หน้าแรก</a></li>
+        <li><a href="rental.html" style="color:var(--primary)">บริการเช่าชุด</a></li>
+        <li><a href="index.html#consign">ฝากชุดเช่า</a></li>
+        <li><a href="index.html#faq">FAQ</a></li>
+        <li><a href="#" class="nav-cta">เช่าเลย</a></li>
+      </ul>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="rental-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html">หน้าแรก</a>
+        <span>›</span>
+        <span class="current">Fashion Sharing</span>
+      </div>
+      <div class="community-badge">✦ Fashion Sharing Community</div>
+      <h1>ส่งต่อ<span>ความสวย</span><br>ชุดทุกตัวมีเรื่องเล่า</h1>
+      <p>ไม่ใช่แค่เช่าชุด — แต่คือการแชร์สไตล์ ส่งต่อประสบการณ์ความสวย พร้อมเคล็ดลับการแต่งตัวจากเจ้าของชุด</p>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <section class="rental-main">
+    <div class="container">
+
+      <!-- Mobile Filter Toggle -->
+      <button class="mobile-filter-toggle" id="mobileFilterToggle">
+        🔍 กรองชุด <span class="filter-count-badge" id="filterCountBadge">0</span>
+      </button>
+
+      <!-- Active Filter Tags -->
+      <div class="active-filters" id="activeFilters"></div>
+
+      <div class="rental-layout">
+
+        <!-- FILTER SIDEBAR -->
+        <aside class="filter-sidebar" id="filterSidebar">
+          <div class="filter-header">
+            <h3>ตัวกรอง</h3>
+            <button class="close-filter-btn" id="closeFilter">✕</button>
+            <button class="clear-filters-btn" id="clearAll">ล้างทั้งหมด</button>
+          </div>
+
+          <!-- Color Filter -->
+          <div class="filter-group">
+            <div class="filter-group-title">🎨 สีชุด</div>
+            <div class="color-swatches">
+              <label class="color-swatch">
+                <input type="checkbox" name="color" value="white">
+                <div class="swatch swatch-white"></div>
+                <span class="swatch-label">ขาว</span>
+              </label>
+              <label class="color-swatch">
+                <input type="checkbox" name="color" value="black">
+                <div class="swatch swatch-black"></div>
+                <span class="swatch-label">ดำ</span>
+              </label>
+              <label class="color-swatch">
+                <input type="checkbox" name="color" value="red">
+                <div class="swatch swatch-red"></div>
+                <span class="swatch-label">แดง</span>
+              </label>
+              <label class="color-swatch">
+                <input type="checkbox" name="color" value="pink">
+                <div class="swatch swatch-pink"></div>
+                <span class="swatch-label">ชมพู</span>
+              </label>
+              <label class="color-swatch">
+                <input type="checkbox" name="color" value="blue">
+                <div class="swatch swatch-blue"></div>
+                <span class="swatch-label">น้ำเงิน</span>
+              </label>
+              <label class="color-swatch">
+                <input type="checkbox" name="color" value="green">
+                <div class="swatch swatch-green"></div>
+                <span class="swatch-label">เขียว</span>
+              </label>
+              <label class="color-swatch">
+                <input type="checkbox" name="color" value="gold">
+                <div class="swatch swatch-gold"></div>
+                <span class="swatch-label">ทอง</span>
+              </label>
+              <label class="color-swatch">
+                <input type="checkbox" name="color" value="beige">
+                <div class="swatch swatch-beige"></div>
+                <span class="swatch-label">เบจ</span>
+              </label>
+              <label class="color-swatch">
+                <input type="checkbox" name="color" value="navy">
+                <div class="swatch swatch-navy"></div>
+                <span class="swatch-label">กรม</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Size Filter -->
+          <div class="filter-group">
+            <div class="filter-group-title">📏 ไซส์</div>
+            <div class="size-options">
+              <label class="size-btn"><input type="checkbox" name="size" value="XS"><span
+                  class="size-label">XS</span></label>
+              <label class="size-btn"><input type="checkbox" name="size" value="S"><span
+                  class="size-label">S</span></label>
+              <label class="size-btn"><input type="checkbox" name="size" value="M"><span
+                  class="size-label">M</span></label>
+              <label class="size-btn"><input type="checkbox" name="size" value="L"><span
+                  class="size-label">L</span></label>
+              <label class="size-btn"><input type="checkbox" name="size" value="XL"><span
+                  class="size-label">XL</span></label>
+            </div>
+          </div>
+
+          <!-- Brand Filter -->
+          <div class="filter-group">
+            <div class="filter-group-title">🏷️ แบรนด์</div>
+            <div class="brand-options">
+              <label class="brand-check">
+                <input type="checkbox" name="brand" value="ATE Original">
+                <span>ATE Original</span>
+                <span class="brand-count">4</span>
+              </label>
+              <label class="brand-check">
+                <input type="checkbox" name="brand" value="Zara">
+                <span>Zara</span>
+                <span class="brand-count">3</span>
+              </label>
+              <label class="brand-check">
+                <input type="checkbox" name="brand" value="H&M">
+                <span>H&M</span>
+                <span class="brand-count">2</span>
+              </label>
+              <label class="brand-check">
+                <input type="checkbox" name="brand" value="Mango">
+                <span>Mango</span>
+                <span class="brand-count">2</span>
+              </label>
+              <label class="brand-check">
+                <input type="checkbox" name="brand" value="Other">
+                <span>Other</span>
+                <span class="brand-count">1</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Date Filter -->
+          <div class="filter-group">
+            <div class="filter-group-title">📅 วันที่ต้องการเช่า</div>
+            <div class="date-input-wrap">
+              <input type="date" id="rentalDate" min="">
+            </div>
+            <div class="date-hint">💡 เลือกวันเพื่อดูชุดที่ว่างให้เช่า</div>
+          </div>
+
+          <button class="apply-filter-btn" id="applyFilter">ดูผลลัพธ์</button>
+        </aside>
+
+        <!-- PRODUCT AREA -->
+        <div class="product-area">
+          <!-- Result Bar -->
+          <div class="result-bar">
+            <div class="result-count" id="resultCount">แสดง <strong>12</strong> ชุด</div>
+            <select class="sort-select" id="sortSelect">
+              <option value="recommended">แนะนำ</option>
+              <option value="price-low">ราคาต่ำ → สูง</option>
+              <option value="price-high">ราคาสูง → ต่ำ</option>
+              <option value="newest">ใหม่ล่าสุด</option>
+            </select>
+          </div>
+
+          <!-- Product Grid -->
+          <div class="rental-grid" id="rentalGrid">
+
+            <!-- Card 1 -->
+            <div class="rental-card" data-color="white" data-sizes="S,M,L" data-brand="ATE Original"
+              data-category="casual" data-price="390" data-booked="2026-03-15,2026-03-16,2026-03-17">
+              <div class="product-img">
+                <img src="dress1.png" alt="White Ruffle Mini Dress" loading="lazy">
+                <span class="product-badge casual">Casual</span>
+                <span class="product-days">3 วัน</span>
+                <span class="avail-badge available">ว่าง</span>
+              </div>
+              <div class="card-info">
+                <h3>White Ruffle Mini Dress</h3>
+                <div class="card-brand">ATE Original</div>
+                <div class="card-meta">
+                  <span><span class="card-color-dot" style="background:#fff;border:1px solid #ccc"></span> ขาว</span>
+                  <span>S, M, L</span>
+                </div>
+                <!-- Storytelling -->
+                <div class="card-story">
+                  <div class="story-avatar">🌸</div>
+                  <div class="story-text">
+                    <span class="story-name">พี่มิ้นท์</span> — "ใส่ไปบรันช์กับเพื่อนสาว ได้คอมพลิเมนต์เยอะมาก
+                    แนะนำใส่กับรองเท้าส้นเตี้ยนะคะ สบายทั้งวัน"
+                  </div>
+                </div>
+                <div class="card-bottom">
+                  <div class="card-price">฿390 <span>/ 3 วัน</span></div>
+                  <div class="rental-remaining"><span class="remaining-dot"></span> เช่าได้อีก <strong>7</strong> ครั้ง
+                  </div>
+                </div>
+                <a href="#" class="btn btn-dark" onclick="goToCheckout(this); return false;">เช่าชุดนี้</a>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="rental-card" data-color="beige" data-sizes="S,M,L" data-brand="Zara" data-category="casual"
+              data-price="390" data-booked="2026-03-20,2026-03-21,2026-03-22">
+              <div class="product-img">
+                <img src="dress2.png" alt="Beige Linen Wrap Dress" loading="lazy">
+                <span class="product-badge casual">Casual</span>
+                <span class="product-days">3 วัน</span>
+                <span class="avail-badge available">ว่าง</span>
+              </div>
+              <div class="card-info">
+                <h3>Beige Linen Wrap Dress</h3>
+                <div class="card-brand">Zara</div>
+                <div class="card-meta">
+                  <span><span class="card-color-dot" style="background:#d4b896"></span> เบจ</span>
+                  <span>S, M, L</span>
+                </div>
+                <div class="card-story">
+                  <div class="story-avatar">🧡</div>
+                  <div class="story-text">
+                    <span class="story-name">น้องแพร</span> — "ตัวนี้ซื้อจาก Zara ที่ลอนดอน ใส่ไปเที่ยวทะเลสวยมากค่ะ
+                    ผ้าลินินเบาสบาย ถ่ายรูปขึ้นทุกมุม"
+                  </div>
+                </div>
+                <div class="card-bottom">
+                  <div class="card-price">฿390 <span>/ 3 วัน</span></div>
+                  <div class="rental-remaining"><span class="remaining-dot"></span> เช่าได้อีก <strong>9</strong> ครั้ง
+                  </div>
+                </div>
+                <a href="#" class="btn btn-dark" onclick="goToCheckout(this); return false;">เช่าชุดนี้</a>
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="rental-card" data-color="green" data-sizes="S,M,L" data-brand="ATE Original"
+              data-category="party" data-price="490" data-booked="2026-03-10,2026-03-11,2026-03-12">
+              <div class="product-img">
+                <img src="dress3.png" alt="Emerald Satin Cocktail" loading="lazy">
+                <span class="product-badge party">Party</span>
+                <span class="product-days">3 วัน</span>
+                <span class="avail-badge available">ว่าง</span>
+              </div>
+              <div class="card-info">
+                <h3>Emerald Satin Cocktail</h3>
+                <div class="card-brand">ATE Original</div>
+                <div class="card-meta">
+                  <span><span class="card-color-dot" style="background:#1e6b45"></span> เขียว</span>
+                  <span>S, M, L</span>
+                </div>
+                <div class="card-story">
+                  <div class="story-avatar">💚</div>
+                  <div class="story-text">
+                    <span class="story-name">พี่เจน</span> — "ใส่ไปงานแต่ง ผ้าซาตินพริ้วสวย ทิปส์คือจับคู่กับ clutch
+                    สีทอง จะดู luxury มาก"
+                  </div>
+                </div>
+                <div class="card-bottom">
+                  <div class="card-price">฿490 <span>/ 3 วัน</span></div>
+                  <div class="rental-remaining"><span class="remaining-dot"></span> เช่าได้อีก <strong>5</strong> ครั้ง
+                  </div>
+                </div>
+                <a href="#" class="btn btn-dark" onclick="goToCheckout(this); return false;">เช่าชุดนี้</a>
+              </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="rental-card" data-color="black" data-sizes="XS,S,M" data-brand="Zara" data-category="party"
+              data-price="490" data-booked="2026-03-08,2026-03-09,2026-03-10">
+              <div class="product-img">
+                <img src="dress4.png" alt="Black Sequin Mini" loading="lazy">
+                <span class="product-badge party">Party</span>
+                <span class="product-days">3 วัน</span>
+                <span class="avail-badge available">ว่าง</span>
+              </div>
+              <div class="card-info">
+                <h3>Black Sequin Mini</h3>
+                <div class="card-brand">Zara</div>
+                <div class="card-meta">
+                  <span><span class="card-color-dot" style="background:#1a1a1a"></span> ดำ</span>
+                  <span>XS, S, M</span>
+                </div>
+                <div class="card-story">
+                  <div class="story-avatar">✨</div>
+                  <div class="story-text">
+                    <span class="story-name">พี่แนน</span> — "ใส่ไปปาร์ตี้วันเกิด sequin เปล่งประกายมากค่ะ แมทช์กับ
+                    earring ยาว ๆ จะปังสุด!"
+                  </div>
+                </div>
+                <div class="card-bottom">
+                  <div class="card-price">฿490 <span>/ 3 วัน</span></div>
+                  <div class="rental-remaining"><span class="remaining-dot"></span> เช่าได้อีก <strong>6</strong> ครั้ง
+                  </div>
+                </div>
+                <a href="#" class="btn btn-dark" onclick="goToCheckout(this); return false;">เช่าชุดนี้</a>
+              </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="rental-card" data-color="navy" data-sizes="S,M" data-brand="ATE Original"
+              data-category="premium" data-price="590" data-booked="2026-03-25,2026-03-26,2026-03-27">
+              <div class="product-img">
+                <img src="dress5.png" alt="Navy Velvet Evening Gown" loading="lazy">
+                <span class="product-badge premium">Premium</span>
+                <span class="product-days">3 วัน</span>
+                <span class="avail-badge available">ว่าง</span>
+              </div>
+              <div class="card-info">
+                <h3>Navy Velvet Evening Gown</h3>
+                <div class="card-brand">ATE Original</div>
+                <div class="card-meta">
+                  <span><span class="card-color-dot" style="background:#1b2a4a"></span> กรม</span>
+                  <span>S, M</span>
+                </div>
+                <div class="card-story">
+                  <div class="story-avatar">💎</div>
+                  <div class="story-text">
+                    <span class="story-name">พี่เมย์</span> — "เดรสตัวนี้ใส่ไปงานดินเนอร์มาครั้งเดียว
+                    ผ้ากำมะหยี่สวยหรูมาก แนะนำทำผมแบบรวบขึ้นจะดูเพรียวค่ะ"
+                  </div>
+                </div>
+                <div class="card-bottom">
+                  <div class="card-price">฿590 <span>/ 3 วัน</span></div>
+                  <div class="rental-remaining"><span class="remaining-dot"></span> เช่าได้อีก <strong>9</strong> ครั้ง
+                  </div>
+                </div>
+                <a href="#" class="btn btn-dark" onclick="goToCheckout(this); return false;">เช่าชุดนี้</a>
+              </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="rental-card" data-color="beige" data-sizes="S,M,L" data-brand="Mango" data-category="premium"
+              data-price="590" data-booked="">
+              <div class="product-img">
+                <img src="dress6.png" alt="Champagne Silk Maxi" loading="lazy">
+                <span class="product-badge premium">Premium</span>
+                <span class="product-days">3 วัน</span>
+                <span class="avail-badge available">ว่าง</span>
+              </div>
+              <div class="card-info">
+                <h3>Champagne Silk Maxi</h3>
+                <div class="card-brand">Mango</div>
+                <div class="card-meta">
+                  <span><span class="card-color-dot" style="background:#d4b896"></span> เบจ</span>
+                  <span>S, M, L</span>
+                </div>
+                <div class="card-story">
+                  <div class="story-avatar">🥂</div>
+                  <div class="story-text">
+                    <span class="story-name">พี่อร</span> — "ชุดนี้ใส่ไปงาน gala ผ้าไหมพลิ้วสวย ใส่กับ heels
+                    สีนู้ดจะดูขายาวมาก เหมาะมากเลย"
+                  </div>
+                </div>
+                <div class="card-bottom">
+                  <div class="card-price">฿590 <span>/ 3 วัน</span></div>
+                  <div class="rental-remaining"><span class="remaining-dot"></span> เช่าได้อีก <strong>8</strong> ครั้ง
+                  </div>
+                </div>
+                <a href="#" class="btn btn-dark" onclick="goToCheckout(this); return false;">เช่าชุดนี้</a>
+              </div>
+            </div>
+
+            <!-- Card 7 -->
+            <div class="rental-card" data-color="pink" data-sizes="S,M,L" data-brand="H&M" data-category="party"
+              data-price="490" data-booked="2026-03-18,2026-03-19,2026-03-20">
+              <div class="product-img">
+                <img src="dress7.png" alt="Pink Ruched Corset Midi" loading="lazy">
+                <span class="product-badge party">Party</span>
+                <span class="product-days">3 วัน</span>
+                <span class="avail-badge available">ว่าง</span>
+              </div>
+              <div class="card-info">
+                <h3>Pink Ruched Corset Midi</h3>
+                <div class="card-brand">H&M</div>
+                <div class="card-meta">
+                  <span><span class="card-color-dot" style="background:#e8a0bf"></span> ชมพู</span>
+                  <span>S, M, L</span>
+                </div>
+                <div class="card-story">
+                  <div class="story-avatar">🌷</div>
+                  <div class="story-text">
+                    <span class="story-name">น้องปิ่น</span> — "corset midi สุดฮิตค่ะ ใส่ไป date night ได้รับคำชมเลย
+                    ทรงรัดเอวทำให้ดูเข้ารูปสวยมาก"
+                  </div>
+                </div>
+                <div class="card-bottom">
+                  <div class="card-price">฿490 <span>/ 3 วัน</span></div>
+                  <div class="rental-remaining"><span class="remaining-dot"></span> เช่าได้อีก <strong>4</strong> ครั้ง
+                  </div>
+                </div>
+                <a href="#" class="btn btn-dark" onclick="goToCheckout(this); return false;">เช่าชุดนี้</a>
+              </div>
+            </div>
+
+            <!-- Card 8 -->
+            <div class="rental-card" data-color="red" data-sizes="XS,S,M,L" data-brand="Zara" data-category="party"
+              data-price="490" data-booked="">
+              <div class="product-img">
+                <img src="dress8.png" alt="Red Satin Slip Dress" loading="lazy">
+                <span class="product-badge party">Party</span>
+                <span class="product-days">3 วัน</span>
+                <span class="avail-badge available">ว่าง</span>
+              </div>
+              <div class="card-info">
+                <h3>Red Satin Slip Dress</h3>
+                <div class="card-brand">Zara</div>
+                <div class="card-meta">
+                  <span><span class="card-color-dot" style="background:#c0392b"></span> แดง</span>
+                  <span>XS, S, M, L</span>
+                </div>
+                <div class="card-story">
+                  <div class="story-avatar">❤️</div>
+                  <div class="story-text">
+                    <span class="story-name">พี่เบลล์</span> — "slip dress สีแดงตัวนี้ใส่แล้วเซ็กซี่แบบเรียบหรู
+                    ใส่ไปงานดินเนอร์ทุกคนต้องหัน!"
+                  </div>
+                </div>
+                <div class="card-bottom">
+                  <div class="card-price">฿490 <span>/ 3 วัน</span></div>
+                  <div class="rental-remaining"><span class="remaining-dot"></span> เช่าได้อีก <strong>10</strong> ครั้ง
+                  </div>
+                </div>
+                <a href="#" class="btn btn-dark" onclick="goToCheckout(this); return false;">เช่าชุดนี้</a>
+              </div>
+            </div>
+
+            <!-- Card 9 -->
+            <div class="rental-card" data-color="blue" data-sizes="XS,S,M" data-brand="H&M" data-category="party"
+              data-price="490" data-booked="2026-03-12,2026-03-13,2026-03-14">
+              <div class="product-img">
+                <img src="dress9.png" alt="Royal Blue Corset Mini" loading="lazy">
+                <span class="product-badge party">Party</span>
+                <span class="product-days">3 วัน</span>
+                <span class="avail-badge available">ว่าง</span>
+              </div>
+              <div class="card-info">
+                <h3>Royal Blue Corset Mini</h3>
+                <div class="card-brand">H&M</div>
+                <div class="card-meta">
+                  <span><span class="card-color-dot" style="background:#2471a3"></span> น้ำเงิน</span>
+                  <span>XS, S, M</span>
+                </div>
+                <div class="card-story">
+                  <div class="story-avatar">💙</div>
+                  <div class="story-text">
+                    <span class="story-name">น้องบี</span> — "สีน้ำเงินตัวนี้สวยจริงค่ะ puff sleeves ช่วยให้ดู cute
+                    ใส่ไปเดินห้างยังได้คอมพลิเมนต์"
+                  </div>
+                </div>
+                <div class="card-bottom">
+                  <div class="card-price">฿490 <span>/ 3 วัน</span></div>
+                  <div class="rental-remaining"><span class="remaining-dot"></span> เช่าได้อีก <strong>3</strong> ครั้ง
+                  </div>
+                </div>
+                <a href="#" class="btn btn-dark" onclick="goToCheckout(this); return false;">เช่าชุดนี้</a>
+              </div>
+            </div>
+
+            <!-- Card 10 -->
+            <div class="rental-card" data-color="green" data-sizes="S,M,L" data-brand="Mango" data-category="premium"
+              data-price="590" data-booked="">
+              <div class="product-img">
+                <img src="dress10.png" alt="Emerald Cut-Out Midi" loading="lazy">
+                <span class="product-badge premium">Premium</span>
+                <span class="product-days">3 วัน</span>
+                <span class="avail-badge available">ว่าง</span>
+              </div>
+              <div class="card-info">
+                <h3>Emerald Cut-Out Midi</h3>
+                <div class="card-brand">Mango</div>
+                <div class="card-meta">
+                  <span><span class="card-color-dot" style="background:#1e6b45"></span> เขียว</span>
+                  <span>S, M, L</span>
+                </div>
+                <div class="card-story">
+                  <div class="story-avatar">🍃</div>
+                  <div class="story-text">
+                    <span class="story-name">พี่กิ๊ฟ</span> — "cut-out dress ตัวนี้ทันสมัยมาก ใส่ไปถ่าย content ได้ยอด
+                    like เยอะมาก ภาพสวยทุกมุม"
+                  </div>
+                </div>
+                <div class="card-bottom">
+                  <div class="card-price">฿590 <span>/ 3 วัน</span></div>
+                  <div class="rental-remaining"><span class="remaining-dot"></span> เช่าได้อีก <strong>10</strong> ครั้ง
+                  </div>
+                </div>
+                <a href="#" class="btn btn-dark" onclick="goToCheckout(this); return false;">เช่าชุดนี้</a>
+              </div>
+            </div>
+
+            <!-- Card 11 -->
+            <div class="rental-card" data-color="gold" data-sizes="XS,S,M" data-brand="Other" data-category="premium"
+              data-price="590" data-booked="2026-03-22,2026-03-23,2026-03-24">
+              <div class="product-img">
+                <img src="dress11.png" alt="Gold Metallic Draped Mini" loading="lazy">
+                <span class="product-badge premium">Premium</span>
+                <span class="product-days">3 วัน</span>
+                <span class="avail-badge available">ว่าง</span>
+              </div>
+              <div class="card-info">
+                <h3>Gold Metallic Draped Mini</h3>
+                <div class="card-brand">Retrofête</div>
+                <div class="card-meta">
+                  <span><span class="card-color-dot" style="background:linear-gradient(135deg,#d4a853,#f0d78c)"></span>
+                    ทอง</span>
+                  <span>XS, S, M</span>
+                </div>
+                <div class="card-story">
+                  <div class="story-avatar">👑</div>
+                  <div class="story-text">
+                    <span class="story-name">พี่นุ่น</span> — "ชุดนี้ซื้อมาจากอเมริกา ใส่ไปงาน award night ครั้งเดียว
+                    metallic สวยวิ้ง ใส่ผมตรงจะดูเท่มาก"
+                  </div>
+                </div>
+                <div class="card-bottom">
+                  <div class="card-price">฿590 <span>/ 3 วัน</span></div>
+                  <div class="rental-remaining"><span class="remaining-dot"></span> เช่าได้อีก <strong>9</strong> ครั้ง
+                  </div>
+                </div>
+                <a href="#" class="btn btn-dark" onclick="goToCheckout(this); return false;">เช่าชุดนี้</a>
+              </div>
+            </div>
+
+            <!-- Card 12 -->
+            <div class="rental-card" data-color="black" data-sizes="S,M,L,XL" data-brand="ATE Original"
+              data-category="premium" data-price="590" data-booked="">
+              <div class="product-img">
+                <img src="dress12.png" alt="Black Halter Maxi Gown" loading="lazy">
+                <span class="product-badge premium">Premium</span>
+                <span class="product-days">3 วัน</span>
+                <span class="avail-badge available">ว่าง</span>
+              </div>
+              <div class="card-info">
+                <h3>Black Halter Maxi Gown</h3>
+                <div class="card-brand">ATE Original</div>
+                <div class="card-meta">
+                  <span><span class="card-color-dot" style="background:#1a1a1a"></span> ดำ</span>
+                  <span>S, M, L, XL</span>
+                </div>
+                <div class="card-story">
+                  <div class="story-avatar">🖤</div>
+                  <div class="story-text">
+                    <span class="story-name">พี่ออม</span> — "maxi gown ตัวนี้สวยคลาสสิก ใส่ไปงานราตรีได้เลย
+                    หลังเปิดสวยเซ็กซี่ แนะนำผมเกล้าค่ะ"
+                  </div>
+                </div>
+                <div class="card-bottom">
+                  <div class="card-price">฿590 <span>/ 3 วัน</span></div>
+                  <div class="rental-remaining"><span class="remaining-dot"></span> เช่าได้อีก <strong>10</strong> ครั้ง
+                  </div>
+                </div>
+                <a href="#" class="btn btn-dark" onclick="goToCheckout(this); return false;">เช่าชุดนี้</a>
+              </div>
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state" id="emptyState">
+              <div class="empty-state-icon">👗</div>
+              <h3>ไม่พบชุดที่ตรงกับตัวกรอง</h3>
+              <p>ลองปรับตัวกรองใหม่ หรือล้างตัวกรองทั้งหมดเพื่อดูชุดทั้งหมด</p>
+              <button class="btn btn-primary" onclick="clearAllFilters()">ล้างตัวกรองทั้งหมด</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop">↑</button>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">ATE<span>.Rental</span></a>
+          <p>Fashion Sharing Community — แชร์ชุดสวย ส่งต่อความมั่นใจ ทุกชุดมีเรื่องเล่า</p>
+        </div>
+        <div class="footer-col">
+          <h4>บริการ</h4>
+          <ul>
+            <li><a href="rental.html">เช่ารายครั้ง</a></li>
+            <li><a href="index.html#consign">ฝากชุดเช่า</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>เกี่ยวกับเรา</h4>
+          <ul>
+            <li><a href="#">เกี่ยวกับ ATE.Rental</a></li>
+            <li><a href="index.html#policy">นโยบาย</a></li>
+            <li><a href="index.html#faq">คำถามที่พบบ่อย</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>ติดต่อเรา</h4>
+          <ul>
+            <li><a href="#">Line: @aterental</a></li>
+            <li><a href="#">Tel: 02-xxx-xxxx</a></li>
+            <li><a href="#">info@aterental.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 ATE.Rental — All rights reserved.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="Instagram">ig</a>
+          <a href="#" aria-label="Line">L</a>
+          <a href="#" aria-label="TikTok">Tk</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ===== FILTER SYSTEM =====
+    const cards = document.querySelectorAll('.rental-card');
+    const rentalGrid = document.getElementById('rentalGrid');
+    const resultCount = document.getElementById('resultCount');
+    const emptyState = document.getElementById('emptyState');
+    const activeFiltersEl = document.getElementById('activeFilters');
+    const filterCountBadge = document.getElementById('filterCountBadge');
+
+    // Thai color names
+    const colorNames = {
+      white: 'ขาว', black: 'ดำ', red: 'แดง', pink: 'ชมพู',
+      blue: 'น้ำเงิน', green: 'เขียว', gold: 'ทอง', beige: 'เบจ', navy: 'กรม'
+    };
+
+    // Set min date to today
+    const dateInput = document.getElementById('rentalDate');
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.min = today;
+
+    // Listen to all filter changes
+    document.querySelectorAll('input[name="color"], input[name="size"], input[name="brand"]').forEach(input => {
+      input.addEventListener('change', applyFilters);
+    });
+    dateInput.addEventListener('change', applyFilters);
+
+    // Sort
+    document.getElementById('sortSelect').addEventListener('change', applyFilters);
+
+    function getSelectedValues(name) {
+      return [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(i => i.value);
+    }
+
+    function applyFilters() {
+      const selectedColors = getSelectedValues('color');
+      const selectedSizes = getSelectedValues('size');
+      const selectedBrands = getSelectedValues('brand');
+      const selectedDate = dateInput.value;
+
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const cardColor = card.dataset.color;
+        const cardSizes = card.dataset.sizes.split(',');
+        const cardBrand = card.dataset.brand;
+        const bookedDates = card.dataset.booked ? card.dataset.booked.split(',') : [];
+
+        let show = true;
+
+        // Color filter
+        if (selectedColors.length > 0 && !selectedColors.includes(cardColor)) show = false;
+
+        // Size filter (any match)
+        if (selectedSizes.length > 0 && !selectedSizes.some(s => cardSizes.includes(s))) show = false;
+
+        // Brand filter
+        if (selectedBrands.length > 0 && !selectedBrands.includes(cardBrand)) show = false;
+
+        // Date filter - check if date is booked
+        if (selectedDate && bookedDates.includes(selectedDate)) show = false;
+
+        // Update availability badge
+        const availBadge = card.querySelector('.avail-badge');
+        if (selectedDate) {
+          if (bookedDates.includes(selectedDate)) {
+            availBadge.textContent = 'ไม่ว่าง';
+            availBadge.className = 'avail-badge unavailable';
+          } else {
+            availBadge.textContent = 'ว่าง';
+            availBadge.className = 'avail-badge available';
+          }
+        } else {
+          availBadge.textContent = 'ว่าง';
+          availBadge.className = 'avail-badge available';
+        }
+
+        if (show) {
+          card.classList.remove('filtering-out');
+          card.classList.add('filtering-in');
+          card.style.display = '';
+          visibleCount++;
+        } else {
+          card.classList.add('filtering-out');
+          card.classList.remove('filtering-in');
+          setTimeout(() => { if (card.classList.contains('filtering-out')) card.style.display = 'none'; }, 300);
+        }
+      });
+
+      // Sort visible cards
+      const sortValue = document.getElementById('sortSelect').value;
+      const visibleCards = [...cards].filter(c => !c.classList.contains('filtering-out'));
+
+      visibleCards.sort((a, b) => {
+        const priceA = parseInt(a.dataset.price);
+        const priceB = parseInt(b.dataset.price);
+        if (sortValue === 'price-low') return priceA - priceB;
+        if (sortValue === 'price-high') return priceB - priceA;
+        return 0;
+      });
+
+      visibleCards.forEach(card => rentalGrid.appendChild(card));
+      rentalGrid.appendChild(emptyState);
+
+      // Update result count
+      resultCount.innerHTML = `แสดง <strong>${visibleCount}</strong> ชุด`;
+
+      // Empty state
+      if (visibleCount === 0) {
+        emptyState.classList.add('show');
+      } else {
+        emptyState.classList.remove('show');
+      }
+
+      // Update active filter tags
+      updateFilterTags(selectedColors, selectedSizes, selectedBrands, selectedDate);
+
+      // Update mobile badge
+      const totalFilters = selectedColors.length + selectedSizes.length + selectedBrands.length + (selectedDate ? 1 : 0);
+      filterCountBadge.textContent = totalFilters;
+      filterCountBadge.classList.toggle('has-filters', totalFilters > 0);
+    }
+
+    function updateFilterTags(colors, sizes, brands, date) {
+      activeFiltersEl.innerHTML = '';
+      colors.forEach(c => addTag(`สี: ${colorNames[c]}`, 'color', c));
+      sizes.forEach(s => addTag(`ไซส์: ${s}`, 'size', s));
+      brands.forEach(b => addTag(`แบรนด์: ${b}`, 'brand', b));
+      if (date) {
+        const d = new Date(date);
+        const formatted = d.toLocaleDateString('th-TH', { day: 'numeric', month: 'short', year: 'numeric' });
+        addTag(`วันที่: ${formatted}`, 'date', '');
+      }
+    }
+
+    function addTag(label, type, value) {
+      const tag = document.createElement('div');
+      tag.className = 'filter-tag';
+      tag.innerHTML = `${label} <button class="remove-tag" aria-label="Remove filter">×</button>`;
+      tag.querySelector('.remove-tag').addEventListener('click', () => {
+        if (type === 'date') {
+          dateInput.value = '';
+        } else {
+          const input = document.querySelector(`input[name="${type}"][value="${value}"]`);
+          if (input) input.checked = false;
+        }
+        applyFilters();
+      });
+      activeFiltersEl.appendChild(tag);
+    }
+
+    function clearAllFilters() {
+      document.querySelectorAll('input[name="color"], input[name="size"], input[name="brand"]').forEach(i => i.checked = false);
+      dateInput.value = '';
+      document.getElementById('sortSelect').value = 'recommended';
+      applyFilters();
+    }
+
+    document.getElementById('clearAll').addEventListener('click', clearAllFilters);
+
+    // ===== MOBILE FILTER =====
+    const filterSidebar = document.getElementById('filterSidebar');
+
+    document.getElementById('mobileFilterToggle').addEventListener('click', () => {
+      filterSidebar.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+
+    document.getElementById('closeFilter').addEventListener('click', () => {
+      filterSidebar.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+
+    document.getElementById('applyFilter').addEventListener('click', () => {
+      filterSidebar.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+
+    // ===== NAVBAR =====
+    document.getElementById('menuToggle').addEventListener('click', () => {
+      const links = document.querySelector('.nav-links');
+      links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+      links.style.flexDirection = 'column';
+      links.style.position = 'absolute';
+      links.style.top = '100%';
+      links.style.left = '0';
+      links.style.width = '100%';
+      links.style.background = 'rgba(26,26,26,0.98)';
+      links.style.padding = '20px';
+      links.style.gap = '16px';
+      links.style.borderRadius = '0 0 16px 16px';
+    });
+
+    // ===== BACK TO TOP =====
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      backToTop.classList.toggle('visible', window.scrollY > 400);
+    });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ===== SMOOTH SCROLL =====
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const href = a.getAttribute('href');
+        if (href === '#') return;
+        e.preventDefault();
+        const t = document.querySelector(href);
+        if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // ===== STORY EXPAND/COLLAPSE =====
+    document.querySelectorAll('.card-story').forEach(story => {
+      story.addEventListener('click', () => {
+        story.classList.toggle('expanded');
+      });
+    });
+
+    // ===== CHECKOUT NAVIGATION =====
+    function goToCheckout(btn) {
+      const card = btn.closest('.rental-card');
+      const name = card.querySelector('.card-info h3').textContent;
+      const brand = card.querySelector('.card-brand').textContent;
+      const price = card.dataset.price;
+      const img = card.querySelector('.product-img img').getAttribute('src');
+      const colorEl = card.querySelector('.card-color-dot');
+      const color = colorEl ? colorEl.nextSibling.textContent.trim() : '';
+      const sizeEl = card.querySelector('.card-sizes');
+      const size = sizeEl ? sizeEl.textContent.replace(/[^A-Z,XSMLxsml]/g, '').trim() : '';
+      const storyEl = card.querySelector('.story-text');
+      const story = storyEl ? storyEl.textContent.trim() : '';
+
+      const params = new URLSearchParams({
+        name, brand, price, image: img, color, size, story
+      });
+      window.location.href = `checkout.html?${params.toString()}`;
+    }
+  </script>
+</body>
+
+</html>

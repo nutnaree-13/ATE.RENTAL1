@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ATE.Rental — ชำระเงินค่าเช่าชุด QR Code PromptPay หรือบัตรเครดิต">
+    <title>ชำระเงิน — ATE.Rental</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="checkout.css">
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <nav id="navbar" class="scrolled">
+        <div class="container">
+            <a href="index.html" class="logo">ATE<span>.Rental</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">หน้าแรก</a></li>
+                <li><a href="rental.html">บริการเช่าชุด</a></li>
+                <li><a href="index.html#faq">FAQ</a></li>
+            </ul>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+        </div>
+    </nav>
+
+    <!-- CHECKOUT CONTAINER -->
+    <section class="checkout-section">
+        <div class="container">
+
+            <!-- Progress Steps -->
+            <div class="checkout-progress">
+                <div class="progress-step active" data-step="1">
+                    <div class="step-circle">1</div>
+                    <span>สรุปคำสั่งเช่า</span>
+                </div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="2">
+                    <div class="step-circle">2</div>
+                    <span>ข้อมูลลูกค้า</span>
+                </div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="3">
+                    <div class="step-circle">3</div>
+                    <span>ชำระเงิน</span>
+                </div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="4">
+                    <div class="step-circle">✓</div>
+                    <span>ยืนยัน</span>
+                </div>
+            </div>
+
+            <div class="checkout-layout">
+
+                <!-- ===== STEP 1: ORDER SUMMARY ===== -->
+                <div class="checkout-step" id="step1">
+                    <div class="checkout-card">
+                        <h2>📋 สรุปคำสั่งเช่า</h2>
+                        <div class="order-item">
+                            <div class="order-img">
+                                <img id="orderImg" src="dress5.png" alt="ชุดที่เช่า">
+                            </div>
+                            <div class="order-details">
+                                <h3 id="orderName">Navy Velvet Evening Gown</h3>
+                                <div class="order-brand" id="orderBrand">ATE Original</div>
+                                <div class="order-meta">
+                                    <span>📐 ไซส์: <strong id="orderSize">M</strong></span>
+                                    <span>🎨 สี: <strong id="orderColor">กรม</strong></span>
+                                </div>
+                                <div class="order-story">
+                                    <span class="story-tag">📖</span>
+                                    <span id="orderStory">พี่เมย์ — "เดรสตัวนี้ใส่ไปงานดินเนอร์มาครั้งเดียว
+                                        แนะนำทำผมแบบรวบขึ้นจะดูเพรียว"</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="order-breakdown">
+                            <div class="breakdown-row">
+                                <span>ค่าเช่าชุด (3 วัน)</span>
+                                <span id="orderPrice">฿590</span>
+                            </div>
+                            <div class="breakdown-row">
+                                <span>ค่าจัดส่ง</span>
+                                <span id="orderShipping" class="shipping-note">฿50</span>
+                            </div>
+                            <div class="breakdown-row">
+                                <span>ค่ามัดจำ</span>
+                                <span class="no-deposit">ไม่มี ✓</span>
+                            </div>
+                            <div class="breakdown-total">
+                                <span>รวมทั้งหมด</span>
+                                <span id="orderTotal">฿640</span>
+                            </div>
+                        </div>
+
+                        <div class="rental-dates">
+                            <div class="date-field">
+                                <label>📅 วันที่ต้องการรับชุด</label>
+                                <input type="date" id="pickupDate">
+                            </div>
+                            <div class="date-field">
+                                <label>📅 วันที่คืนชุด (อัตโนมัติ 3 วัน)</label>
+                                <input type="date" id="returnDate" readonly>
+                            </div>
+                        </div>
+
+                        <!-- Shipping Method Selection -->
+                        <div class="shipping-selection">
+                            <h3>🚛 เลือกวิธีจัดส่ง</h3>
+                            <div class="shipping-options">
+                                <label class="shipping-option active">
+                                    <input type="radio" name="shipping" value="standard" checked
+                                        onchange="updateShipping()">
+                                    <div class="shipping-card">
+                                        <div class="shipping-card-header">
+                                            <span class="shipping-name">📦 Flash / Kerry / ไปรษณีย์</span>
+                                            <span class="shipping-price">฿50</span>
+                                        </div>
+                                        <p class="shipping-desc">จัดส่งภายใน 1-3 วันทำการ ทั้งขาส่งและขาคืน</p>
+                                    </div>
+                                </label>
+                                <label class="shipping-option">
+                                    <input type="radio" name="shipping" value="messenger" onchange="updateShipping()">
+                                    <div class="shipping-card">
+                                        <div class="shipping-card-header">
+                                            <span class="shipping-name">🏍️ แมสเซนเจอร์</span>
+                                            <span class="shipping-price">ค่าส่งตามจริง</span>
+                                        </div>
+                                        <p class="shipping-desc">ส่งถึงบ้านตามเวลาที่กำหนด —
+                                            ชำระค่าส่งปลายทางกับแมสเซนเจอร์</p>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <!-- Messenger Time Picker (hidden by default) -->
+                            <div class="messenger-time hidden" id="messengerTimeSection">
+                                <div class="messenger-note">
+                                    <span>⏰</span>
+                                    ต้องสั่งล่วงหน้าอย่างน้อย <strong>2 ชั่วโมง</strong> —
+                                    ไม่สามารถระบุเวลาจัดส่งน้อยกว่า 2 ชั่วโมงนับจากเวลาสั่งซื้อ
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="messengerDate">📅 วันที่ส่ง</label>
+                                        <input type="date" id="messengerDate">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="messengerTime">🕐 เวลาที่ต้องการรับชุด</label>
+                                        <input type="time" id="messengerTime" step="1800">
+                                    </div>
+                                </div>
+                                <div class="messenger-validation hidden" id="messengerValidation">
+                                    <span>⚠️</span> <span id="messengerError"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary checkout-next" onclick="goToStep(2)">ถัดไป — กรอกข้อมูลลูกค้า
+                            →</button>
+                    </div>
+                </div>
+
+                <!-- ===== STEP 2: CUSTOMER INFO ===== -->
+                <div class="checkout-step hidden" id="step2">
+                    <div class="checkout-card">
+                        <h2>👤 ข้อมูลลูกค้า</h2>
+
+                        <div class="form-group">
+                            <label for="custName">ชื่อ - นามสกุล *</label>
+                            <input type="text" id="custName" placeholder="กรุณากรอกชื่อ-นามสกุล" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="custPhone">เบอร์โทรศัพท์ *</label>
+                                <input type="tel" id="custPhone" placeholder="08x-xxx-xxxx" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="custEmail">อีเมล</label>
+                                <input type="email" id="custEmail" placeholder="email@example.com">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="custAddress">ที่อยู่จัดส่ง *</label>
+                            <textarea id="custAddress" rows="3" placeholder="กรุณากรอกที่อยู่สำหรับจัดส่งชุด"
+                                required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>🪪 แนบภาพถ่ายบัตรประชาชน *</label>
+                            <div class="id-card-upload" id="idCardUpload">
+                                <div class="upload-area" id="uploadArea">
+                                    <div class="upload-icon">📸</div>
+                                    <p>คลิกเพื่ออัปโหลด หรือลากไฟล์มาวาง</p>
+                                    <span class="upload-hint">รองรับ JPG, PNG ไม่เกิน 5MB</span>
+                                    <input type="file" id="idCardFile" accept="image/*" hidden>
+                                </div>
+                                <div class="upload-preview hidden" id="uploadPreview">
+                                    <img id="previewImg" src="" alt="Preview">
+                                    <button class="remove-upload" onclick="removeUpload()">✕</button>
+                                </div>
+                            </div>
+                            <div class="id-card-note">
+                                <span class="note-icon">🔒</span>
+                                สามารถปิดบังเลขบัตรบางส่วนและข้อมูล sensitive ได้ — ข้อมูลจะถูกลบหลังคืนชุดเรียบร้อย
+                            </div>
+                        </div>
+
+                        <div class="btn-row">
+                            <button class="btn btn-outline checkout-back" onclick="goToStep(1)">← ย้อนกลับ</button>
+                            <button class="btn btn-primary checkout-next" onclick="validateAndGoStep3()">ถัดไป —
+                                ชำระเงิน →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== STEP 3: PAYMENT ===== -->
+                <div class="checkout-step hidden" id="step3">
+                    <div class="checkout-card">
+                        <h2>💳 เลือกวิธีชำระเงิน</h2>
+
+                        <!-- Payment Method Tabs -->
+                        <div class="payment-tabs">
+                            <button class="payment-tab active" onclick="switchPayment('qr')" id="tabQR">
+                                <span class="tab-icon">📱</span>
+                                <span class="tab-label">QR Code<br><small>PromptPay</small></span>
+                            </button>
+                            <button class="payment-tab" onclick="switchPayment('card')" id="tabCard">
+                                <span class="tab-icon">💳</span>
+                                <span class="tab-label">บัตรเครดิต<br><small>Visa / MasterCard</small></span>
+                            </button>
+                        </div>
+
+                        <!-- QR Code Payment -->
+                        <div class="payment-content" id="payQR">
+                            <div class="qr-section">
+                                <div class="qr-code-box">
+                                    <div class="qr-header">
+                                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 30'%3E%3Crect fill='%231a3f7a' width='100' height='30' rx='4'/%3E%3Ctext x='50' y='20' text-anchor='middle' fill='white' font-size='12' font-family='Arial'%3EPromptPay%3C/text%3E%3C/svg%3E"
+                                            alt="PromptPay" class="promptpay-logo">
+                                    </div>
+                                    <div class="qr-image" id="qrImage">
+                                        <!-- Generated QR pattern -->
+                                        <canvas id="qrCanvas" width="200" height="200"></canvas>
+                                    </div>
+                                    <div class="qr-amount">
+                                        <span>จำนวนเงิน</span>
+                                        <strong id="qrAmount">฿590.00</strong>
+                                    </div>
+                                </div>
+                                <div class="qr-instructions">
+                                    <h4>วิธีชำระเงิน</h4>
+                                    <ol>
+                                        <li>เปิดแอปธนาคารของคุณ</li>
+                                        <li>เลือก "สแกน QR Code"</li>
+                                        <li>สแกน QR Code ด้านบน</li>
+                                        <li>ตรวจสอบจำนวนเงินและยืนยันการชำระ</li>
+                                    </ol>
+                                    <div class="qr-timer">
+                                        <span class="timer-icon">⏱️</span>
+                                        QR Code หมดอายุใน <strong id="qrTimer">15:00</strong> นาที
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary checkout-next" onclick="simulatePayment()">
+                                ✅ ฉันชำระเงินแล้ว
+                            </button>
+                        </div>
+
+                        <!-- Credit Card Payment -->
+                        <div class="payment-content hidden" id="payCard">
+                            <div class="card-form">
+                                <div class="card-visual">
+                                    <div class="card-chip"></div>
+                                    <div class="card-number-display" id="cardDisplay">•••• •••• •••• ••••</div>
+                                    <div class="card-bottom">
+                                        <div>
+                                            <span class="card-label">CARDHOLDER</span>
+                                            <div id="cardHolderDisplay">YOUR NAME</div>
+                                        </div>
+                                        <div>
+                                            <span class="card-label">EXPIRES</span>
+                                            <div id="cardExpiryDisplay">MM/YY</div>
+                                        </div>
+                                    </div>
+                                    <div class="card-brand-logo" id="cardBrandLogo">VISA</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="cardNumber">หมายเลขบัตร</label>
+                                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19"
+                                        oninput="formatCardNumber(this)">
+                                    <div class="card-brands">
+                                        <span class="brand-icon visa">VISA</span>
+                                        <span class="brand-icon mc">MC</span>
+                                        <span class="brand-icon jcb">JCB</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="cardHolder">ชื่อบนบัตร</label>
+                                    <input type="text" id="cardHolder" placeholder="FULL NAME ON CARD"
+                                        oninput="updateCardDisplay()">
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="cardExpiry">วันหมดอายุ</label>
+                                        <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5"
+                                            oninput="formatExpiry(this)">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cardCVV">CVV</label>
+                                        <input type="password" id="cardCVV" placeholder="•••" maxlength="4">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="payment-total-bar">
+                                <span>ยอดชำระ</span>
+                                <strong id="cardTotal">฿590.00</strong>
+                            </div>
+
+                            <button class="btn btn-primary checkout-next" onclick="simulatePayment()">
+                                🔒 ชำระเงิน ฿590
+                            </button>
+                            <div class="secure-note">
+                                <span>🔒</span> ข้อมูลบัตรถูกเข้ารหัสด้วย SSL — ปลอดภัย 100%
+                            </div>
+                        </div>
+
+                        <div class="btn-row" style="margin-top:16px">
+                            <button class="btn btn-outline checkout-back" onclick="goToStep(2)">← ย้อนกลับ</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== STEP 4: CONFIRMATION ===== -->
+                <div class="checkout-step hidden" id="step4">
+                    <div class="checkout-card confirmation-card">
+                        <div class="success-animation">
+                            <div class="success-circle">
+                                <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                    <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none" />
+                                    <path class="checkmark-check" fill="none" d="m14.1 27.2 7.1 7.2 16.7-16.8" />
+                                </svg>
+                            </div>
+                        </div>
+                        <h2>🎉 ชำระเงินสำเร็จ!</h2>
+                        <p class="confirm-subtitle">ขอบคุณที่เช่าชุดกับ ATE.Rental — Fashion Sharing Community</p>
+
+                        <div class="confirm-details">
+                            <div class="confirm-row">
+                                <span>หมายเลขคำสั่งเช่า</span>
+                                <strong id="confirmOrderId">ATE-20260307-001</strong>
+                            </div>
+                            <div class="confirm-row">
+                                <span>ชุดที่เช่า</span>
+                                <strong id="confirmDress">Navy Velvet Evening Gown</strong>
+                            </div>
+                            <div class="confirm-row">
+                                <span>วันที่รับชุด</span>
+                                <strong id="confirmPickup">—</strong>
+                            </div>
+                            <div class="confirm-row">
+                                <span>วันที่คืนชุด</span>
+                                <strong id="confirmReturn">—</strong>
+                            </div>
+                            <div class="confirm-row">
+                                <span>วิธีจัดส่ง</span>
+                                <strong id="confirmShipping">Flash / Kerry / ไปรษณีย์</strong>
+                            </div>
+                            <div class="confirm-row">
+                                <span>ชำระโดย</span>
+                                <strong id="confirmMethod">QR Code PromptPay</strong>
+                            </div>
+                            <div class="confirm-row total">
+                                <span>ยอดชำระ</span>
+                                <strong id="confirmTotal">฿640</strong>
+                            </div>
+                        </div>
+
+                        <div class="confirm-next-steps">
+                            <h4>📦 ขั้นตอนถัดไป</h4>
+                            <ol>
+                                <li>ทีมงานจะยืนยันคำสั่งเช่าผ่าน Line: <strong>@aterental</strong></li>
+                                <li>ส่งชุดให้คุณตามวันที่กำหนด (ค่าจัดส่งชำระปลายทาง)</li>
+                                <li>สวมใส่ชุดสวย 3 วัน 🎀</li>
+                                <li>ส่งคืนชุดผ่านขนส่ง ไม่ต้องซัก ไม่ต้องรีด</li>
+                            </ol>
+                        </div>
+
+                        <div class="btn-row">
+                            <a href="rental.html" class="btn btn-outline">← เช่าชุดเพิ่ม</a>
+                            <a href="index.html" class="btn btn-primary">กลับหน้าแรก</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SIDEBAR: Mini Summary (visible on step 2 & 3) -->
+                <aside class="checkout-sidebar" id="checkoutSidebar">
+                    <div class="sidebar-card">
+                        <h4>🧾 สรุปรายการ</h4>
+                        <div class="sidebar-item">
+                            <img id="sideImg" src="dress5.png" alt="">
+                            <div>
+                                <strong id="sideName">Navy Velvet Evening Gown</strong>
+                                <span id="sideBrand">ATE Original</span>
+                            </div>
+                        </div>
+                        <div class="sidebar-row">
+                            <span>ค่าเช่า (3 วัน)</span>
+                            <span id="sidePrice">฿590</span>
+                        </div>
+                        <div class="sidebar-row">
+                            <span>ค่าจัดส่ง</span>
+                            <span id="sideShipping" class="shipping-note">฿50</span>
+                        </div>
+                        <div class="sidebar-row">
+                            <span>ค่ามัดจำ</span>
+                            <span class="no-deposit">ไม่มี</span>
+                        </div>
+                        <div class="sidebar-total">
+                            <span>รวมทั้งหมด</span>
+                            <strong id="sideTotal">฿640</strong>
+                        </div>
+                    </div>
+                </aside>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Processing Overlay -->
+    <div class="processing-overlay hidden" id="processingOverlay">
+        <div class="processing-content">
+            <div class="processing-spinner"></div>
+            <h3>กำลังตรวจสอบการชำระเงิน...</h3>
+            <p>กรุณารอสักครู่</p>
+        </div>
+    </div>
+
+    <script>
+        // ===== CHECKOUT STATE =====
+        let currentStep = 1;
+        let selectedPayment = 'qr';
+        let selectedShipping = 'standard';
+        let shippingCost = 50;
+        let qrTimerInterval;
+
+        // Parse URL params for dress info
+        const params = new URLSearchParams(window.location.search);
+        const dressInfo = {
+            name: params.get('name') || 'Navy Velvet Evening Gown',
+            brand: params.get('brand') || 'ATE Original',
+            price: parseInt(params.get('price')) || 590,
+            image: params.get('image') || 'dress5.png',
+            color: params.get('color') || 'กรม',
+            size: params.get('size') || 'M',
+            story: params.get('story') || 'พี่เมย์ — "เดรสตัวนี้ใส่ไปงานดินเนอร์มาครั้งเดียว แนะนำทำผมแบบรวบขึ้น"'
+        };
+
+        // Populate order info
+        function populateOrder() {
+            document.getElementById('orderImg').src = dressInfo.image;
+            document.getElementById('orderName').textContent = dressInfo.name;
+            document.getElementById('orderBrand').textContent = dressInfo.brand;
+            document.getElementById('orderSize').textContent = dressInfo.size;
+            document.getElementById('orderColor').textContent = dressInfo.color;
+            document.getElementById('orderStory').textContent = dressInfo.story;
+            document.getElementById('orderPrice').textContent = `฿${dressInfo.price}`;
+            document.getElementById('sideImg').src = dressInfo.image;
+            document.getElementById('sideName').textContent = dressInfo.name;
+            document.getElementById('sideBrand').textContent = dressInfo.brand;
+            document.getElementById('sidePrice').textContent = `฿${dressInfo.price}`;
+
+            // Set min date to tomorrow
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            document.getElementById('pickupDate').min = tomorrow.toISOString().split('T')[0];
+            document.getElementById('pickupDate').value = tomorrow.toISOString().split('T')[0];
+            document.getElementById('messengerDate').min = new Date().toISOString().split('T')[0];
+            document.getElementById('messengerDate').value = new Date().toISOString().split('T')[0];
+            updateReturnDate();
+            updateTotals();
+        }
+
+        // ===== SHIPPING =====
+        function updateShipping() {
+            const val = document.querySelector('input[name="shipping"]:checked').value;
+            selectedShipping = val;
+            const messengerSection = document.getElementById('messengerTimeSection');
+
+            document.querySelectorAll('.shipping-option').forEach(opt => {
+                opt.classList.toggle('active', opt.querySelector('input').value === val);
+            });
+
+            if (val === 'messenger') {
+                messengerSection.classList.remove('hidden');
+                shippingCost = 0; // customer pays messenger directly
+            } else {
+                messengerSection.classList.add('hidden');
+                shippingCost = 50;
+            }
+            updateTotals();
+        }
+
+        function updateTotals() {
+            const total = dressInfo.price + shippingCost;
+            const shippingText = selectedShipping === 'messenger' ? 'ชำระปลายทาง' : '฿50';
+            const totalText = selectedShipping === 'messenger' ? `฿${dressInfo.price}` : `฿${total}`;
+
+            document.getElementById('orderShipping').textContent = shippingText;
+            document.getElementById('orderTotal').textContent = totalText;
+            document.getElementById('sideShipping').textContent = shippingText;
+            document.getElementById('sideTotal').textContent = totalText;
+
+            const payAmount = selectedShipping === 'messenger' ? dressInfo.price : total;
+            document.getElementById('qrAmount').textContent = `฿${payAmount}.00`;
+            document.getElementById('cardTotal').textContent = `฿${payAmount}.00`;
+        }
+
+        function validateMessengerTime() {
+            const dateVal = document.getElementById('messengerDate').value;
+            const timeVal = document.getElementById('messengerTime').value;
+            const validationEl = document.getElementById('messengerValidation');
+            const errorEl = document.getElementById('messengerError');
+
+            if (!dateVal || !timeVal) {
+                validationEl.classList.add('hidden');
+                return false;
+            }
+
+            const selectedDateTime = new Date(`${dateVal}T${timeVal}`);
+            const now = new Date();
+            const minTime = new Date(now.getTime() + 2 * 60 * 60 * 1000); // +2 hours
+
+            if (selectedDateTime < minTime) {
+                validationEl.classList.remove('hidden');
+                const minTimeStr = minTime.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
+                errorEl.textContent = `เวลาจัดส่งต้องไม่น้อยกว่า 2 ชั่วโมงนับจากตอนนี้ (เร็วสุด ${minTimeStr} น.)`;
+                return false;
+            }
+
+            validationEl.classList.add('hidden');
+            return true;
+        }
+
+        document.getElementById('messengerDate').addEventListener('change', validateMessengerTime);
+        document.getElementById('messengerTime').addEventListener('change', validateMessengerTime);
+
+        function updateReturnDate() {
+            const pickup = document.getElementById('pickupDate').value;
+            if (pickup) {
+                const ret = new Date(pickup);
+                ret.setDate(ret.getDate() + 3);
+                document.getElementById('returnDate').value = ret.toISOString().split('T')[0];
+            }
+        }
+        document.getElementById('pickupDate').addEventListener('change', updateReturnDate);
+
+        // ===== STEP NAVIGATION =====
+        function goToStep(step) {
+            // Validate messenger time before leaving step 1
+            if (currentStep === 1 && step > 1 && selectedShipping === 'messenger') {
+                const mDate = document.getElementById('messengerDate').value;
+                const mTime = document.getElementById('messengerTime').value;
+                if (!mDate || !mTime) {
+                    alert('กรุณาระบุวันที่และเวลาจัดส่งสำหรับแมสเซนเจอร์');
+                    return;
+                }
+                if (!validateMessengerTime()) {
+                    alert('เวลาจัดส่งต้องไม่น้อยกว่า 2 ชั่วโมงนับจากเวลาปัจจุบัน');
+                    return;
+                }
+            }
+
+            document.querySelectorAll('.checkout-step').forEach(s => s.classList.add('hidden'));
+            document.getElementById(`step${step}`).classList.remove('hidden');
+
+            // Update progress
+            document.querySelectorAll('.progress-step').forEach(s => {
+                const n = parseInt(s.dataset.step);
+                s.classList.toggle('active', n <= step);
+                s.classList.toggle('completed', n < step);
+            });
+            document.querySelectorAll('.progress-line').forEach((line, i) => {
+                line.classList.toggle('active', i < step - 1);
+            });
+
+            // Show sidebar on step 2 & 3
+            const sidebar = document.getElementById('checkoutSidebar');
+            sidebar.classList.toggle('visible', step === 2 || step === 3);
+
+            currentStep = step;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Start QR timer on step 3
+            if (step === 3 && selectedPayment === 'qr') startQRTimer();
+        }
+
+        function validateAndGoStep3() {
+            const name = document.getElementById('custName').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
+            const address = document.getElementById('custAddress').value.trim();
+            const idFile = document.getElementById('idCardFile').files.length;
+
+            if (!name) { alert('กรุณากรอกชื่อ-นามสกุล'); return; }
+            if (!phone) { alert('กรุณากรอกเบอร์โทรศัพท์'); return; }
+            if (!address) { alert('กรุณากรอกที่อยู่จัดส่ง'); return; }
+            if (!idFile) { alert('กรุณาแนบภาพถ่ายบัตรประชาชน'); return; }
+
+            goToStep(3);
+        }
+
+        // ===== PAYMENT METHODS =====
+        function switchPayment(method) {
+            selectedPayment = method;
+            document.getElementById('payQR').classList.toggle('hidden', method !== 'qr');
+            document.getElementById('payCard').classList.toggle('hidden', method !== 'card');
+            document.getElementById('tabQR').classList.toggle('active', method === 'qr');
+            document.getElementById('tabCard').classList.toggle('active', method === 'card');
+
+            if (method === 'qr') startQRTimer();
+            else clearInterval(qrTimerInterval);
+        }
+
+        // ===== QR CODE =====
+        function generateQR() {
+            const canvas = document.getElementById('qrCanvas');
+            const ctx = canvas.getContext('2d');
+            const size = 200;
+            const cellSize = 8;
+            const modules = Math.floor(size / cellSize);
+
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, size, size);
+
+            // Generate realistic-looking QR pattern
+            ctx.fillStyle = '#1a1a1a';
+
+            // Position detection patterns (corners)
+            drawFinderPattern(ctx, 0, 0, cellSize);
+            drawFinderPattern(ctx, (modules - 7) * cellSize, 0, cellSize);
+            drawFinderPattern(ctx, 0, (modules - 7) * cellSize, cellSize);
+
+            // Random data modules
+            for (let i = 0; i < modules; i++) {
+                for (let j = 0; j < modules; j++) {
+                    if (isInFinderArea(i, j, modules)) continue;
+                    if (Math.random() > 0.5) {
+                        ctx.fillRect(i * cellSize, j * cellSize, cellSize - 1, cellSize - 1);
+                    }
+                }
+            }
+        }
+
+        function drawFinderPattern(ctx, x, y, cell) {
+            // Outer box
+            ctx.fillStyle = '#1a1a1a';
+            ctx.fillRect(x, y, 7 * cell, 7 * cell);
+            // Inner white
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(x + cell, y + cell, 5 * cell, 5 * cell);
+            // Inner black
+            ctx.fillStyle = '#1a1a1a';
+            ctx.fillRect(x + 2 * cell, y + 2 * cell, 3 * cell, 3 * cell);
+        }
+
+        function isInFinderArea(i, j, modules) {
+            if (i < 8 && j < 8) return true;
+            if (i >= modules - 8 && j < 8) return true;
+            if (i < 8 && j >= modules - 8) return true;
+            return false;
+        }
+
+        // QR Timer
+        function startQRTimer() {
+            clearInterval(qrTimerInterval);
+            let seconds = 900; // 15 min
+            const timerEl = document.getElementById('qrTimer');
+
+            qrTimerInterval = setInterval(() => {
+                seconds--;
+                const m = Math.floor(seconds / 60);
+                const s = seconds % 60;
+                timerEl.textContent = `${m}:${s.toString().padStart(2, '0')}`;
+                if (seconds <= 0) {
+                    clearInterval(qrTimerInterval);
+                    timerEl.textContent = 'หมดอายุ';
+                }
+            }, 1000);
+        }
+
+        // ===== CREDIT CARD =====
+        function formatCardNumber(input) {
+            let v = input.value.replace(/\D/g, '').substring(0, 16);
+            input.value = v.replace(/(\d{4})(?=\d)/g, '$1 ');
+            const display = v.padEnd(16, '•').replace(/(.{4})/g, '$1 ').trim();
+            document.getElementById('cardDisplay').textContent = display;
+            // Detect brand
+            if (v.startsWith('4')) document.getElementById('cardBrandLogo').textContent = 'VISA';
+            else if (v.startsWith('5')) document.getElementById('cardBrandLogo').textContent = 'MC';
+            else if (v.startsWith('3')) document.getElementById('cardBrandLogo').textContent = 'JCB';
+        }
+
+        function formatExpiry(input) {
+            let v = input.value.replace(/\D/g, '').substring(0, 4);
+            if (v.length > 2) v = v.substring(0, 2) + '/' + v.substring(2);
+            input.value = v;
+            document.getElementById('cardExpiryDisplay').textContent = v || 'MM/YY';
+        }
+
+        function updateCardDisplay() {
+            document.getElementById('cardHolderDisplay').textContent =
+                document.getElementById('cardHolder').value.toUpperCase() || 'YOUR NAME';
+        }
+
+        // ===== SIMULATE PAYMENT =====
+        function simulatePayment() {
+            const overlay = document.getElementById('processingOverlay');
+            overlay.classList.remove('hidden');
+
+            // Simulate processing
+            setTimeout(() => {
+                overlay.classList.add('hidden');
+                // Fill confirmation
+                const now = new Date();
+                const orderId = `ATE-${now.getFullYear()}${(now.getMonth() + 1).toString().padStart(2, '0')}${now.getDate().toString().padStart(2, '0')}-${Math.floor(Math.random() * 999).toString().padStart(3, '0')}`;
+                document.getElementById('confirmOrderId').textContent = orderId;
+                document.getElementById('confirmDress').textContent = dressInfo.name;
+                document.getElementById('confirmPickup').textContent = formatThaiDate(document.getElementById('pickupDate').value);
+                document.getElementById('confirmReturn').textContent = formatThaiDate(document.getElementById('returnDate').value);
+                document.getElementById('confirmMethod').textContent = selectedPayment === 'qr' ? 'QR Code PromptPay' : 'บัตรเครดิต';
+
+                // Shipping info
+                if (selectedShipping === 'messenger') {
+                    const mDate = document.getElementById('messengerDate').value;
+                    const mTime = document.getElementById('messengerTime').value;
+                    document.getElementById('confirmShipping').textContent = `แมสเซนเจอร์ (${formatThaiDate(mDate)} ${mTime} น.)`;
+                    document.getElementById('confirmTotal').textContent = `฿${dressInfo.price} + ค่าแมสเซนเจอร์`;
+                } else {
+                    document.getElementById('confirmShipping').textContent = 'Flash / Kerry / ไปรษณีย์ (฿50)';
+                    document.getElementById('confirmTotal').textContent = `฿${dressInfo.price + 50}`;
+                }
+
+                goToStep(4);
+            }, 2500);
+        }
+
+        function formatThaiDate(dateStr) {
+            if (!dateStr) return '—';
+            const d = new Date(dateStr);
+            return d.toLocaleDateString('th-TH', { day: 'numeric', month: 'long', year: 'numeric' });
+        }
+
+        // ===== FILE UPLOAD =====
+        const uploadArea = document.getElementById('uploadArea');
+        const idCardFile = document.getElementById('idCardFile');
+        const uploadPreview = document.getElementById('uploadPreview');
+
+        uploadArea.addEventListener('click', () => idCardFile.click());
+        uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.classList.add('dragover'); });
+        uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('dragover'));
+        uploadArea.addEventListener('drop', e => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            if (e.dataTransfer.files.length) {
+                idCardFile.files = e.dataTransfer.files;
+                showPreview(e.dataTransfer.files[0]);
+            }
+        });
+
+        idCardFile.addEventListener('change', function () {
+            if (this.files.length) showPreview(this.files[0]);
+        });
+
+        function showPreview(file) {
+            const reader = new FileReader();
+            reader.onload = e => {
+                document.getElementById('previewImg').src = e.target.result;
+                uploadArea.classList.add('hidden');
+                uploadPreview.classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function removeUpload() {
+            idCardFile.value = '';
+            uploadArea.classList.remove('hidden');
+            uploadPreview.classList.add('hidden');
+        }
+
+        // ===== NAVBAR =====
+        document.getElementById('menuToggle').addEventListener('click', () => {
+            const links = document.querySelector('.nav-links');
+            links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+            links.style.flexDirection = 'column';
+            links.style.position = 'absolute';
+            links.style.top = '100%';
+            links.style.left = '0';
+            links.style.width = '100%';
+            links.style.background = 'rgba(26,26,26,0.98)';
+            links.style.padding = '20px';
+            links.style.gap = '16px';
+            links.style.borderRadius = '0 0 16px 16px';
+        });
+
+        // ===== INIT =====
+        populateOrder();
+        generateQR();
+    </script>
+</body>
+
+</html>

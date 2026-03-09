@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="ATE.Rental - เช่าชุดสวยตามเทรนด์ ราคาเริ่มต้น 390 บาท หรือสมัครสมาชิกรายเดือน 1,590 บาท ฝากชุดเช่าได้ แบ่งรายได้ 60:40">
+  <title>ATE.Rental — เช่าชุดสวย ตามเทรนด์ ราคาดี</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <nav id="navbar">
+    <div class="container">
+      <a href="#" class="logo">ATE<span>.Rental</span></a>
+      <ul class="nav-links">
+        <li><a href="#how">วิธีการเช่า</a></li>
+        <li><a href="rental.html">บริการเช่าชุด</a></li>
+        <li><a href="#consign">ฝากชุดเช่า</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="rental.html" class="nav-cta">เช่าเลย</a></li>
+      </ul>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">✦ Fashion Sharing Community</div>
+        <h1>ส่งต่อ<span>ความสวย</span><br>ในราคาที่คุณรัก</h1>
+        <p>ไม่ต้องซื้อ ไม่ต้องเก็บ แค่เลือก เช่า แล้วส่งคืน — ไม่มีมัดจำ ชุดใหม่ทุกโอกาส เริ่มต้นเพียง 390 บาท</p>
+        <div class="hero-buttons">
+          <a href="rental.html" class="btn btn-primary">ดูชุดทั้งหมด →</a>
+          <a href="#consign" class="btn btn-outline">ฝากชุดเช่า</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-number">500+</div>
+            <div class="stat-label">ชุดให้เลือก</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">3,000+</div>
+            <div class="stat-label">ลูกค้าที่ไว้ใจ</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">4.9★</div>
+            <div class="stat-label">คะแนนรีวิว</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="hero.png" alt="ATE.Rental - เช่าชุดออนไลน์" loading="eager">
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-it-works" id="how">
+    <div class="container">
+      <div class="section-header animate">
+        <div class="section-tag">How It Works</div>
+        <h2>เช่าง่ายแค่ 4 ขั้นตอน</h2>
+        <p>ขั้นตอนเช่าชุดที่ออกแบบมาให้สะดวกที่สุด ส่งตรงถึงบ้านคุณ</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card animate">
+          <div class="step-number">1</div>
+          <div class="step-icon">👗</div>
+          <h3>เลือกชุดที่ชอบ</h3>
+          <p>เลือกจากคอลเลกชันชุดหลากหลายสไตล์ ตามเทรนด์ล่าสุด</p>
+        </div>
+        <div class="step-card animate">
+          <div class="step-number">2</div>
+          <div class="step-icon">📦</div>
+          <h3>จัดส่งถึงบ้าน</h3>
+          <p>ชุดจะถูกจัดส่งให้คุณพร้อมซองส่งคืน สะดวก รวดเร็ว</p>
+        </div>
+        <div class="step-card animate">
+          <div class="step-number">3</div>
+          <div class="step-icon">✨</div>
+          <h3>สวมใส่ 3 วัน</h3>
+          <p>สวมใส่ชุดสวยไปในทุกโอกาส ถ่ายรูปสวย ๆ ให้จุใจ</p>
+        </div>
+        <div class="step-card animate">
+          <div class="step-number">4</div>
+          <div class="step-icon">🔄</div>
+          <h3>ส่งคืนง่าย</h3>
+          <p>ส่งคืนชุดผ่านขนส่ง ไม่ต้องซัก ไม่ต้องรีด ง่ายมาก!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING / CATALOG -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="section-header animate">
+        <div class="section-tag">เลือกชุดที่ชอบ</div>
+        <h2>ชุดให้เช่า — ราคาน่ารัก</h2>
+        <p>เลือกชุดสวยตามสไตล์ของคุณ เช่าง่าย ครั้งละ 3 วัน</p>
+      </div>
+      <!-- Filter Tabs -->
+      <div class="catalog-filter animate">
+        <button class="filter-btn active" data-filter="all">ทั้งหมด</button>
+        <button class="filter-btn" data-filter="casual">ชุดลำลอง · ฿390</button>
+        <button class="filter-btn" data-filter="party">ชุดออกงาน · ฿490</button>
+        <button class="filter-btn" data-filter="premium">ชุดพรีเมียม · ฿590</button>
+      </div>
+      <!-- Product Grid -->
+      <div class="catalog-grid">
+        <div class="product-card animate" data-category="casual">
+          <div class="product-img"><img src="dress1.png" alt="White Ruffle Mini Dress" loading="lazy"><span
+              class="product-badge casual">Casual</span><span class="product-days">3 วัน</span></div>
+          <div class="product-info">
+            <h3>White Ruffle Mini Dress</h3>
+            <p class="product-size">Size: S, M, L</p>
+            <div class="product-price">฿390 <span>/ 3 วัน</span></div><a href="#cta" class="btn btn-dark">เช่าชุดนี้</a>
+          </div>
+        </div>
+        <div class="product-card animate" data-category="casual">
+          <div class="product-img"><img src="dress2.png" alt="Beige Linen Wrap Dress" loading="lazy"><span
+              class="product-badge casual">Casual</span><span class="product-days">3 วัน</span></div>
+          <div class="product-info">
+            <h3>Beige Linen Wrap Dress</h3>
+            <p class="product-size">Size: S, M, L</p>
+            <div class="product-price">฿390 <span>/ 3 วัน</span></div><a href="#cta" class="btn btn-dark">เช่าชุดนี้</a>
+          </div>
+        </div>
+        <div class="product-card animate" data-category="party">
+          <div class="product-img"><img src="dress3.png" alt="Emerald Satin Cocktail" loading="lazy"><span
+              class="product-badge party">Party</span><span class="product-days">3 วัน</span></div>
+          <div class="product-info">
+            <h3>Emerald Satin Cocktail</h3>
+            <p class="product-size">Size: S, M, L</p>
+            <div class="product-price">฿490 <span>/ 3 วัน</span></div><a href="#cta" class="btn btn-dark">เช่าชุดนี้</a>
+          </div>
+        </div>
+        <div class="product-card animate" data-category="party">
+          <div class="product-img"><img src="dress4.png" alt="Black Sequin Mini" loading="lazy"><span
+              class="product-badge party">Party</span><span class="product-days">3 วัน</span></div>
+          <div class="product-info">
+            <h3>Black Sequin Mini</h3>
+            <p class="product-size">Size: XS, S, M</p>
+            <div class="product-price">฿490 <span>/ 3 วัน</span></div><a href="#cta" class="btn btn-dark">เช่าชุดนี้</a>
+          </div>
+        </div>
+        <div class="product-card animate" data-category="premium">
+          <div class="product-img"><img src="dress5.png" alt="Navy Velvet Evening Gown" loading="lazy"><span
+              class="product-badge premium">Premium</span><span class="product-days">3 วัน</span></div>
+          <div class="product-info">
+            <h3>Navy Velvet Evening Gown</h3>
+            <p class="product-size">Size: S, M</p>
+            <div class="product-price">฿590 <span>/ 3 วัน</span></div><a href="#cta" class="btn btn-dark">เช่าชุดนี้</a>
+          </div>
+        </div>
+        <div class="product-card animate" data-category="premium">
+          <div class="product-img"><img src="dress6.png" alt="Champagne Silk Maxi" loading="lazy"><span
+              class="product-badge premium">Premium</span><span class="product-days">3 วัน</span></div>
+          <div class="product-info">
+            <h3>Champagne Silk Maxi</h3>
+            <p class="product-size">Size: S, M, L</p>
+            <div class="product-price">฿590 <span>/ 3 วัน</span></div><a href="#cta" class="btn btn-dark">เช่าชุดนี้</a>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:48px" class="animate">
+        <a href="rental.html" class="btn btn-primary">ดูชุดทั้งหมด →</a>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- CONSIGNMENT -->
+  <section class="consign" id="consign">
+    <div class="container">
+      <div class="consign-grid">
+        <div class="consign-image animate">
+          <img src="collection.png" alt="ฝากชุดเช่ากับ ATE.Rental" loading="lazy">
+          <div class="consign-badge">
+            <div class="split">60 : 40</div>
+            <p>ส่วนแบ่งรายได้ เจ้าของชุด : ATE.Rental</p>
+          </div>
+        </div>
+        <div class="consign-content animate">
+          <div class="section-tag">Consignment</div>
+          <h2>มีชุดสวย?<br>นำมาสร้างรายได้</h2>
+          <p>ชุดสวย ๆ ที่แขวนอยู่ในตู้เสื้อผ้า สามารถเปลี่ยนเป็นรายได้ทุกเดือน ฝากชุดเช่ากับ ATE.Rental รับส่วนแบ่ง 60%
+            ของรายได้ค่าเช่า</p>
+          <div class="consign-steps">
+            <div class="c-step">
+              <div class="c-step-num">1</div>
+              <div class="c-step-text">
+                <h4>ส่งชุดให้ประเมิน</h4>
+                <p>ส่งรูปชุดมาให้ทีมประเมินสภาพ ราคาเช่า และความน่าสนใจ</p>
+              </div>
+            </div>
+            <div class="c-step">
+              <div class="c-step-num">2</div>
+              <div class="c-step-text">
+                <h4>ตกลงราคา & ส่งชุด</h4>
+                <p>เจ้าหน้าที่แจ้งราคาเช่าที่เหมาะสม ตกลงแล้วส่งชุดมาให้เรา</p>
+              </div>
+            </div>
+            <div class="c-step">
+              <div class="c-step-num">3</div>
+              <div class="c-step-text">
+                <h4>รับรายได้ทุกเดือน</h4>
+                <p>เราดูแลการเช่า ซักรีด จัดส่ง คุณรับส่วนแบ่ง 60% ทุกเดือน</p>
+              </div>
+            </div>
+          </div>
+          <a href="#cta" class="btn btn-primary">ส่งชุดประเมิน →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POLICY -->
+  <section class="policy" id="policy">
+    <div class="container">
+      <div class="section-header animate">
+        <div class="section-tag">Policy</div>
+        <h2>นโยบายการเช่า</h2>
+        <p>เราดูแลทุกรายละเอียดเพื่อความโปร่งใสและยุติธรรม</p>
+      </div>
+      <div class="policy-grid">
+        <div class="policy-card animate">
+          <div class="policy-icon">⏰</div>
+          <h3>ระยะเวลาเช่า</h3>
+          <p>เช่าครั้งละ <span class="policy-highlight">3 วัน</span> นับจากวันที่ได้รับชุด หากเกินกำหนด
+            มีค่าบริการเพิ่มเติมตามอัตราที่กำหนด</p>
+        </div>
+        <div class="policy-card animate">
+          <div class="policy-icon">🔧</div>
+          <h3>ชุดเสียหาย</h3>
+          <p>กรณีชุดเสียหาย คิดค่าเสียหาย <span class="policy-highlight">จุดละ 250 บาท</span> ตรวจสอบโดยทีมงาน
+            พร้อมแจ้งรายละเอียดก่อนเรียกเก็บ</p>
+        </div>
+        <div class="policy-card animate">
+          <div class="policy-icon">⚠️</div>
+          <h3>ชุดสูญหาย</h3>
+          <p>กรณีชุดสูญหาย ต้อง<span class="policy-highlight">ชำระค่าชุดเต็มจำนวน</span>
+            ตามมูลค่าที่ประเมินไว้ก่อนการเช่า</p>
+        </div>
+      </div>
+      <div class="policy-card animate">
+        <div class="policy-icon">🪪</div>
+        <h3>ไม่มีมัดจำ</h3>
+        <p>ไม่เรียกเก็บค่ามัดจำ แต่ลูกค้าต้อง<span class="policy-highlight">แนบภาพถ่ายบัตรประชาชน</span>เพื่อยืนยันตัวตน
+          สามารถปิดบังเลขบัตรบางส่วนและข้อมูล sensitive ได้ ข้อมูลจะถูกลบหลังคืนชุดเรียบร้อย</p>
+      </div>
+      <div class="policy-card animate">
+        <div class="policy-icon">🚛</div>
+        <h3>ค่าจัดส่ง</h3>
+        <p>จัดส่งทั่วประเทศ เลือกส่ง <span class="policy-highlight">Flash, Kerry, ไปรษณีย์ ค่าส่ง 50 บาท</span>
+          หรือเลือกส่งแมสเซนเจอร์ <span class="policy-highlight">คิดค่าส่งตามจริง</span>
+          ชำระปลายทางกับแมสเซนเจอร์ (ต้องสั่งล่วงหน้าอย่างน้อย 2 ชั่วโมง)</p>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-header animate">
+        <div class="section-tag">FAQ</div>
+        <h2>คำถามที่พบบ่อย</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item"><button class="faq-question">เช่าชุดต้องวางมัดจำไหม?<span class="arrow">▾</span></button>
+          <div class="faq-answer">
+            <p>ไม่มีมัดจำค่ะ! แต่ลูกค้าต้องแนบภาพถ่ายบัตรประชาชนเพื่อยืนยันตัวตน สามารถปิดบังเลขบัตรบางส่วนและข้อมูล
+              sensitive ได้ ข้อมูลจะถูกเก็บรักษาเป็นความลับและลบหลังคืนชุดเรียบร้อย</p>
+          </div>
+        </div>
+        <div class="faq-item"><button class="faq-question">คืนชุดต้องซักก่อนไหม?<span class="arrow">▾</span></button>
+          <div class="faq-answer">
+            <p>ไม่ต้องซักและไม่ต้องรีดค่ะ เราจะดูแลการทำความสะอาดให้ทั้งหมด</p>
+          </div>
+        </div>
+        <div class="faq-item"><button class="faq-question">สมัครสมาชิกแล้วยกเลิกได้ไหม?<span
+              class="arrow">▾</span></button>
+          <div class="faq-answer">
+            <p>ได้ค่ะ ยกเลิกได้ทุกเมื่อ ไม่มีสัญญาผูกมัด สมาชิกจะหมดอายุเมื่อสิ้นรอบบิล</p>
+          </div>
+        </div>
+        <div class="faq-item"><button class="faq-question">ฝากชุดเช่าต้องชุดใหม่ไหม?<span
+              class="arrow">▾</span></button>
+          <div class="faq-answer">
+            <p>ไม่จำเป็นค่ะ แต่ชุดต้องอยู่ในสภาพดี สะอาด และตามเทรนด์ ทีมงานจะประเมินให้</p>
+          </div>
+        </div>
+        <div class="faq-item"><button class="faq-question">ค่าส่งเท่าไหร่?<span class="arrow">▾</span></button>
+          <div class="faq-answer">
+            <p>ส่ง Flash, Kerry หรือไปรษณีย์ ค่าส่ง 50 บาทค่ะ ทั้งขาส่งและขาคืน
+              หรือเลือกส่งแมสเซนเจอร์คิดค่าส่งตามจริง ชำระปลายทางกับแมสเซนเจอร์โดยตรง
+              (ต้องสั่งล่วงหน้าอย่างน้อย 2 ชั่วโมง)
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item"><button class="faq-question">เช่าเกินเวลาคิดค่าบริการเท่าไหร่?<span
+            class="arrow">▾</span></button>
+        <div class="faq-answer">
+          <p>มีค่าบริการเกินเวลาตามอัตราที่กำหนด กรุณาติดต่อทีมงานเพื่อสอบถามรายละเอียด</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="cta">
+    <div class="container">
+      <h2 class="animate">พร้อมเปลี่ยนตู้เสื้อผ้าของคุณ?</h2>
+      <p class="animate">เริ่มต้นเช่าชุดสวยตามเทรนด์ได้เลยวันนี้</p>
+      <div class="cta-buttons animate">
+        <a href="#" class="btn btn-primary">เริ่มเช่าเลย →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo">ATE<span>.Rental</span></a>
+          <p>แพลตฟอร์มเช่าชุดออนไลน์ ชุดสวยตามเทรนด์ ราคาดี ส่งตรงถึงบ้านคุณ</p>
+        </div>
+        <div class="footer-col">
+          <h4>บริการ</h4>
+          <ul>
+            <li><a href="#pricing">เช่ารายครั้ง</a></li>
+            <li><a href="#consign">ฝากชุดเช่า</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>เกี่ยวกับเรา</h4>
+          <ul>
+            <li><a href="#">เกี่ยวกับ ATE.Rental</a></li>
+            <li><a href="#policy">นโยบาย</a></li>
+            <li><a href="#faq">คำถามที่พบบ่อย</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>ติดต่อเรา</h4>
+          <ul>
+            <li><a href="#">Line: @aterental</a></li>
+            <li><a href="#">Tel: 02-xxx-xxxx</a></li>
+            <li><a href="#">info@aterental.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 ATE.Rental — All rights reserved.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="Instagram">ig</a>
+          <a href="#" aria-label="Line">L</a>
+          <a href="#" aria-label="TikTok">Tk</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 50) });
+
+    // Mobile menu
+    document.getElementById('menuToggle').addEventListener('click', () => {
+      const links = document.querySelector('.nav-links');
+      links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+      links.style.flexDirection = 'column'; links.style.position = 'absolute';
+      links.style.top = '100%'; links.style.left = '0'; links.style.width = '100%';
+      links.style.background = 'rgba(26,26,26,0.98)'; links.style.padding = '20px';
+      links.style.gap = '16px'; links.style.borderRadius = '0 0 16px 16px';
+    });
+
+    // Scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target) } })
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.animate').forEach(el => observer.observe(el));
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const answer = item.querySelector('.faq-answer');
+        const isActive = item.classList.contains('active');
+        document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('active'); i.querySelector('.faq-answer').style.maxHeight = null });
+        if (!isActive) { item.classList.add('active'); answer.style.maxHeight = answer.scrollHeight + 'px' }
+      });
+    });
+
+    // Catalog filter
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.product-card').forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) { card.classList.remove('hidden'); card.style.opacity = '0'; card.style.transform = 'translateY(20px)'; setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'translateY(0)' }, 50) }
+          else { card.classList.add('hidden') }
+        });
+      });
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const links = document.querySelector('.nav-links');
+        if (window.innerWidth <= 968) links.style.display = 'none';
+      });
+    });
+  </script>
+</body>
+
+</html>
