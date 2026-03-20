@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ATE.Rental — แดชบอร์ดรายได้ของผู้ปล่อยเช่า">
+    <title>Lender Dashboard — ATE.Rental</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="checkout.css">
+    <style>
+        .lender-dashboard {
+            padding: 120px 0 60px;
+            background: var(--light);
+            min-height: 100vh;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .dashboard-header h1 {
+            font-size: 2.5rem;
+            color: var(--dark);
+        }
+
+        .lender-profile {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: #fff;
+            padding: 12px 24px;
+            border-radius: 50px;
+            box-shadow: var(--shadow);
+            border: 1px solid #eee;
+        }
+
+        .lender-avatar {
+            font-size: 1.5rem;
+            background: var(--primary);
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .lender-info strong {
+            display: block;
+            color: var(--dark);
+            font-size: 1rem;
+        }
+
+        .lender-info span {
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: #fff;
+            padding: 32px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid #eee;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: var(--primary);
+        }
+
+        .stat-card.secondary::before { background: #333; }
+        .stat-card.tertiary::before { background: #a8845a; }
+
+        .stat-title {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+
+        .stat-sub {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .stat-sub.positive {
+            color: #2e7d32;
+        }
+
+        /* Tab Filter */
+        .lender-tabs {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 2px;
+        }
+
+        .lender-tab {
+            background: none;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-light);
+            cursor: pointer;
+            position: relative;
+            top: 2px;
+            transition: var(--transition);
+        }
+
+        .lender-tab.active {
+            color: var(--dark);
+            border-bottom: 2px solid var(--dark);
+        }
+
+        /* Dresses List */
+        .dresses-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .dress-row {
+            display: flex;
+            align-items: center;
+            background: #fff;
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid #eee;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+            gap: 24px;
+            transition: var(--transition);
+        }
+
+        .dress-row:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+            border-color: #ddd;
+        }
+
+        .dress-img {
+            width: 80px;
+            height: 100px;
+            border-radius: 8px;
+            object-fit: cover;
+            background: #f5f0eb;
+        }
+
+        .dress-main {
+            flex: 2;
+        }
+
+        .dress-name {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 6px;
+        }
+
+        .dress-meta {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            display: flex;
+            gap: 16px;
+        }
+
+        .dress-status {
+            padding: 6px 12px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .status-available { background: #e8f5e9; color: #2e7d32; }
+        .status-rented { background: #fff3e0; color: #ef6c00; }
+        .status-cleaning { background: #e3f2fd; color: #1565c0; }
+
+        .dress-stats {
+            flex: 1;
+            text-align: right;
+        }
+
+        .dress-stats-label {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-bottom: 4px;
+        }
+
+        .dress-stats-value {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .dress-stats-value.money {
+            color: var(--primary-dark);
+        }
+
+        /* Simulation Card */
+        .simulation-card {
+            margin-top: 40px;
+            background: #eef2f6;
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px dashed #b0bec5;
+        }
+        .simulation-card h3 { margin-bottom: 12px; }
+        .simulation-card p { font-size: 0.9rem; margin-bottom: 16px; color: #546e7a; }
+
+        @media (max-width: 768px) {
+            .stats-grid { grid-template-columns: 1fr; }
+            .dress-row { flex-direction: column; text-align: center; }
+            .dress-meta { justify-content: center; }
+            .dress-stats { text-align: center; margin-top: 16px; width: 100%; display: flex; justify-content: space-around; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav id="navbar" class="scrolled">
+        <div class="container">
+            <a href="index.html" class="logo">ATE<span>.Rental</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">หน้าแรก</a></li>
+                <li><a href="rental.html">บริการเช่าชุด</a></li>
+                <li><a href="lender.html" style="color:var(--primary); font-weight: 600;">รายได้ผู้ปล่อยเช่า</a></li>
+                <li><a href="index.html#faq">FAQ</a></li>
+            </ul>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+        </div>
+    </nav>
+
+    <!-- DASHBOARD -->
+    <section class="lender-dashboard">
+        <div class="container">
+            
+            <div class="dashboard-header animate">
+                <h1>แดชบอร์ดรายได้ของคุณ</h1>
+                <div class="lender-profile">
+                    <div class="lender-avatar">👤</div>
+                    <div class="lender-info">
+                        <strong>คุณเมย์ (Lender)</strong>
+                        <span>พาร์ทเนอร์ระดับ Gold</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STATS -->
+            <div class="stats-grid">
+                <div class="stat-card animate">
+                    <div class="stat-title">รายได้สะสมทั้งหมด (60%)</div>
+                    <div class="stat-value">฿8,490</div>
+                    <div class="stat-sub positive"><span>↑</span> +฿2,350 จากเดือนที่แล้ว</div>
+                </div>
+                <div class="stat-card secondary animate" style="transition-delay: 0.1s;">
+                    <div class="stat-title">กำลังรอโอนเข้าบัญชี</div>
+                    <div class="stat-value">฿1,050</div>
+                    <div class="stat-sub">รอบโอนถัดไป: สิ้นเดือนนี้</div>
+                </div>
+                <div class="stat-card tertiary animate" style="transition-delay: 0.2s;">
+                    <div class="stat-title">จำนวนครั้งที่ถูกเช่า</div>
+                    <div class="stat-value">22 ครั้ง</div>
+                    <div class="stat-sub">จากชุดทั้งหมด 3 ชุด</div>
+                </div>
+            </div>
+
+            <!-- TAB -->
+            <div class="lender-tabs animate">
+                <button class="lender-tab active">ชุดของคุณ</button>
+                <button class="lender-tab">ประวัติรายได้</button>
+                <button class="lender-tab">ถอนเงิน (เร็วๆ นี้)</button>
+            </div>
+
+            <!-- DRESSES LIST -->
+            <div class="dresses-list">
+                
+                <!-- Dress 1 -->
+                <div class="dress-row animate">
+                    <img src="dress5.png" alt="Navy Velvet Evening Gown" class="dress-img">
+                    <div class="dress-main">
+                        <h3 class="dress-name">Navy Velvet Evening Gown</h3>
+                        <div class="dress-meta">
+                            <span>ไซส์: M</span>
+                            <span>สี: กรม</span>
+                        </div>
+                    </div>
+                    <div class="dress-stats">
+                        <span class="dress-status status-rented">กำลังถูกเช่า</span>
+                    </div>
+                    <div class="dress-stats">
+                        <div class="dress-stats-label">ถูกเช่าไปแล้ว</div>
+                        <div class="dress-stats-value">12 ครั้ง</div>
+                    </div>
+                    <div class="dress-stats">
+                        <div class="dress-stats-label">รายได้สะสม (60%)</div>
+                        <div class="dress-stats-value money">฿4,248</div>
+                    </div>
+                </div>
+
+                <!-- Dress 2 -->
+                <div class="dress-row animate">
+                    <img src="dress3.png" alt="Emerald Satin Cocktail" class="dress-img">
+                    <div class="dress-main">
+                        <h3 class="dress-name">Emerald Satin Cocktail</h3>
+                        <div class="dress-meta">
+                            <span>ไซส์: S</span>
+                            <span>สี: เขียวมรกต</span>
+                        </div>
+                    </div>
+                    <div class="dress-stats">
+                        <span class="dress-status status-cleaning">กำลังส่งไปซักรีด</span>
+                    </div>
+                    <div class="dress-stats">
+                        <div class="dress-stats-label">ถูกเช่าไปแล้ว</div>
+                        <div class="dress-stats-value">7 ครั้ง</div>
+                    </div>
+                    <div class="dress-stats">
+                        <div class="dress-stats-label">รายได้สะสม (60%)</div>
+                        <div class="dress-stats-value money">฿2,058</div>
+                    </div>
+                </div>
+
+                <!-- Dress 3 -->
+                <div class="dress-row animate">
+                    <img src="dress1.png" alt="White Ruffle Mini Dress" class="dress-img">
+                    <div class="dress-main">
+                        <h3 class="dress-name">White Ruffle Mini Dress</h3>
+                        <div class="dress-meta">
+                            <span>ไซส์: M</span>
+                            <span>สี: ขาว</span>
+                        </div>
+                    </div>
+                    <div class="dress-stats">
+                        <span class="dress-status status-available">พร้อมให้เช่า</span>
+                    </div>
+                    <div class="dress-stats">
+                        <div class="dress-stats-label">ถูกเช่าไปแล้ว</div>
+                        <div class="dress-stats-value">3 ครั้ง</div>
+                    </div>
+                    <div class="dress-stats">
+                        <div class="dress-stats-label">รายได้สะสม (60%)</div>
+                        <div class="dress-stats-value money">฿702</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- SIMULATION AREA -->
+            <div class="simulation-card animate">
+                <h3>ทดสอบระบบการแจ้งเตือน LINE</h3>
+                <p>ในการจำลองระบบ ทุกครั้งที่มีคนกดเช่าชุดของคุณสำเร็จ คุณจะได้รับการแจ้งเตือนรายได้ผ่าน LINE แบบเรียลไทม์ ลองกดปุ่มด้านล่างเพื่อจำลองดูว่าหน้าตาการแจ้งเตือนเป็นอย่างไร</p>
+                <button class="btn btn-primary" onclick="showLenderNotificationMock()">จำลองการแจ้งเตือนทาง LINE</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- MOCK LINE NOTIFICATION -->
+    <style>
+        .mock-line-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 350px;
+            background: rgba(43, 43, 43, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 16px;
+            color: #fff;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            z-index: 9999;
+            transform: translateX(120%);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .mock-line-notification.show {
+            transform: translateX(0);
+        }
+
+        .mock-line-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .mock-line-icon {
+            width: 20px;
+            height: 20px;
+            background: #06C755;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .mock-line-body {
+            display: flex;
+            gap: 16px;
+        }
+
+        .mock-line-body img {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+
+        .mock-line-text strong {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+
+        .mock-line-text p {
+            font-size: 0.9rem;
+            color: #c9a87c;
+            line-height: 1.4;
+        }
+        
+        .mock-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            color: white;
+            opacity: 0.5;
+            cursor: pointer;
+        }
+        .mock-close:hover { opacity: 1; }
+    </style>
+
+    <div class="mock-line-notification" id="mockLineNotif">
+        <button class="mock-close" onclick="closeNotif()">✕</button>
+        <div class="mock-line-header">
+            <div class="mock-line-icon">L</div>
+            ATE.Rental — LINE Official
+        </div>
+        <div class="mock-line-body">
+            <img src="dress5.png" alt="Dress">
+            <div class="mock-line-text">
+                <strong>🎉 เย้! ชุดของคุณถูกเช่าแล้ว</strong>
+                <p>Navy Velvet Evening Gown<br>รับรายได้ทันที: ฿354 (60%)<br>ยอดรวมรอโอน: ฿1,404</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>© 2026 ATE.Rental — All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target) } })
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.animate').forEach(el => observer.observe(el));
+
+        // Mobile menu
+        document.getElementById('menuToggle').addEventListener('click', () => {
+            const links = document.querySelector('.nav-links');
+            links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+            links.style.flexDirection = 'column'; links.style.position = 'absolute';
+            links.style.top = '100%'; links.style.left = '0'; links.style.width = '100%';
+            links.style.background = 'rgba(26,26,26,0.98)'; links.style.padding = '20px';
+            links.style.gap = '16px'; links.style.borderRadius = '0 0 16px 16px';
+        });
+
+        function showLenderNotificationMock() {
+            const notif = document.getElementById('mockLineNotif');
+            notif.classList.add('show');
+            setTimeout(() => {
+                notif.classList.remove('show');
+            }, 6000);
+        }
+
+        function closeNotif() {
+            document.getElementById('mockLineNotif').classList.remove('show');
+        }
+    </script>
+  <!-- Floating LINE Chat -->
+  <a href="https://line.me/R/ti/p/@aterental" target="_blank" class="floating-line" aria-label="Chat via LINE">
+    <svg viewBox="0 0 24 24" fill="white" width="28" height="28">
+      <path d="M22.5 10.3c0-4.5-5.2-8.3-11.5-8.3S-.5 5.8-.5 10.3c0 4 .3 7.6 9 8.3.4.1.9.4 1.1.9.1.5.1 1.4-.1 2.2 0 0-.2.9 1 .3 1.2-.6 6.3-4.1 8.5-6.7 1.8-1.5 3.5-3.3 3.5-5z"></path>
+    </svg>
+    <span>ติดต่อแอดมิน</span>
+  </a>
+
+</body>
+</html>

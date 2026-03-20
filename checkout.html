@@ -19,6 +19,7 @@
             <ul class="nav-links">
                 <li><a href="index.html">หน้าแรก</a></li>
                 <li><a href="rental.html">บริการเช่าชุด</a></li>
+                <li><a href="lender.html">รายได้ผู้ปล่อยเช่า</a></li>
                 <li><a href="index.html#faq">FAQ</a></li>
             </ul>
             <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
@@ -444,6 +445,54 @@
         </div>
     </div>
 
+    <!-- MOCK LINE NOTIFICATION (For Lender Simulation) -->
+    <style>
+        .mock-line-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 350px;
+            background: rgba(43, 43, 43, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 16px;
+            color: #fff;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            z-index: 9999;
+            transform: translateX(120%);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .mock-line-notification.show { transform: translateX(0); }
+        .mock-line-header {
+            display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: rgba(255,255,255,0.7);
+        }
+        .mock-line-icon {
+            width: 20px; height: 20px; background: #06C755; border-radius: 5px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 12px;
+        }
+        .mock-line-body { display: flex; gap: 16px; }
+        .mock-line-body img { width: 50px; height: 50px; border-radius: 12px; object-fit: cover; }
+        .mock-line-text strong { display: block; font-size: 1rem; margin-bottom: 4px; }
+        .mock-line-text p { font-size: 0.9rem; color: #c9a87c; line-height: 1.4; }
+        .mock-close { position: absolute; top: 16px; right: 16px; background: none; border: none; color: white; opacity: 0.5; cursor: pointer; }
+        .mock-close:hover { opacity: 1; }
+    </style>
+    <div class="mock-line-notification" id="mockLineNotif">
+        <button class="mock-close" onclick="closeNotif()">✕</button>
+        <div class="mock-line-header"><div class="mock-line-icon">L</div>ATE.Rental — LINE Official</div>
+        <div class="mock-line-body">
+            <img id="mockNotifImg" src="" alt="Dress">
+            <div class="mock-line-text">
+                <strong>🎉 เย้! ชุดของคุณถูกเช่าแล้ว</strong>
+                <p id="mockNotifDress">Dress Name</p>
+                <p id="mockNotifRev" style="color: #06C755; font-weight: 600;">รับรายได้ทันที: ฿0 (60%)</p>
+            </div>
+        </div>
+    </div>
+
     <script>
         // ===== CHECKOUT STATE =====
         let currentStep = 1;
@@ -728,6 +777,7 @@
             // Simulate processing
             setTimeout(() => {
                 overlay.classList.add('hidden');
+                showLenderNotificationMock();
                 // Fill confirmation
                 const now = new Date();
                 const orderId = `ATE-${now.getFullYear()}${(now.getMonth() + 1).toString().padStart(2, '0')}${now.getDate().toString().padStart(2, '0')}-${Math.floor(Math.random() * 999).toString().padStart(3, '0')}`;
@@ -813,7 +863,32 @@
         // ===== INIT =====
         populateOrder();
         generateQR();
+
+        // ===== NOTIFICATION MOCK =====
+        function showLenderNotificationMock() {
+            const price = dressInfo.price;
+            const revenue = Math.floor(price * 0.6);
+            document.getElementById('mockNotifDress').textContent = dressInfo.name;
+            document.getElementById('mockNotifImg').src = dressInfo.image;
+            document.getElementById('mockNotifRev').textContent = `รับรายได้ทันที: ฿${revenue} (60%)`;
+            const notif = document.getElementById('mockLineNotif');
+            notif.classList.add('show');
+            setTimeout(() => {
+                notif.classList.remove('show');
+            }, 6000);
+        }
+        function closeNotif() {
+            document.getElementById('mockLineNotif').classList.remove('show');
+        }
     </script>
+  <!-- Floating LINE Chat -->
+  <a href="https://line.me/R/ti/p/@aterental" target="_blank" class="floating-line" aria-label="Chat via LINE">
+    <svg viewBox="0 0 24 24" fill="white" width="28" height="28">
+      <path d="M22.5 10.3c0-4.5-5.2-8.3-11.5-8.3S-.5 5.8-.5 10.3c0 4 .3 7.6 9 8.3.4.1.9.4 1.1.9.1.5.1 1.4-.1 2.2 0 0-.2.9 1 .3 1.2-.6 6.3-4.1 8.5-6.7 1.8-1.5 3.5-3.3 3.5-5z"></path>
+    </svg>
+    <span>ส่งรูปประเมิน / สอบถาม</span>
+  </a>
+
 </body>
 
 </html>

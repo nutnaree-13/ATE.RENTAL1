@@ -1094,12 +1094,55 @@ footer {
     }
 
     .footer-grid {
-        grid-template-columns: 1fr
+        grid-template-columns: 1fr;
+        gap: 40px
     }
 
     .footer-bottom {
         flex-direction: column;
-        gap: 12px;
+        gap: 16px;
         text-align: center
+    }
+}
+
+/* Floating LINE Chat */
+.floating-line {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #06C755;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 4px 15px rgba(6, 199, 85, 0.4);
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.floating-line:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(6, 199, 85, 0.5);
+    color: white;
+}
+
+.floating-line svg {
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .floating-line {
+        bottom: 20px;
+        right: 20px;
+        padding: 10px;
+        border-radius: 50%;
+    }
+    .floating-line span {
+        display: none;
     }
 }
