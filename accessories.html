@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ATE.Rental — ช้อปอุปกรณ์เสริมความสวย บราปีกนก ปิดจุก ขนตาปลอม ราคาดี คุณภาพเยี่ยม">
+  <title>Accessories Shop — ATE.Rental</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .acc-hero {
+      padding: 130px 0 60px;
+      background: linear-gradient(135deg, #fdf5f0 0%, #fce8e0 50%, #fdf5f0 100%);
+      text-align: center;
+    }
+    .acc-hero h1 { font-size: 2.8rem; color: var(--dark); margin-bottom: 12px; }
+    .acc-hero h1 span { color: var(--primary); font-style: italic; }
+    .acc-hero p { color: var(--text-light); font-size: 1.05rem; max-width: 500px; margin: 0 auto; }
+
+    .acc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      padding: 70px 0 80px;
+    }
+
+    .acc-card {
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid #eee;
+      transition: all 0.35s ease;
+    }
+    .acc-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+    }
+
+    .acc-img {
+      height: 280px;
+      overflow: hidden;
+      position: relative;
+      background: #faf8f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .acc-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .acc-card:hover .acc-img img {
+      transform: scale(1.05);
+    }
+    .acc-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(26,26,26,0.85);
+      color: #fff;
+      padding: 5px 14px;
+      border-radius: 50px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      backdrop-filter: blur(4px);
+    }
+    .acc-badge.bestseller { background: #e74c3c; }
+    .acc-badge.new { background: var(--primary-dark); }
+
+    .acc-content { padding: 24px; }
+    .acc-content h3 { font-size: 1.2rem; color: var(--dark); margin-bottom: 6px; }
+    .acc-content .acc-desc {
+      font-size: 0.88rem; color: var(--text-light); line-height: 1.6; margin-bottom: 16px;
+    }
+    .acc-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .acc-feature-tag {
+      display: inline-block;
+      padding: 4px 10px;
+      background: #faf8f5;
+      border-radius: 50px;
+      font-size: 0.72rem;
+      color: var(--text-light);
+      border: 1px solid #eee;
+    }
+
+    .acc-price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 16px;
+      border-top: 1px solid #f0f0f0;
+    }
+    .acc-price {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--dark);
+    }
+    .acc-price small {
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: var(--text-light);
+    }
+
+    /* Variants */
+    .acc-variants {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .variant-btn {
+      padding: 6px 14px;
+      border: 1.5px solid #ddd;
+      border-radius: 50px;
+      background: #fff;
+      font-size: 0.78rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+    .variant-btn.active, .variant-btn:hover {
+      border-color: var(--primary);
+      background: #faf5ef;
+      color: var(--primary-dark);
+      font-weight: 600;
+    }
+
+    /* Quantity */
+    .qty-selector {
+      display: inline-flex;
+      align-items: center;
+      border: 1.5px solid #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .qty-btn {
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: #faf8f5;
+      font-size: 1.1rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s;
+    }
+    .qty-btn:hover { background: #f0e8dc; }
+    .qty-value {
+      width: 40px;
+      text-align: center;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: none;
+      border-left: 1px solid #eee;
+      border-right: 1px solid #eee;
+      background: #fff;
+    }
+
+    .btn-add-cart {
+      padding: 10px 20px;
+      background: var(--dark);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+    .btn-add-cart:hover { background: #333; transform: scale(1.03); }
+
+    /* Cart bar */
+    .cart-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--dark);
+      color: #fff;
+      padding: 16px 24px;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 999;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+    }
+    .cart-bar.show { display: flex; }
+    .cart-info { display: flex; align-items: center; gap: 12px; }
+    .cart-count {
+      background: var(--primary);
+      color: var(--dark);
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.85rem;
+    }
+    .cart-bar .btn-checkout {
+      padding: 10px 28px;
+      background: #fff;
+      color: var(--dark);
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: transform 0.2s;
+    }
+    .cart-bar .btn-checkout:hover { transform: scale(1.04); }
+
+    /* Why buy section */
+    .why-section {
+      padding: 60px 0;
+      background: #faf8f5;
+    }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 32px;
+    }
+    .why-item {
+      text-align: center;
+      padding: 24px 16px;
+      background: #fff;
+      border-radius: 16px;
+      border: 1px solid #eee;
+    }
+    .why-icon { font-size: 2rem; margin-bottom: 12px; }
+    .why-item h4 { font-size: 0.95rem; color: var(--dark); margin-bottom: 6px; }
+    .why-item p { font-size: 0.82rem; color: var(--text-light); line-height: 1.5; }
+
+    @media (max-width: 768px) {
+      .acc-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: repeat(2, 1fr); }
+      .acc-hero h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav id="navbar" class="scrolled">
+    <div class="container">
+      <a href="index.html" class="logo">ATE<span>.Rental</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">หน้าแรก</a></li>
+        <li><a href="lookbook.html" style="font-weight: 500; color: var(--primary);">Lookbook ✨</a></li>
+        <li><a href="rental.html">บริการเช่าชุด</a></li>
+        <li><a href="second_hand.html">ซื้อชุดมือสอง</a></li>
+        <li><a href="accessories.html" style="font-weight:600;">Accessories 🛍️</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropbtn">สำหรับผู้ปล่อยเช่า</a>
+          <div class="dropdown-content">
+            <a href="consign.html">ฝากชุดเช่า</a>
+            <a href="lender.html">แดชบอร์ดรายได้</a>
+          </div>
+        </li>
+        <li><a href="profile.html">โปรไฟล์</a></li>
+        <li><a href="rental.html" class="nav-cta">เช่าเลย</a></li>
+      </ul>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="acc-hero">
+    <div class="container">
+      <div style="display:inline-block; background:rgba(201,168,124,0.15); border:1px solid rgba(201,168,124,0.3); color:var(--primary-dark); padding:8px 24px; border-radius:50px; font-size:0.78rem; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:16px;">🛍️ Accessories Shop</div>
+      <h1>อุปกรณ์เสริม<br><span>ความสวย</span></h1>
+      <p>เช่าชุดสวยแล้ว อย่าลืมเตรียมตัวให้พร้อม! เลือกช้อปอุปกรณ์เสริมคุณภาพดี ราคาเบาๆ</p>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section>
+    <div class="container">
+      <div class="acc-grid">
+
+        <!-- Product 1: Nu Bra -->
+        <div class="acc-card">
+          <div class="acc-img">
+            <img src="https://images.unsplash.com/photo-1616627577385-5c0c4dce935c?w=400&auto=format&fit=crop&q=80" alt="บราปีกนก Nu Bra">
+            <div class="acc-badge bestseller">🔥 ขายดี</div>
+          </div>
+          <div class="acc-content">
+            <h3>👙 บราปีกนก (Nu Bra)</h3>
+            <p class="acc-desc">ซิลิโคนเกรดพรีเมียม เนื้อนุ่ม กาวแน่น ติดทนทั้งวัน ซักได้ใช้ซ้ำหลายครั้ง เหมาะกับชุดเกาะอก ชุดหลังเปลือย</p>
+            <div class="acc-features">
+              <span class="acc-feature-tag">ซิลิโคนแท้</span>
+              <span class="acc-feature-tag">ซักได้</span>
+              <span class="acc-feature-tag">กันน้ำ</span>
+              <span class="acc-feature-tag">ใช้ซ้ำ 30+ ครั้ง</span>
+            </div>
+            <div class="acc-variants">
+              <button class="variant-btn active" onclick="selectVariant(this)">Cup A/B</button>
+              <button class="variant-btn" onclick="selectVariant(this)">Cup C/D</button>
+            </div>
+            <div class="acc-price-row">
+              <div class="acc-price">฿89 <small>/ชิ้น</small></div>
+              <div style="display:flex; align-items:center; gap:10px;">
+                <div class="qty-selector">
+                  <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+                  <input class="qty-value" value="1" readonly>
+                  <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+                </div>
+                <button class="btn-add-cart" onclick="addToCart('บราปีกนก (Nu Bra)', 89, this)">🛒 ใส่ตะกร้า</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 2: Nipple Cover -->
+        <div class="acc-card">
+          <div class="acc-img">
+            <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=400&auto=format&fit=crop&q=80" alt="ปิดจุก Nipple Cover">
+            <div class="acc-badge new">✨ ใหม่</div>
+          </div>
+          <div class="acc-content">
+            <h3>🩹 ปิดจุก (Nipple Cover)</h3>
+            <p class="acc-desc">ซิลิโคนบางเบา แนบสนิท ไม่เห็นรอยผ่านเนื้อผ้า กันน้ำ กันเหงื่อ ใช้ซ้ำได้หลายครั้ง ทำจากซิลิโคนเกรดการแพทย์</p>
+            <div class="acc-features">
+              <span class="acc-feature-tag">ซิลิโคนการแพทย์</span>
+              <span class="acc-feature-tag">บางเบา</span>
+              <span class="acc-feature-tag">กันเหงื่อ</span>
+              <span class="acc-feature-tag">ใช้ซ้ำ 20+ ครั้ง</span>
+            </div>
+            <div class="acc-variants">
+              <button class="variant-btn active" onclick="selectVariant(this)">สีเนื้อ</button>
+              <button class="variant-btn" onclick="selectVariant(this)">สีดำ</button>
+            </div>
+            <div class="acc-price-row">
+              <div class="acc-price">฿39 <small>/คู่</small></div>
+              <div style="display:flex; align-items:center; gap:10px;">
+                <div class="qty-selector">
+                  <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+                  <input class="qty-value" value="1" readonly>
+                  <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+                </div>
+                <button class="btn-add-cart" onclick="addToCart('ปิดจุก (Nipple Cover)', 39, this)">🛒 ใส่ตะกร้า</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 3: False Lashes -->
+        <div class="acc-card">
+          <div class="acc-img">
+            <img src="https://images.unsplash.com/photo-1583241475880-751a0d6a8e40?w=400&auto=format&fit=crop&q=80" alt="ขนตาปลอม False Lashes">
+            <div class="acc-badge bestseller">🔥 ขายดี</div>
+          </div>
+          <div class="acc-content">
+            <h3>👁️ ขนตาปลอม (False Lashes)</h3>
+            <p class="acc-desc">ขนตาปลอมเส้นธรรมชาติ น้ำหนักเบา ติดง่าย ไม่ระคายตา มาพร้อมกาวติดขนตาเกรดดี ในชุด 3 คู่ให้เลือกใช้คุ้ม</p>
+            <div class="acc-features">
+              <span class="acc-feature-tag">3 คู่ / ชุด</span>
+              <span class="acc-feature-tag">แถมกาว</span>
+              <span class="acc-feature-tag">เส้นธรรมชาติ</span>
+              <span class="acc-feature-tag">น้ำหนักเบา</span>
+            </div>
+            <div class="acc-variants">
+              <button class="variant-btn active" onclick="selectVariant(this)">Natural</button>
+              <button class="variant-btn" onclick="selectVariant(this)">Dramatic</button>
+              <button class="variant-btn" onclick="selectVariant(this)">Cat Eye</button>
+            </div>
+            <div class="acc-price-row">
+              <div class="acc-price">฿59 <small>/ชุด 3 คู่</small></div>
+              <div style="display:flex; align-items:center; gap:10px;">
+                <div class="qty-selector">
+                  <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+                  <input class="qty-value" value="1" readonly>
+                  <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+                </div>
+                <button class="btn-add-cart" onclick="addToCart('ขนตาปลอม (False Lashes)', 59, this)">🛒 ใส่ตะกร้า</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY BUY -->
+  <section class="why-section">
+    <div class="container">
+      <div style="text-align:center;">
+        <div class="section-tag">Why Choose Us</div>
+        <h2 style="font-size:2rem; color:var(--dark);">ทำไมต้องช้อปกับ ATE?</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-item">
+          <div class="why-icon">✅</div>
+          <h4>คุณภาพดี</h4>
+          <p>คัดสรรสินค้าเกรดพรีเมียม ทดสอบก่อนวางขาย</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">💰</div>
+          <h4>ราคาเบาๆ</h4>
+          <p>ราคาสบายกระเป๋า ถูกกว่าซื้อตามห้าง</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">📦</div>
+          <h4>ส่งพร้อมชุด</h4>
+          <p>สั่งพร้อมเช่าชุด ส่งไปในกล่องเดียวกัน!</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🔁</div>
+          <h4>ใช้ซ้ำได้</h4>
+          <p>สินค้าทุกชิ้นซักได้ ใช้ซ้ำได้หลายครั้ง</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="padding: 40px 0; background: #fff; text-align: center; border-top: 1px solid #eee;">
+    <div class="container">
+      <a href="index.html" class="logo" style="color: var(--dark);">ATE<span style="color: var(--primary);">.Rental</span></a>
+      <p style="margin-top: 20px; color: var(--text-light); font-size: 0.9rem;">© 2026 ATE.Rental Fashion Sharing Community.</p>
+    </div>
+  </footer>
+
+  <!-- FLOATING CART BAR -->
+  <div class="cart-bar" id="cartBar">
+    <div class="cart-info">
+      <div class="cart-count" id="cartCount">0</div>
+      <div>
+        <div style="font-weight:600; font-size:0.95rem;">ตะกร้าของคุณ</div>
+        <div style="font-size:0.82rem; opacity:0.7;" id="cartTotal">฿0</div>
+      </div>
+    </div>
+    <button class="btn-checkout" onclick="checkout()">สั่งซื้อเลย →</button>
+  </div>
+
+  <script src="admin-toggle.js"></script>
+  <script src="chat.js"></script>
+  <script>
+    // Navbar
+    document.getElementById('menuToggle').addEventListener('click', () => {
+      const links = document.querySelector('.nav-links');
+      links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+      links.style.flexDirection = 'column'; links.style.position = 'absolute';
+      links.style.top = '100%'; links.style.left = '0'; links.style.width = '100%';
+      links.style.background = 'rgba(26,26,26,0.98)'; links.style.padding = '20px';
+      links.style.gap = '16px'; links.style.borderRadius = '0 0 16px 16px';
+    });
+
+    // Variant selection
+    function selectVariant(btn) {
+      btn.parentElement.querySelectorAll('.variant-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    // Quantity
+    function changeQty(btn, delta) {
+      const input = btn.parentElement.querySelector('.qty-value');
+      let val = parseInt(input.value) + delta;
+      if (val < 1) val = 1;
+      if (val > 10) val = 10;
+      input.value = val;
+    }
+
+    // Cart logic
+    let cart = [];
+    function addToCart(name, price, btnEl) {
+      const card = btnEl.closest('.acc-card');
+      const qty = parseInt(card.querySelector('.qty-value').value);
+      const variant = card.querySelector('.variant-btn.active')?.textContent || '';
+
+      // Check existing
+      const existing = cart.find(i => i.name === name && i.variant === variant);
+      if (existing) {
+        existing.qty += qty;
+      } else {
+        cart.push({ name, price, qty, variant });
+      }
+
+      updateCartBar();
+
+      // Animate button
+      btnEl.textContent = '✅ เพิ่มแล้ว!';
+      btnEl.style.background = '#27ae60';
+      setTimeout(() => {
+        btnEl.textContent = '🛒 ใส่ตะกร้า';
+        btnEl.style.background = '';
+      }, 1500);
+    }
+
+    function updateCartBar() {
+      const bar = document.getElementById('cartBar');
+      const totalItems = cart.reduce((s, i) => s + i.qty, 0);
+      const totalPrice = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+
+      document.getElementById('cartCount').textContent = totalItems;
+      document.getElementById('cartTotal').textContent = '฿' + totalPrice.toLocaleString();
+
+      bar.classList.toggle('show', totalItems > 0);
+    }
+
+    function checkout() {
+      const items = cart.map(i => `${i.name} ${i.variant ? '(' + i.variant + ')' : ''} x${i.qty}`).join('\n');
+      const total = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+      alert(`🛒 รายการสั่งซื้อ:\n\n${items}\n\nรวม: ฿${total.toLocaleString()}\n\nทีมงานจะยืนยันออเดอร์ผ่าน Line: @aterental`);
+    }
+  </script>
+</body>
+</html>

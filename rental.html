@@ -19,11 +19,19 @@
       <a href="index.html" class="logo">ATE<span>.Rental</span></a>
       <ul class="nav-links">
         <li><a href="index.html">หน้าแรก</a></li>
-        <li><a href="rental.html" style="color:var(--primary)">บริการเช่าชุด</a></li>
-        <li><a href="index.html#consign">ฝากชุดเช่า</a></li>
-        <li><a href="lender.html">รายได้ผู้ปล่อยเช่า</a></li>
-        <li><a href="index.html#faq">FAQ</a></li>
-        <li><a href="#" class="nav-cta">เช่าเลย</a></li>
+        <li><a href="lookbook.html" style="font-weight: 500; color: var(--primary);">Lookbook ✨</a></li>
+        <li><a href="rental.html">บริการเช่าชุด</a></li>
+        <li><a href="second_hand.html">ซื้อชุดมือสอง</a></li>
+        <li><a href="accessories.html">Accessories 🛍️</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropbtn">สำหรับผู้ปล่อยเช่า</a>
+          <div class="dropdown-content">
+            <a href="consign.html">ฝากชุดเช่า</a>
+            <a href="lender.html">แดชบอร์ดรายได้</a>
+          </div>
+        </li>
+        <li><a href="profile.html">โปรไฟล์</a></li>
+        <li><a href="rental.html" class="nav-cta">เช่าเลย</a></li>
       </ul>
       <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
     </div>
@@ -38,8 +46,8 @@
         <span class="current">Fashion Sharing</span>
       </div>
       <div class="community-badge">✦ Fashion Sharing Community</div>
-      <h1>ส่งต่อ<span>ความสวย</span><br>ชุดทุกตัวมีเรื่องเล่า</h1>
-      <p>ไม่ใช่แค่เช่าชุด — แต่คือการแชร์สไตล์ ส่งต่อประสบการณ์ความสวย พร้อมเคล็ดลับการแต่งตัวจากเจ้าของชุด</p>
+      <h1>ค้นพบสไตล์ใหม่ๆ<br><span>จากตู้เสื้อผ้าคอมมูนิตี้</span></h1>
+      <p>เปิดตู้เสื้อผ้าแชร์ความสวย เลือกเช่าชุดที่ใช่ พร้อมดูอินสไปร์การแมตช์ชุดจาก Lookbook ของผู้ใช้งานจริง</p>
     </div>
   </section>
 
@@ -63,6 +71,18 @@
             <h3>ตัวกรอง</h3>
             <button class="close-filter-btn" id="closeFilter">✕</button>
             <button class="clear-filters-btn" id="clearAll">ล้างทั้งหมด</button>
+          </div>
+
+          <!-- Condition Filter -->
+          <div class="filter-group">
+            <div class="filter-group-title">✨ สภาพชุด</div>
+            <div class="brand-options">
+              <label class="brand-check">
+                <input type="checkbox" name="condition" value="value_edit">
+                <span>Value Edit (ราคาพิเศษ)</span>
+                <span class="brand-count">1</span>
+              </label>
+            </div>
           </div>
 
           <!-- Color Filter -->
@@ -193,6 +213,36 @@
 
           <!-- Product Grid -->
           <div class="rental-grid" id="rentalGrid">
+
+            <!-- Value Edit Card -->
+            <div class="rental-card" data-color="red" data-sizes="S,M" data-brand="Zara" data-category="party" data-condition="value_edit"
+              data-price="250" data-booked="">
+              <div class="product-img">
+                <img src="dress8.png" alt="Red Satin Slip Dress" loading="lazy">
+                <span class="product-badge value-edit">Value Edit</span>
+                <span class="product-days">3 วัน</span>
+                <span class="avail-badge available">ว่าง</span>
+              </div>
+              <div class="card-info">
+                <h3>Red Satin Slip Dress</h3>
+                <div class="card-brand">Zara</div>
+                <div class="card-meta">
+                  <span><span class="card-color-dot" style="background:#c0392b"></span> แดง</span>
+                  <span>S, M</span>
+                </div>
+                <div class="card-story">
+                  <div class="story-avatar">💡</div>
+                  <div class="story-text">
+                    <span class="story-name">⚠️ ตำหนิ:</span> รอยเกี่ยวผ้าด้านหลัง 1 ซม. ไม่สะดุดตาเวลาสวมใส่
+                  </div>
+                </div>
+                <div class="card-bottom">
+                  <div class="card-price"><span class="old-price">฿490</span>฿250 <span>/ 3 วัน</span></div>
+                  <div class="rental-remaining"><span class="remaining-dot"></span> เช่าได้อีก <strong>2</strong> ครั้ง</div>
+                </div>
+                <a href="checkout.html?type=value_edit&name=Red+Satin+Slip+Dress&price=250&image=dress8.png&color=แดง&size=M&defect=รอยเกี่ยวผ้าด้านหลัง+1+ซม." class="btn btn-dark" style="background:#444;">เช่าราคาพิเศษ</a>
+              </div>
+            </div>
 
             <!-- Card 1 -->
             <div class="rental-card" data-color="white" data-sizes="S,M,L" data-brand="ATE Original"
@@ -663,7 +713,7 @@
     dateInput.min = today;
 
     // Listen to all filter changes
-    document.querySelectorAll('input[name="color"], input[name="size"], input[name="brand"]').forEach(input => {
+    document.querySelectorAll('input[name="color"], input[name="size"], input[name="brand"], input[name="condition"]').forEach(input => {
       input.addEventListener('change', applyFilters);
     });
     dateInput.addEventListener('change', applyFilters);
@@ -679,6 +729,7 @@
       const selectedColors = getSelectedValues('color');
       const selectedSizes = getSelectedValues('size');
       const selectedBrands = getSelectedValues('brand');
+      const selectedConditions = getSelectedValues('condition');
       const selectedDate = dateInput.value;
 
       let visibleCount = 0;
@@ -687,6 +738,7 @@
         const cardColor = card.dataset.color;
         const cardSizes = card.dataset.sizes.split(',');
         const cardBrand = card.dataset.brand;
+        const cardCondition = card.dataset.condition;
         const bookedDates = card.dataset.booked ? card.dataset.booked.split(',') : [];
 
         let show = true;
@@ -699,6 +751,9 @@
 
         // Brand filter
         if (selectedBrands.length > 0 && !selectedBrands.includes(cardBrand)) show = false;
+
+        // Condition filter
+        if (selectedConditions.length > 0 && !selectedConditions.includes(cardCondition)) show = false;
 
         // Date filter - check if date is booked
         if (selectedDate && bookedDates.includes(selectedDate)) show = false;
@@ -801,6 +856,30 @@
 
     document.getElementById('clearAll').addEventListener('click', clearAllFilters);
 
+    // ===== CHECKOUT NAVIGATION =====
+    function goToCheckout(btn) {
+      const card = btn.closest('.rental-card');
+      const name = card.querySelector('.card-info h3').textContent.trim();
+      const badge = card.querySelector('.product-badge');
+      const brand = badge ? badge.textContent.trim() : '';
+      const price = card.dataset.price || '';
+      const img = card.querySelector('.product-img img') ? card.querySelector('.product-img img').getAttribute('src') : '';
+      
+      const colorEl = card.querySelector('.card-color-dot');
+      const color = colorEl && colorEl.nextSibling ? colorEl.nextSibling.textContent.trim() : '';
+      
+      const metaSpans = card.querySelectorAll('.card-meta > span');
+      const size = metaSpans.length > 1 ? metaSpans[1].textContent.trim() : '';
+
+      const storyEl = card.querySelector('.story-text');
+      const story = storyEl ? storyEl.textContent.trim() : '';
+
+      const params = new URLSearchParams({
+        name, brand, price, image: img, color, size, story
+      });
+      window.location.href = `checkout.html?${params.toString()}`;
+    }
+
     // ===== MOBILE FILTER =====
     const filterSidebar = document.getElementById('filterSidebar');
 
@@ -854,41 +933,174 @@
       });
     });
 
-    // ===== STORY EXPAND/COLLAPSE =====
-    document.querySelectorAll('.card-story').forEach(story => {
-      story.addEventListener('click', () => {
-        story.classList.toggle('expanded');
-      });
+    // ===== HOW TO LOOK MODAL =====
+    const howToLookData = {
+       "default": {
+          style: "แมทช์กับกระเป๋าสะพายสายน้อยสีทอง และรองเท้าส้นสูงเปลือย จะช่วยขับให้ชุดดูเด่นและขายาวขึ้นค่ะ",
+          makeup: "แต่งหน้าคลีนๆ สีนู้ด/พีช ดัดผมลอนคลายๆ หรือเกล้าผมต่ำให้ดูเป็นธรรมชาติแบบสายฝอเบาๆ",
+          photo: "ถ่ายรับแสงแดด 16:30 น. หรือถ่ายหน้ากระจกคาเฟ่แบบเปิดแฟลชปังๆ ไปเลยค่ะ",
+          gallery: [
+              "https://images.unsplash.com/photo-1515347619252-8d28e7e318df?w=200&h=250&fit=crop",
+              "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=200&h=250&fit=crop"
+          ]
+       },
+       "Navy Velvet Evening Gown": {
+          style: "ชุดผ้ากำมะหยี่พรางหุ่นดีมากกกก ใส่กับรองเท้าส้นเข็มสีดำหรือสีเงิน และต่างหูระย้าเพชรวิบวับคือจบ! แพงที่สุดในงานแน่นอน",
+          makeup: "ลองทาลิปสีแดงก่ำ (Burgundy) เข้ากับชุดสีกรมสุดๆ แนะนำทำผมทรงมวยต่ำ (Low Bun) เปิดโชว์คอให้ดูระหงค่ะ",
+          photo: "ถ่ายรูปโซนแสงสลัวๆ ตาม Rooftop Bar หรือหน้าแบคดรอปงานที่ไฟส่องลงมา ชุดจะเล่นแสงเหลือบสวยมาก",
+          gallery: [
+              "https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=200&h=250&fit=crop",
+              "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=200&h=250&fit=crop"
+          ]
+       },
+       "Black Sequin Mini": {
+          style: "ชุดเลื่อมสีดำวิบวับ ใส่คู่กับส้นสูงเปลือยสีดำ หรือบูทยาวก็แซ่บค่ะ ถือกระเป๋าคลัทช์เรียบๆ ก็ไม่ต้องกลัวแย่งซีนชุดเลย",
+          makeup: "เน้นแต่งตาสโมคกี้อายอ่อนๆ หรือกรีดอายไลเนอร์เฉี่ยวๆ ส่วนสีลิปใช้สีนู้ดอมน้ำตาลนิดนึงเพื่อลุคสวยดุ",
+          photo: "เปิดแฟลชถ่ายรูปหน้ากำแพงเรียบๆ หรือในโซนที่แสงสลัว จะช่วยดึงมิติวิบวับของชุดออกมาได้ดีที่สุด!",
+          gallery: [
+              "https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?w=200&h=250&fit=crop",
+              "https://images.unsplash.com/photo-1485231183945-fc3b74f9d2a2?w=200&h=250&fit=crop"
+          ]
+       },
+       "Pink Ruched Corset Midi": {
+           style: "ชุดชมพูหวานปนเซ็กซี่ แนะนำคอมพลีทลุคด้วยรองเท้าส้นสูงหัวแหลมสีขาวหรือสีใสค่ะ เพื่อความตัวเล็กตัวน้อย",
+           makeup: "แต่งหน้าโทนชมพูพีช หรือคอรัล ปัดแก้มหน้าแก้มฉ่ำๆ ดัดขนตาให้งอนเด้งแล้วทาลิปกลอสทับให้ดูเด็กลง",
+           photo: "ถ่ายรูปแนวปิคนิค หรือสวนดอกไม้คาเฟ่สไตล์อังกฤษ จะให้ฟีลนางเอกมาก แสงเช้าหรือเย็นประทับใจแน่นอน",
+           gallery: [
+              "https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?w=200&h=250&fit=crop",
+              "https://images.unsplash.com/photo-1496766444005-728add901eab?w=200&h=250&fit=crop"
+           ]
+       }
+    };
+
+    function openHowToLookModal(card) {
+       const title = card.querySelector('.dress-name') ? card.querySelector('.dress-name').textContent.trim() : 
+                     (card.querySelector('h3') ? card.querySelector('h3').textContent.trim() : "default");
+       
+       const storyNameEl = card.querySelector('.story-name');
+       let ownerName = "สาวๆ ATE.Rental";
+       let ownerAvatar = "✨";
+       if(storyNameEl) {
+           ownerName = storyNameEl.textContent;
+           ownerAvatar = ownerName.charAt(ownerName.startsWith('พี่') ? 3 : 0) || "A";
+       }
+
+       const data = howToLookData[title] || howToLookData["default"];
+       
+       document.getElementById('htlAvatar').textContent = ownerAvatar;
+       document.getElementById('htlName').textContent = ownerName + " (เพื่อนสาวของคุณ)";
+       document.getElementById('htlStyle').textContent = data.style;
+       document.getElementById('htlMakeup').textContent = data.makeup;
+       document.getElementById('htlPhoto').textContent = data.photo;
+       
+       const galleryEl = document.getElementById('htlGallery');
+       galleryEl.innerHTML = '';
+       data.gallery.forEach(imgUrl => {
+           galleryEl.innerHTML += `<img src="${imgUrl}" alt="Share Look" style="height:200px; width:auto; border-radius:12px; object-fit:cover; box-shadow:0 4px 15px rgba(0,0,0,0.05);">`;
+       });
+       
+       document.getElementById('howToLookModal').style.opacity = '1';
+       document.getElementById('howToLookModal').style.pointerEvents = 'auto';
+       document.body.style.overflow = 'hidden';
+    }
+
+    function closeHowToLookModal() {
+       document.getElementById('howToLookModal').style.opacity = '0';
+       document.getElementById('howToLookModal').style.pointerEvents = 'none';
+       document.body.style.overflow = '';
+    }
+    
+  </script>
+
+  <!-- HOW TO LOOK MODAL -->
+  <div class="modal-overlay" id="howToLookModal" style="z-index: 10000; opacity: 0; pointer-events: none; transition: opacity 0.3s; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center;">
+    <div class="modal-content" style="max-width:500px; padding:0; overflow:hidden; border-radius:24px; text-align:left; position:relative; background:#fff; box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+      <button class="mock-close" onclick="closeHowToLookModal()" style="color:#333; z-index:10; background:#fff; border-radius:50%; width:30px; height:30px; box-shadow:0 2px 10px rgba(0,0,0,0.1); position:absolute; top:15px; right:15px; display:flex; align-items:center; justify-content:center; cursor:pointer; border:none; font-weight:bold;">✕</button>
+      
+      <div style="background: linear-gradient(135deg, #fdfbf7 0%, #f3ece1 100%); padding: 35px 24px 25px; text-align:center; border-bottom:1px solid #ebe1d1;">
+        <span style="font-size:36px; display:block; margin-bottom:10px;">👒</span>
+        <h3 style="color:#2a201b; margin-bottom:5px; font-size:1.5rem; font-family:serif; font-style:italic;">How to Look</h3>
+        <p style="color:#888; font-size:0.9rem;">อินเนอร์ยืมชุดเพื่อนสาว แชร์ความสวยไปด้วยกัน!</p>
+      </div>
+
+      <div style="padding: 24px; text-align:left; max-height: 55vh; overflow-y:auto; background:#fff;">
+        
+        <!-- Shared By -->
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:24px; background:#faf8f5; padding:12px 16px; border-radius:12px; border:1px solid #f2e6d9;">
+           <div style="width:45px; height:45px; border-radius:50%; background:#d4b896; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:bold; font-size:1.2rem;" id="htlAvatar">A</div>
+           <div>
+             <div style="font-size:0.8rem; color:#888; margin-bottom:2px;">แชร์ทริคโดย (Owner / เจ้าของชุด)</div>
+             <div><strong style="color:#2a201b; font-size:1.05rem;" id="htlName">K. Alice</strong> <span style="font-size: 0.85rem; color: #f39c12; font-weight: normal; margin-left: 6px;">★ 4.9 <span style="color:#2e7d32; background:#e8f5e9; padding:2px 8px; border-radius:10px; margin-left:4px; font-size:0.75rem;">Trusted Owner</span></span></div>
+           </div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:24px;">
+          <!-- Style -->
+          <div>
+            <h4 style="color:#b59b7a; display:flex; align-items:center; gap:8px; font-size:1.05rem; margin-bottom:8px;">
+               👗 ทริคแมทช์ชุด (Style)
+            </h4>
+            <p style="color:#555; font-size:0.95rem; line-height:1.6; margin:0;" id="htlStyle">Text</p>
+          </div>
+          
+          <!-- Makeup -->
+          <div>
+            <h4 style="color:#b59b7a; display:flex; align-items:center; gap:8px; font-size:1.05rem; margin-bottom:8px;">
+               💄 ไอเดียแต่งหน้า (Makeup Look)
+            </h4>
+            <p style="color:#555; font-size:0.95rem; line-height:1.6; margin:0;" id="htlMakeup">Text</p>
+          </div>
+
+          <!-- Photo -->
+          <div>
+            <h4 style="color:#b59b7a; display:flex; align-items:center; gap:8px; font-size:1.05rem; margin-bottom:8px;">
+               📸 โลเคชันถ่ายรูปปังๆ (Photo Spots)
+            </h4>
+            <p style="color:#555; font-size:0.95rem; line-height:1.6; margin:0;" id="htlPhoto">Text</p>
+          </div>
+
+          <!-- Community Gallery -->
+          <div style="margin-top: 10px; border-top: 1px dashed #eee; padding-top: 20px;">
+            <h4 style="color:#2a201b; display:flex; align-items:center; justify-content:space-between; font-size:1.05rem; margin-bottom:12px;">
+               <span>✨ แชร์ลุคสวย (Community Looks)</span>
+               <span style="font-size:0.8rem; background:#f2e6d9; padding:4px 10px; border-radius:30px; color:#b59b7a;">2 รีวิว</span>
+            </h4>
+            <div id="htlGallery" style="display:flex; gap:12px; overflow-x:auto; padding-bottom:10px;">
+              <!-- Javascript will inject images here -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div style="padding: 20px; background:#faf8f5; border-top:1px solid #eee; text-align:center;">
+         <button class="btn btn-primary" style="width:100%; font-size:1.05rem;" onclick="closeHowToLookModal()">ช้อปความสวยนี้เลย! 💖</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Close modal when clicking outside
+    document.getElementById('howToLookModal').addEventListener('click', function(e) {
+       if (e.target === this) closeHowToLookModal();
     });
 
-    // ===== CHECKOUT NAVIGATION =====
-    function goToCheckout(btn) {
-      const card = btn.closest('.rental-card');
-      const name = card.querySelector('.card-info h3').textContent;
-      const brand = card.querySelector('.card-brand').textContent;
-      const price = card.dataset.price;
-      const img = card.querySelector('.product-img img').getAttribute('src');
-      const colorEl = card.querySelector('.card-color-dot');
-      const color = colorEl ? colorEl.nextSibling.textContent.trim() : '';
-      const sizeEl = card.querySelector('.card-sizes');
-      const size = sizeEl ? sizeEl.textContent.replace(/[^A-Z,XSMLxsml]/g, '').trim() : '';
-      const storyEl = card.querySelector('.story-text');
-      const story = storyEl ? storyEl.textContent.trim() : '';
-
-      const params = new URLSearchParams({
-        name, brand, price, image: img, color, size, story
-      });
-      window.location.href = `checkout.html?${params.toString()}`;
-    }
+    // Replace original stories with How To Look Buttons
+    document.querySelectorAll('.card-story').forEach(story => {
+      story.style.display = 'none';
+      
+      const info = story.parentElement;
+      const btn = document.createElement('button');
+      btn.className = 'btn btn-outline';
+      btn.style.cssText = 'width:100%; margin:8px 0 12px 0; border-color:#d4b896; color:#a18259; font-size:0.9rem; padding:8px; display:flex; align-items:center; justify-content:center; gap:6px; border-radius:30px; border-width:1.5px;';
+      btn.innerHTML = '✨ ทริคยืมชุดเพื่อนสาว';
+      btn.onclick = (e) => { e.preventDefault(); openHowToLookModal(info.closest('.rental-card')); };
+      
+      info.insertBefore(btn, info.querySelector('.card-bottom'));
+    });
   </script>
-  <!-- Floating LINE Chat -->
-  <a href="https://line.me/R/ti/p/@aterental" target="_blank" class="floating-line" aria-label="Chat via LINE">
-    <svg viewBox="0 0 24 24" fill="white" width="28" height="28">
-      <path d="M22.5 10.3c0-4.5-5.2-8.3-11.5-8.3S-.5 5.8-.5 10.3c0 4 .3 7.6 9 8.3.4.1.9.4 1.1.9.1.5.1 1.4-.1 2.2 0 0-.2.9 1 .3 1.2-.6 6.3-4.1 8.5-6.7 1.8-1.5 3.5-3.3 3.5-5z"></path>
-    </svg>
-    <span>ส่งรูปประเมิน / สอบถาม</span>
-  </a>
 
+  <script src="admin-toggle.js"></script>
+  <script src="chat.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ATE.Rental Lookbook — หาอินสไปร์การแต่งตัวจากคอมมูนิตี้ของเรา แมตช์ชุดสวยให้ปังกว่าเดิม">
+  <title>Lookbook — ATE.Rental Fashion Community</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .lookbook-hero {
+      padding: 120px 0 60px;
+      text-align: center;
+      background: linear-gradient(180deg, var(--light) 0%, #fff 100%);
+    }
+    .lookbook-hero h1 {
+      font-size: 3rem;
+      color: var(--dark);
+      margin-bottom: 20px;
+    }
+    .lookbook-hero p {
+      color: var(--text-light);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    
+    /* Masonry Grid */
+    .masonry-grid {
+      column-count: 3;
+      column-gap: 24px;
+      padding: 40px 0 80px;
+    }
+    @media (max-width: 900px) {
+      .masonry-grid { column-count: 2; }
+    }
+    @media (max-width: 600px) {
+      .masonry-grid { column-count: 1; }
+    }
+    
+    .look-card {
+      break-inside: avoid;
+      margin-bottom: 24px;
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
+      position: relative;
+    }
+    .look-card:hover {
+      transform: translateY(-5px);
+    }
+    .look-img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+    .look-content {
+      padding: 24px;
+    }
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: bold;
+    }
+    .user-name {
+      font-weight: 600;
+      color: var(--dark);
+      font-size: 0.95rem;
+    }
+    .user-role {
+      font-size: 0.8rem;
+      color: var(--text-light);
+    }
+    .look-tip {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--text);
+      margin-bottom: 20px;
+      background: #faf8f5;
+      padding: 16px;
+      border-radius: 12px;
+      border-left: 3px solid var(--primary);
+    }
+    .look-tip.owner {
+      border-left-color: #e8c4a0;
+      background: #fffdfa;
+    }
+    .tagged-dress {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+    }
+    .tagged-img {
+      width: 50px;
+      height: 60px;
+      border-radius: 6px;
+      object-fit: cover;
+    }
+    .tagged-info {
+      flex: 1;
+    }
+    .tagged-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+    .tagged-price {
+      font-size: 0.85rem;
+      color: var(--primary);
+      font-weight: 500;
+    }
+    .btn-rent-look {
+      background: var(--dark);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: background 0.3s;
+      white-space: nowrap;
+    }
+    .btn-rent-look:hover {
+      background: var(--primary);
+    }
+    
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .tag {
+      background: #eee;
+      color: #555;
+      padding: 4px 10px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav id="navbar" class="scrolled">
+    <div class="container">
+      <a href="index.html" class="logo">ATE<span>.Rental</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">หน้าแรก</a></li>
+        <li><a href="lookbook.html" style="color: var(--primary);">Lookbook</a></li>
+        <li><a href="rental.html">บริการเช่าชุด</a></li>
+        <li><a href="second_hand.html">ซื้อชุดมือสอง</a></li>
+        <li><a href="accessories.html">Accessories 🛍️</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropbtn">สำหรับผู้ปล่อยเช่า</a>
+          <div class="dropdown-content">
+            <a href="consign.html">ฝากชุดเช่า</a>
+            <a href="lender.html">แดชบอร์ดรายได้</a>
+          </div>
+        </li>
+        <li><a href="profile.html">โปรไฟล์</a></li>
+        <li><a href="rental.html" class="nav-cta">เช่าเลย</a></li>
+      </ul>
+      <button class="menu-toggle" id="menuToggle">☰</button>
+    </div>
+  </nav>
+
+  <!-- SEC: HERO LOOKBOOK -->
+  <section class="lookbook-hero">
+    <div class="container">
+      <div class="section-tag">Community Style</div>
+      <h1>Share The Beauty</h1>
+      <p>หาไอเดียแต่งตัว แมตช์ชุดสวยจากรีวิวผู้ใช้งานจริงของเรา — เลือกสไตล์ที่ใช่ แล้วกดเช่าลุคนี้ไปสวยต่อได้เลย!</p>
+    </div>
+  </section>
+
+  <!-- SEC: MASONRY FEED -->
+  <section class="lookbook-feed">
+    <div class="container">
+      
+      <!-- Filters (Optional UI only) -->
+      <div style="display: flex; gap: 12px; margin-bottom: 30px; overflow-x: auto; padding-bottom: 10px;">
+        <button class="btn btn-dark" style="padding: 8px 20px; font-size:0.9rem;">ทั้งหมด</button>
+        <button class="btn btn-outline" style="color:#333; border-color:#ddd; padding: 8px 20px; font-size:0.9rem;">ลุคดินเนอร์</button>
+        <button class="btn btn-outline" style="color:#333; border-color:#ddd; padding: 8px 20px; font-size:0.9rem;">ลุคออกงาน</button>
+        <button class="btn btn-outline" style="color:#333; border-color:#ddd; padding: 8px 20px; font-size:0.9rem;">ลุคคาเฟ่</button>
+      </div>
+
+      <div class="masonry-grid">
+        
+        <!-- Post 1 -->
+        <div class="look-card">
+          <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600&auto=format&fit=crop&q=80" alt="White Ruffle Mini Dress Look" class="look-img">
+          <div class="look-content">
+            <div class="user-info">
+              <div class="user-avatar">ม</div>
+              <div>
+                <div class="user-name">คุณมิ้นท์</div>
+                <div class="user-role">Renter · เช่าไป 3 ลุคแล้ว</div>
+              </div>
+            </div>
+            <div class="tags">
+              <span class="tag">#CafeHopping</span>
+              <span class="tag">#Minimal</span>
+            </div>
+            <div class="look-tip">
+              "เดรสตัวนี้ขับผิวสุดๆ ค่ะ เราแมตช์กับสร้อยไข่มุกเส้นเล็กๆ และกระเป๋าสานทรงตะกร้า ใส่ไปคาเฟ่มินิมอลได้รูปแบบเกาหลีเกาใจมาก แนะนำรวบผมครึ่งหัวจะยิ่งดูละมุนค่ะ ✨"
+            </div>
+            <div class="tagged-dress">
+              <img src="dress1.png" alt="White Ruffle Mini Dress" class="tagged-img">
+              <div class="tagged-info">
+                <div class="tagged-name">White Ruffle Mini Dress</div>
+                <div class="tagged-price">฿390 / 3 วัน</div>
+              </div>
+              <a href="checkout.html?name=White+Ruffle+Mini+Dress&price=390&image=dress1.png" class="btn-rent-look">Rent This Look</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Post 2 -->
+        <div class="look-card">
+          <img src="https://images.unsplash.com/photo-1566207274740-0f8cf6b7d5a5?w=600&auto=format&fit=crop&q=80" alt="Champagne Silk Maxi Look" class="look-img">
+          <div class="look-content">
+            <div class="user-info">
+              <div class="user-avatar" style="background:var(--accent); color:var(--dark);">อ</div>
+              <div>
+                <div class="user-name">คุณอร (Owner)</div>
+                <div class="user-role">เจ้าของชุด 👑</div>
+              </div>
+            </div>
+            <div class="tags">
+              <span class="tag">#GalaNight</span>
+              <span class="tag">#SilkDress</span>
+            </div>
+            <div class="look-tip owner">
+              "ชุดรวิศราตัวนี้เป็นผ้าไหมซาติน เราจะชอบใส่คู่กับส้นสูงเปลือยหน้าเท้าสีนู้ด ทำให้ดูดึงขายาว ทริกคืออย่าใส่เครื่องประดับเยอะ แค่ต่างหูเพชรระย้าคู่เดียวจบ สวยแพงดูเป็นคนมีเทสต์ค่ะ"
+            </div>
+            <div class="tagged-dress">
+              <img src="dress6.png" alt="Champagne Silk Maxi" class="tagged-img">
+              <div class="tagged-info">
+                <div class="tagged-name">Champagne Silk Maxi</div>
+                <div class="tagged-price">฿590 / 3 วัน</div>
+              </div>
+              <a href="checkout.html?name=Champagne+Silk+Maxi&price=590&image=dress6.png" class="btn-rent-look">Rent This Look</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Post 3 -->
+        <div class="look-card">
+          <img src="https://images.unsplash.com/photo-1543632345-eb0746ba9fcd?w=600&auto=format&fit=crop&q=80" alt="Red Satin Dress Look" class="look-img">
+          <div class="look-content">
+            <div class="user-info">
+              <div class="user-avatar" style="background:#e74c3c;">บ</div>
+              <div>
+                <div class="user-name">คุณเบลล์</div>
+                <div class="user-role">Renter</div>
+              </div>
+            </div>
+            <div class="tags">
+              <span class="tag">#DinnerDate</span>
+              <span class="tag">#SexyElegance</span>
+            </div>
+            <div class="look-tip">
+              "เดรสแดงตัวนี้คือเดอะเบสท์ ใส่ไป Rooftop bar วันเกิดแฟน ปล่อยผมลอนใหญ่ แมตช์กับลิปสีไวน์แดง และกระเป๋าคลัชสีดำทรงแข็ง รูปออกมาจึ้งมาก!"
+            </div>
+            <div class="tagged-dress">
+              <img src="dress8.png" alt="Red Satin Slip Dress" class="tagged-img">
+              <div class="tagged-info">
+                <div class="tagged-name">Red Satin Slip Dress</div>
+                <div class="tagged-price">฿490 / 3 วัน</div>
+              </div>
+              <a href="checkout.html?name=Red+Satin+Slip+Dress&price=490&image=dress8.png" class="btn-rent-look">Rent This Look</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Post 4 -->
+        <div class="look-card">
+          <img src="https://images.unsplash.com/photo-1617265851456-addbc6223df1?w=600&auto=format&fit=crop&q=80" alt="Black Halter Maxi Look" class="look-img">
+          <div class="look-content">
+            <div class="user-info">
+              <div class="user-avatar" style="background:#2c3e50;">อ</div>
+              <div>
+                <div class="user-name">คุณออม</div>
+                <div class="user-role">Renter</div>
+              </div>
+            </div>
+            <div class="tags">
+              <span class="tag">#WeddingGuest</span>
+            </div>
+            <div class="look-tip">
+              "ใส่ไปงานแต่งธีมดำ เดรสตัวนี้โชว์หลังสวยมากค่ะ แนะนำให้เกล้าผมต่ำหรือทำผมทรง sleek bun เผื่อโชว์ดีเทลด้านหลัง แมตช์กับสร้อยข้อมือเพชรคือจบ"
+            </div>
+            <div class="tagged-dress">
+              <img src="dress12.png" alt="Black Halter Maxi Gown" class="tagged-img">
+              <div class="tagged-info">
+                <div class="tagged-name">Black Halter Maxi Gown</div>
+                <div class="tagged-price">฿590 / 3 วัน</div>
+              </div>
+              <a href="checkout.html?name=Black+Halter+Maxi+Gown&price=590&image=dress12.png" class="btn-rent-look">Rent This Look</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Post 5 -->
+        <div class="look-card">
+          <img src="https://images.unsplash.com/photo-1545622359-8ed423405dc9?w=600&auto=format&fit=crop&q=80" alt="Emerald Green Look" class="look-img">
+          <div class="look-content">
+            <div class="user-info">
+              <div class="user-avatar" style="background:#1abc9c;">พ</div>
+              <div>
+                <div class="user-name">คุณพลอย (Owner)</div>
+                <div class="user-role">เจ้าของชุด 👑</div>
+              </div>
+            </div>
+            <div class="tags">
+              <span class="tag">#PartyDress</span>
+            </div>
+            <div class="look-tip owner">
+              "เดรสเขียวปีกแมลงทับตัวนี้ เล่นแสงสวยมากค่ะ เราชอบถือกระเป๋าสีทองตัดกับสีชุด ทำให้ลุคดูแพงขึ้น 10 เท่า ส้นสูงสายรัดข้อเทรนดี้ๆ หน่อย เข้ากันเลยค่ะ"
+            </div>
+            <div class="tagged-dress">
+              <img src="dress3.png" alt="Emerald Satin Cocktail" class="tagged-img">
+              <div class="tagged-info">
+                <div class="tagged-name">Emerald Satin Cocktail</div>
+                <div class="tagged-price">฿490 / 3 วัน</div>
+              </div>
+              <a href="checkout.html?name=Emerald+Satin+Cocktail&price=490&image=dress3.png" class="btn-rent-look">Rent This Look</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="background: var(--dark); color: #fff; padding: 80px 0; text-align: center;">
+    <div class="container">
+      <h2 style="font-size: 2.2rem; margin-bottom: 20px;">มีลุคสวยๆ อยากอวดไหม?</h2>
+      <p style="color: rgba(255,255,255,0.7); margin-bottom: 30px; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+        แชร์รูปที่คุณใส่ชุดจากร้านเรา แล้วรับส่วนลด 5% สำหรับการเช่าชุดนี้ซ้ำครั้งถัดไป ทริคดีๆ ของคุณอาจเป็นแรงบันดาลใจให้เพื่อนสาวคนอื่น!
+      </p>
+      <a href="profile.html" class="btn btn-primary" style="background: #fff; color: var(--dark);">อัปโหลดลุคของคุณที่หน้าโปรไฟล์</a>
+    </div>
+  </section>
+
+  <!-- FOOTER (Simplified) -->
+  <footer style="padding: 40px 0; background: #fff; text-align: center; border-top: 1px solid #eee;">
+    <div class="container">
+      <a href="index.html" class="logo" style="color: var(--dark);">ATE<span style="color: var(--primary);">.Rental</span></a>
+      <p style="margin-top: 20px; color: var(--text-light); font-size: 0.9rem;">© 2026 ATE.Rental Fashion Sharing Community.</p>
+    </div>
+  </footer>
+
+  <script src="admin-toggle.js"></script>
+  <script src="chat.js"></script>
+  <script>
+    document.getElementById('menuToggle').addEventListener('click', () => {
+      const links = document.querySelector('.nav-links');
+      links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+      links.style.flexDirection = 'column'; links.style.position = 'absolute';
+      links.style.top = '100%'; links.style.left = '0'; links.style.width = '100%';
+      links.style.background = 'rgba(26,26,26,0.98)'; links.style.padding = '20px';
+      links.style.gap = '16px'; links.style.borderRadius = '0 0 16px 16px';
+    });
+  </script>
+</body>
+</html>

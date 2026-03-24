@@ -17,11 +17,19 @@
     <div class="container">
       <a href="#" class="logo">ATE<span>.Rental</span></a>
       <ul class="nav-links">
-        <li><a href="#how">วิธีการเช่า</a></li>
+        <li><a href="index.html">หน้าแรก</a></li>
+        <li><a href="lookbook.html" style="font-weight: 500; color: var(--primary);">Lookbook ✨</a></li>
         <li><a href="rental.html">บริการเช่าชุด</a></li>
-        <li><a href="#consign">ฝากชุดเช่า</a></li>
-        <li><a href="lender.html">รายได้ผู้ปล่อยเช่า</a></li>
-        <li><a href="#faq">FAQ</a></li>
+        <li><a href="second_hand.html">ซื้อชุดมือสอง</a></li>
+        <li><a href="accessories.html">Accessories 🛍️</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropbtn">สำหรับผู้ปล่อยเช่า</a>
+          <div class="dropdown-content">
+            <a href="consign.html">ฝากชุดเช่า</a>
+            <a href="lender.html">แดชบอร์ดรายได้</a>
+          </div>
+        </li>
+        <li><a href="profile.html">โปรไฟล์</a></li>
         <li><a href="rental.html" class="nav-cta">เช่าเลย</a></li>
       </ul>
       <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
@@ -33,8 +41,8 @@
     <div class="container">
       <div class="hero-content">
         <div class="hero-badge">✦ Fashion Sharing Community</div>
-        <h1>ส่งต่อ<span>ความสวย</span><br>ในราคาที่คุณรัก</h1>
-        <p>ไม่ต้องซื้อ ไม่ต้องเก็บ แค่เลือก เช่า แล้วส่งคืน — ไม่มีมัดจำ ชุดใหม่ทุกโอกาส เริ่มต้นเพียง 390 บาท</p>
+        <h1>แพลตฟอร์มแชร์ความสวย<br><span>Mix & Match</span> ให้ลุคปังกว่าเดิม</h1>
+        <p>ไม่ใช่แค่เช่าชุด แต่คือพื้นที่แชร์สไตล์ หาอินสไปร์การแต่งตัว พร้อมเคล็ดลับแมตช์ชุด ทรงผม และ Accessories จากผู้ใช้งานจริง!</p>
         <div class="hero-buttons">
           <a href="rental.html" class="btn btn-primary">ดูชุดทั้งหมด →</a>
           <a href="#consign" class="btn btn-outline">ฝากชุดเช่า</a>
@@ -60,122 +68,93 @@
     </div>
   </section>
 
+  <!-- SUSTAINABILITY -->
+  <section class="sustainability animate" style="background: var(--light); padding: 60px 0; text-align: center; border-bottom: 1px solid #ebe1d1;">
+    <div class="container">
+      <div class="section-tag">Sustainability</div>
+      <h2 style="font-family: serif; font-size: 2rem; color: var(--dark); margin-bottom: 16px;">Lower Your Environmental Impact</h2>
+      <p style="color: var(--text); max-width: 600px; margin: 0 auto; font-size: 1.1rem; line-height: 1.6;">"การเช่าชุดแทนการซื้อใหม่ คือวิธีที่ชาญฉลาดที่สุดในการลดขยะแฟชั่น ร่วมสร้างวงจรแฟชั่นหมุนเวียนที่ยั่งยืนไปกับคอมมูนิตี้ของเรา"</p>
+    </div>
+  </section>
+
   <!-- HOW IT WORKS -->
   <section class="how-it-works" id="how">
     <div class="container">
       <div class="section-header animate">
         <div class="section-tag">How It Works</div>
-        <h2>เช่าง่ายแค่ 4 ขั้นตอน</h2>
-        <p>ขั้นตอนเช่าชุดที่ออกแบบมาให้สะดวกที่สุด ส่งตรงถึงบ้านคุณ</p>
+        <h2 style="font-size: 2.2rem;">แชร์สไตล์ ส่งต่อความสวย ใน 4 ขั้นตอน</h2>
+        <p>เปลี่ยนการเช่าชุดธรรมดา ให้เป็นการค้นพบสไตล์ใหม่ๆ ที่เข้ากับคุณ</p>
       </div>
       <div class="steps-grid">
         <div class="step-card animate">
           <div class="step-number">1</div>
-          <div class="step-icon">👗</div>
-          <h3>เลือกชุดที่ชอบ</h3>
-          <p>เลือกจากคอลเลกชันชุดหลากหลายสไตล์ ตามเทรนด์ล่าสุด</p>
+          <div class="step-icon">💡</div>
+          <h3>หาอินสไปร์ใน Lookbook</h3>
+          <p>ดูไอเดียการแต่งตัว ทริคการแมตช์ชุด และ Accessories จากคอมมูนิตี้สาวๆ ของเรา</p>
         </div>
         <div class="step-card animate">
           <div class="step-number">2</div>
-          <div class="step-icon">📦</div>
-          <h3>จัดส่งถึงบ้าน</h3>
-          <p>ชุดจะถูกจัดส่งให้คุณพร้อมซองส่งคืน สะดวก รวดเร็ว</p>
+          <div class="step-icon">👗</div>
+          <h3>กดเช่าลุคที่ใช่</h3>
+          <p>ถูกใจลุคไหน กด "Rent This Look" เพื่อเช่าชุดตามสไตล์ที่คุณหลงรักได้ทันที</p>
         </div>
         <div class="step-card animate">
           <div class="step-number">3</div>
           <div class="step-icon">✨</div>
-          <h3>สวมใส่ 3 วัน</h3>
-          <p>สวมใส่ชุดสวยไปในทุกโอกาส ถ่ายรูปสวย ๆ ให้จุใจ</p>
+          <h3>Mix & Match สไตล์คุณ</h3>
+          <p>นำชุดไปต่อยอดความสวย ด้วยทริคแต่งหน้าทำผมหรือแมตช์กระเป๋าในแบบของคุณ</p>
         </div>
         <div class="step-card animate">
           <div class="step-number">4</div>
-          <div class="step-icon">🔄</div>
-          <h3>ส่งคืนง่าย</h3>
-          <p>ส่งคืนชุดผ่านขนส่ง ไม่ต้องซัก ไม่ต้องรีด ง่ายมาก!</p>
+          <div class="step-icon">📸</div>
+          <h3>แชร์ลุค &amp; รับส่วนลด 5%</h3>
+          <p>อวดลุคสวยจากชุดที่เคยเช่า รับส่วนลด 5% สำหรับเช่าชุดนี้ซ้ำ พร้อมเป็นอินสไปร์ให้เพื่อนสาวคนต่อไป</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PRICING / CATALOG -->
-  <section class="pricing" id="pricing">
+  <!-- COMMUNITY LOOKS (NEW) -->
+  <section class="community-looks" style="padding: 100px 0; background: #fff;">
     <div class="container">
       <div class="section-header animate">
-        <div class="section-tag">เลือกชุดที่ชอบ</div>
-        <h2>ชุดให้เช่า — ราคาน่ารัก</h2>
-        <p>เลือกชุดสวยตามสไตล์ของคุณ เช่าง่าย ครั้งละ 3 วัน</p>
+        <div class="section-tag">Lookbook & Mix Match</div>
+        <h2>Fashion Sharing Community</h2>
+        <p>หาอินสไปร์การแต่งตัวจากคอมมูนิตี้ของเรา แมตช์ชุดสวย ทรงผม เครื่องประดับ ให้ปังกว่าเดิม</p>
       </div>
-      <!-- Filter Tabs -->
-      <div class="catalog-filter animate">
-        <button class="filter-btn active" data-filter="all">ทั้งหมด</button>
-        <button class="filter-btn" data-filter="casual">ชุดลำลอง · ฿390</button>
-        <button class="filter-btn" data-filter="party">ชุดออกงาน · ฿490</button>
-        <button class="filter-btn" data-filter="premium">ชุดพรีเมียม · ฿590</button>
-      </div>
-      <!-- Product Grid -->
-      <div class="catalog-grid">
-        <div class="product-card animate" data-category="casual">
-          <div class="product-img"><img src="dress1.png" alt="White Ruffle Mini Dress" loading="lazy"><span
-              class="product-badge casual">Casual</span><span class="product-days">3 วัน</span></div>
-          <div class="product-info">
-            <h3>White Ruffle Mini Dress</h3>
-            <p class="product-size">Size: S, M, L</p>
-            <div class="product-price">฿390 <span>/ 3 วัน</span></div><a href="#cta" class="btn btn-dark">เช่าชุดนี้</a>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-bottom: 50px;">
+        <div class="step-card animate" style="padding: 0; overflow: hidden; text-align: left;">
+          <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500&auto=format&fit=crop&q=80" alt="Community Look" style="width: 100%; height: 320px; object-fit: cover;">
+          <div style="padding: 24px;">
+            <div style="font-size: 0.85rem; color: var(--primary); font-weight: 600; margin-bottom: 8px;">#CafeHopping</div>
+            <p style="font-size: 0.95rem; color: #555; line-height: 1.6; margin-bottom: 16px;">"แมตช์ชุดมินิเดรสกับกระเป๋าสานทรงตะกร้า ใส่ไปคาเฟ่มินิมอลได้รูปเกาหลีเกาใจมาก"</p>
+            <a href="lookbook.html" style="color: var(--dark); font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--dark); padding-bottom: 2px;">ดูทริคแต่งตัวลุคนี้ →</a>
           </div>
         </div>
-        <div class="product-card animate" data-category="casual">
-          <div class="product-img"><img src="dress2.png" alt="Beige Linen Wrap Dress" loading="lazy"><span
-              class="product-badge casual">Casual</span><span class="product-days">3 วัน</span></div>
-          <div class="product-info">
-            <h3>Beige Linen Wrap Dress</h3>
-            <p class="product-size">Size: S, M, L</p>
-            <div class="product-price">฿390 <span>/ 3 วัน</span></div><a href="#cta" class="btn btn-dark">เช่าชุดนี้</a>
+        <div class="step-card animate" style="padding: 0; overflow: hidden; text-align: left;">
+          <img src="https://images.unsplash.com/photo-1566207274740-0f8cf6b7d5a5?w=500&auto=format&fit=crop&q=80" alt="Community Look" style="width: 100%; height: 320px; object-fit: cover;">
+          <div style="padding: 24px;">
+            <div style="font-size: 0.85rem; color: var(--primary); font-weight: 600; margin-bottom: 8px;">👑 Tips จากเจ้าของชุด</div>
+            <p style="font-size: 0.95rem; color: #555; line-height: 1.6; margin-bottom: 16px;">"ใส่คู่กับส้นสูงสีนู้ดดึงขายาว ทริกคืออย่าใส่เครื่องประดับเยอะ แค่ต่างหูเพชรระย้าคู่เดียวจบ"</p>
+            <a href="lookbook.html" style="color: var(--dark); font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--dark); padding-bottom: 2px;">ดูทริคแต่งตัวลุคนี้ →</a>
           </div>
         </div>
-        <div class="product-card animate" data-category="party">
-          <div class="product-img"><img src="dress3.png" alt="Emerald Satin Cocktail" loading="lazy"><span
-              class="product-badge party">Party</span><span class="product-days">3 วัน</span></div>
-          <div class="product-info">
-            <h3>Emerald Satin Cocktail</h3>
-            <p class="product-size">Size: S, M, L</p>
-            <div class="product-price">฿490 <span>/ 3 วัน</span></div><a href="#cta" class="btn btn-dark">เช่าชุดนี้</a>
-          </div>
-        </div>
-        <div class="product-card animate" data-category="party">
-          <div class="product-img"><img src="dress4.png" alt="Black Sequin Mini" loading="lazy"><span
-              class="product-badge party">Party</span><span class="product-days">3 วัน</span></div>
-          <div class="product-info">
-            <h3>Black Sequin Mini</h3>
-            <p class="product-size">Size: XS, S, M</p>
-            <div class="product-price">฿490 <span>/ 3 วัน</span></div><a href="#cta" class="btn btn-dark">เช่าชุดนี้</a>
-          </div>
-        </div>
-        <div class="product-card animate" data-category="premium">
-          <div class="product-img"><img src="dress5.png" alt="Navy Velvet Evening Gown" loading="lazy"><span
-              class="product-badge premium">Premium</span><span class="product-days">3 วัน</span></div>
-          <div class="product-info">
-            <h3>Navy Velvet Evening Gown</h3>
-            <p class="product-size">Size: S, M</p>
-            <div class="product-price">฿590 <span>/ 3 วัน</span></div><a href="#cta" class="btn btn-dark">เช่าชุดนี้</a>
-          </div>
-        </div>
-        <div class="product-card animate" data-category="premium">
-          <div class="product-img"><img src="dress6.png" alt="Champagne Silk Maxi" loading="lazy"><span
-              class="product-badge premium">Premium</span><span class="product-days">3 วัน</span></div>
-          <div class="product-info">
-            <h3>Champagne Silk Maxi</h3>
-            <p class="product-size">Size: S, M, L</p>
-            <div class="product-price">฿590 <span>/ 3 วัน</span></div><a href="#cta" class="btn btn-dark">เช่าชุดนี้</a>
+        <div class="step-card animate" style="padding: 0; overflow: hidden; text-align: left;">
+          <img src="https://images.unsplash.com/photo-1543632345-eb0746ba9fcd?w=500&auto=format&fit=crop&q=80" alt="Community Look" style="width: 100%; height: 320px; object-fit: cover;">
+          <div style="padding: 24px;">
+            <div style="font-size: 0.85rem; color: var(--primary); font-weight: 600; margin-bottom: 8px;">#DinnerDate</div>
+            <p style="font-size: 0.95rem; color: #555; line-height: 1.6; margin-bottom: 16px;">"แมตช์กับลิปสีไวน์แดง และกระเป๋าคลัชทรงแข็ง แค่นี้ก็สวยเด่นที่สุดในงาน"</p>
+            <a href="lookbook.html" style="color: var(--dark); font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--dark); padding-bottom: 2px;">ดูทริคแต่งตัวลุคนี้ →</a>
           </div>
         </div>
       </div>
-      <div style="text-align:center;margin-top:48px" class="animate">
-        <a href="rental.html" class="btn btn-primary">ดูชุดทั้งหมด →</a>
+      
+      <div style="text-align: center;">
+        <a href="lookbook.html" class="btn btn-outline" style="color: var(--dark); border-color: var(--dark);">เข้าสู่หน้า Lookbook เต็มๆ</a>
       </div>
     </div>
   </section>
-
-
 
   <!-- CONSIGNMENT -->
   <section class="consign" id="consign">
@@ -189,10 +168,9 @@
           </div>
         </div>
         <div class="consign-content animate">
-          <div class="section-tag">Consignment</div>
-          <h2>มีชุดสวย?<br>นำมาสร้างรายได้</h2>
-          <p>ชุดสวย ๆ ที่แขวนอยู่ในตู้เสื้อผ้า สามารถเปลี่ยนเป็นรายได้ทุกเดือน ฝากชุดเช่ากับ ATE.Rental รับส่วนแบ่ง 60%
-            ของรายได้ค่าเช่า</p>
+          <div class="section-tag">Invest in your closet</div>
+          <h2>ตู้เสื้อผ้าของคุณ<br>คือแหล่งลงทุน</h2>
+          <p>เปลี่ยนชุดสวยที่แขวนทิ้งไว้ ให้กลายเป็น Money Market ส่วนตัว ฝากชุดเช่ากับ ATE.Rental รับส่วนแบ่ง 60% ของรายได้ โดยทางเราดูแลจัดการให้ทุกขั้นตอนตั้งแต่ซัก-ส่ง-เคลม แถมยังได้ช่วยสนับสนุนแฟชั่นหมุนเวียนที่ยั่งยืน</p>
           <div class="consign-steps">
             <div class="c-step">
               <div class="c-step-num">1</div>
@@ -216,7 +194,34 @@
               </div>
             </div>
           </div>
-          <a href="https://line.me/R/ti/p/@aterental" target="_blank" class="btn btn-primary" style="background:#06C755; color:white; border-color:#06C755;">ส่งชุดประเมินผ่าน LINE →</a>
+          <a href="consign.html" class="btn btn-primary">ส่งชุดประเมิน →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" style="padding: 80px 0; background: #faf8f5;">
+    <div class="container">
+      <div class="section-header animate">
+        <div class="section-tag">Community</div>
+        <h2>เสียงจากเพื่อนสาวของเรา</h2>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card animate" style="text-align: left; padding: 30px;">
+          <p style="font-style: italic; color: #555; margin-bottom: 20px;">"เมื่อก่อนตู้เสื้อผ้าแน่นมาก แต่ตอนนี้ระบบ ATE.Rental เปลี่ยนชุดที่ซื้อมาแพงๆ ให้เป็น Money Market สร้างรายได้ดีมาก ช่วยให้มีข้ออ้างซื้อชุดใหม่ๆ ได้สบาย!"</p>
+          <div style="font-weight: bold; color: var(--dark);">K. Mint</div>
+          <div style="font-size: 0.9rem; color: #888;">Owner (ผู้ให้เช่า)</div>
+        </div>
+        <div class="step-card animate" style="text-align: left; padding: 30px;">
+          <p style="font-style: italic; color: #555; margin-bottom: 20px;">"ได้ลองชุดแบรนด์เนมใหม่ๆ โดยไม่ต้องควักเงินก้อน แถมยังได้ช่วยรักษ์โลกลดขยะแฟชั่นด้วย แฮปปี้มากค่ะ"</p>
+          <div style="font-weight: bold; color: var(--dark);">K. Alice</div>
+          <div style="font-size: 0.9rem; color: #888;">Renter (ผู้เช่า)</div>
+        </div>
+        <div class="step-card animate" style="text-align: left; padding: 30px;">
+          <p style="font-style: italic; color: #555; margin-bottom: 20px;">"เช่าชุดจาก ATE ให้ฟีลเหมือนยืมชุดเพื่อนสาวสุดๆ มี How-to-look จากเจ้าของชุดแนะนำให้ด้วย ใส่แล้วได้คอมพลิเมนต์เยอะมาก!"</p>
+          <div style="font-weight: bold; color: var(--dark);">K. Bow</div>
+          <div style="font-size: 0.9rem; color: #888;">Renter (ผู้เช่า)</div>
         </div>
       </div>
     </div>
@@ -240,7 +245,7 @@
         <div class="policy-card animate">
           <div class="policy-icon">🔧</div>
           <h3>ชุดเสียหาย</h3>
-          <p>กรณีชุดเสียหาย คิดค่าเสียหาย <span class="policy-highlight">จุดละ 250 บาท</span> ตรวจสอบโดยทีมงาน
+          <p>กรณีชุดเสียหาย คิดค่าเสียหาย <span class="policy-highlight">จุดละ 300 บาท</span> ตรวจสอบโดยทีมงาน
             พร้อมแจ้งรายละเอียดก่อนเรียกเก็บ</p>
         </div>
         <div class="policy-card animate">
@@ -323,7 +328,7 @@
       <h2 class="animate">พร้อมเปลี่ยนตู้เสื้อผ้าของคุณ?</h2>
       <p class="animate">เริ่มต้นเช่าชุดสวยตามเทรนด์ได้เลยวันนี้</p>
       <div class="cta-buttons animate">
-        <a href="#" class="btn btn-primary">เริ่มเช่าเลย →</a>
+        <a href="rental.html" class="btn btn-primary">เริ่มเช่าเลย →</a>
       </div>
     </div>
   </section>
@@ -339,7 +344,7 @@
         <div class="footer-col">
           <h4>บริการ</h4>
           <ul>
-            <li><a href="#pricing">เช่ารายครั้ง</a></li>
+            <li><a href="rental.html">เช่ารายครั้ง</a></li>
             <li><a href="#consign">ฝากชุดเช่า</a></li>
           </ul>
         </div>
@@ -404,19 +409,6 @@
       });
     });
 
-    // Catalog filter
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const filter = btn.dataset.filter;
-        document.querySelectorAll('.product-card').forEach(card => {
-          if (filter === 'all' || card.dataset.category === filter) { card.classList.remove('hidden'); card.style.opacity = '0'; card.style.transform = 'translateY(20px)'; setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'translateY(0)' }, 50) }
-          else { card.classList.add('hidden') }
-        });
-      });
-    });
-
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', e => {
@@ -436,6 +428,8 @@
     <span>ส่งรูปประเมิน / สอบถาม</span>
   </a>
 
+  <script src="admin-toggle.js"></script>
+  <script src="chat.js"></script>
 </body>
 
 </html

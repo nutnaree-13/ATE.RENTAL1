@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ATE.Rental — ฝากชุดเช่ากับเรา เปลี่ยนตู้เสื้อผ้าเป็นรายได้">
+  <title>ฝากชุดเช่า (Consignment) — ATE.Rental</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Consign Hero */
+    .consign-hero {
+      padding: 160px 0 80px;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2a201b 100%);
+      color: #fff;
+      text-align: center;
+      position: relative;
+    }
+    .consign-hero h1 span { color: #d4b896; font-style: italic; }
+    
+    /* Form Section */
+    .consign-main {
+      padding: 80px 0;
+      background: #faf8f5;
+    }
+    .consign-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+    .form-header {
+      background: #2a201b;
+      color: #fff;
+      padding: 30px 40px;
+      text-align: center;
+    }
+    .form-header h2 { font-size: 1.8rem; margin-bottom: 8px; color: #d4b896; }
+    .form-header p { opacity: 0.8; font-size: 0.95rem; }
+    
+    .consign-form {
+      padding: 40px;
+    }
+    
+    .form-section {
+      margin-bottom: 40px;
+    }
+    .form-section-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #2a201b;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    /* Upload Zone */
+    .upload-zone {
+      border: 2px dashed #d4b896;
+      border-radius: 16px;
+      padding: 40px 20px;
+      text-align: center;
+      background: #fbf9f6;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .upload-zone:hover {
+      background: #faf4eb;
+      border-color: #b59b7a;
+    }
+    .upload-icon {
+      font-size: 40px;
+      margin-bottom: 10px;
+      color: #d4b896;
+    }
+    .upload-text {
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 5px;
+    }
+    .upload-hint {
+      font-size: 0.85rem;
+      color: #777;
+    }
+    .upload-zone input[type="file"] {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      opacity: 0; cursor: pointer;
+    }
+    
+    /* Preview Grid */
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .preview-box {
+      aspect-ratio: 1;
+      border-radius: 12px;
+      background: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .preview-box img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    
+    /* Grid Layout */
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+    
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .form-group label {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #333;
+    }
+    .form-control {
+      padding: 12px 16px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-family: inherit;
+      background: #fff;
+      transition: border-color 0.2s;
+    }
+    .form-control:focus {
+      outline: none;
+      border-color: #d4b896;
+    }
+    select.form-control {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      background-size: 1em;
+    }
+    textarea.form-control {
+      resize: vertical;
+      min-height: 100px;
+    }
+    
+    .submit-btn {
+      width: 100%;
+      padding: 16px;
+      background: #d4b896;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 20px;
+    }
+    .submit-btn:hover {
+      background: #b59b7a;
+      transform: translateY(-2px);
+    }
+    
+    /* Success Modal */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 10000;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    }
+    .modal-overlay.show { opacity: 1; pointer-events: auto; }
+    .modal-content {
+      background: #fff; padding: 40px; border-radius: 24px;
+      text-align: center; max-width: 400px; width: 90%;
+      transform: translateY(20px); transition: transform 0.3s;
+    }
+    .modal-overlay.show .modal-content { transform: translateY(0); }
+    .success-icon { font-size: 60px; margin-bottom: 20px; display: block; }
+    .modal-content h3 { font-size: 1.5rem; margin-bottom: 15px; color: #2a201b; }
+    .modal-content p { color: #666; line-height: 1.6; margin-bottom: 25px; }
+    
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <nav id="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">ATE<span>.Rental</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">หน้าแรก</a></li>
+        <li><a href="lookbook.html" style="font-weight: 500; color: var(--primary);">Lookbook ✨</a></li>
+        <li><a href="rental.html">บริการเช่าชุด</a></li>
+        <li><a href="second_hand.html">ซื้อชุดมือสอง</a></li>
+        <li><a href="accessories.html">Accessories 🛍️</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropbtn" style="color:var(--primary)">สำหรับผู้ปล่อยเช่า</a>
+          <div class="dropdown-content">
+            <a href="consign.html">ฝากชุดเช่า</a>
+            <a href="lender.html">แดชบอร์ดรายได้</a>
+          </div>
+        </li>
+        <li><a href="profile.html">โปรไฟล์</a></li>
+        <li><a href="rental.html" class="nav-cta">เช่าเลย</a></li>
+      </ul>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="consign-hero">
+    <div class="container">
+      <div class="breadcrumb" style="margin-bottom: 20px;">
+        <a href="index.html" style="color: rgba(255,255,255,0.7);">หน้าแรก</a>
+        <span style="color: rgba(255,255,255,0.7);">›</span>
+        <span class="current" style="color: #d4b896;">ฝากชุดเช่า</span>
+      </div>
+      <h1>Share Your <span>Closet & Style</span></h1>
+      <p style="max-width: 600px; margin: 0 auto; opacity: 0.9; margin-bottom: 24px;">เปิดตู้เสื้อผ้าแบรนด์เนมของคุณให้สาวๆ ได้เช่าต่อ พร้อมแชร์ทริคการแมตช์ชุดในสไตล์คุณ<br>รับส่วนแบ่ง 60% ทุกครั้งที่มีคนเช่า (Rent Your Look) พร้อมขับเคลื่อนคอมมูนิตี้แฟชั่นที่ยั่งยืน</p>
+      <a href="lender.html?tab=evaluated" style="display:inline-block; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.3); color:#fff; padding:10px 24px; border-radius:30px; text-decoration:none; font-size:0.95rem; transition:all 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">🔎 เช็คสถานะการประเมินชุดของคุณ</a>
+    </div>
+  </section>
+
+  <!-- FORM SECTION -->
+  <section class="consign-main">
+    <div class="container">
+      <div class="consign-container">
+        <div class="form-header">
+          <h2>ยื่นแบบฟอร์มประเมินชุด</h2>
+          <p>กรุณากรอกข้อมูลชุดตามจริงเพื่อความรวดเร็วในการประเมินราคาครับ</p>
+        </div>
+        
+        <div style="background: linear-gradient(135deg, #fdfbf7 0%, #f3ece1 100%); padding: 20px; border-radius: 16px; margin-bottom: 30px; border: 1px solid #ebe1d1; text-align: center;">
+          <h4 style="color: #a18259; margin-bottom: 8px;">💡 รู้หรือไม่?</h4>
+          <p style="color: #555; font-size: 0.95rem; margin: 0;">ชุดแบรนด์เนม 1 ชุด สามารถสร้างรายได้เฉลี่ย <strong>1,500 - 3,000 บาท/เดือน</strong> ให้ชุดทำงานแทนคุณ!</p>
+        </div>
+        
+        <form class="consign-form" id="consignForm" onsubmit="event.preventDefault(); showSuccessModal();">
+          
+          <!-- Section 1: Photos -->
+          <div class="form-section">
+            <div class="form-section-title">📸 1. อัปโหลดรูปภาพชุด</div>
+            <div class="upload-zone" id="uploadZone">
+              <input type="file" multiple accept="image/*" id="fileInput">
+              <div class="upload-icon">📁</div>
+              <div class="upload-text">คลิกเพื่ออัปโหลด หรือลากไฟล์มาวางที่นี่</div>
+              <div class="upload-hint">กรุณาแนบรูป หน้า ตรง, หลัง, ป้ายแบรนด์ และ บริเวณตำหนิ (ถ้ามี)</div>
+            </div>
+            <div class="preview-grid" id="previewGrid">
+              <!-- JS will append previews here -->
+            </div>
+          </div>
+
+          <!-- Section 2: Details -->
+          <div class="form-section">
+            <div class="form-section-title">👗 2. รายละเอียดชุด</div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>แบรนด์ (Brand)</label>
+                <input type="text" class="form-control" placeholder="เช่น Zara, H&M, Pomelo" required>
+              </div>
+              <div class="form-group">
+                <label>สี (Color)</label>
+                <input type="text" class="form-control" placeholder="เช่น แดง, ชมพู, ดำ" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>ไซส์ป้าย (Size)</label>
+                <select class="form-control" required>
+                  <option value="" disabled selected>เลือกไซส์ตามป้าย</option>
+                  <option value="XS">XS</option>
+                  <option value="S">S</option>
+                  <option value="M">M</option>
+                  <option value="L">L</option>
+                  <option value="XL">XL</option>
+                  <option value="Free">Freesize</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>สัดส่วนวัดจริง (อก-เอว-สะโพก)</label>
+                <input type="text" class="form-control" placeholder="เช่น 32-26-36 นิ้ว" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>ราคาที่ซื้อมาโดยประมาณ (บาท)</label>
+                <input type="number" class="form-control" placeholder="เช่น 1500" required>
+              </div>
+              <div class="form-group">
+                <label>ประวัติการใช้งาน</label>
+                <select class="form-control" required>
+                  <option value="" disabled selected>จำนวนครั้งที่เคยใส่</option>
+                  <option value="0">ของใหม่ป้ายห้อย (ยังไม่เคยใส่)</option>
+                  <option value="1">ใส่ 1-3 ครั้ง</option>
+                  <option value="2">ใส่ 4-10 ครั้ง</option>
+                  <option value="3">ใส่มากกว่า 10 ครั้ง</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 3: Defects -->
+          <div class="form-section" style="margin-bottom: 30px;">
+            <div class="form-section-title">🔎 3. รายละเอียดตำหนิ</div>
+            <div class="form-group">
+              <label>อธิบายตำหนิของชุด (ถ้าไม่มีให้เว้นว่างหรือพิมพ์ว่า ไม่มี)</label>
+              <textarea class="form-control" placeholder="เช่น มีรอยเปื้อนจางๆ ที่ชายกระโปรงด้านซ้าย, กระดุมหลุด 1 เม็ด..."></textarea>
+            </div>
+          </div>
+
+          <!-- Section 4: Share How To Look (Girlfriend's Guide) -->
+          <div class="form-section" style="margin-bottom: 20px;">
+            <div class="form-section-title">✨ 4. แชร์ทริคความสวย (ขึ้นโชว์ใน Lookbook)</div>
+            <p style="font-size: 0.9rem; color: #555; margin-bottom: 16px;">เขียนบรรยายทริคการแมตช์ชุดของคุณ เพื่อนำไปแสดงบนคอมมูนิตี้ Lookbook จะช่วยเพิ่มโอกาสในการปล่อยเช่าได้ถึง 30%!</p>
+            
+            <div class="form-group" style="margin-bottom: 16px;">
+              <label>👗 ทริคจับคู่ชุด (Style Guide)</label>
+              <input type="text" class="form-control" placeholder="เช่น แมทช์กับกระเป๋าสายโซ่สีทอง และส้นสูงเปลือยเท้า">
+            </div>
+            <div class="form-group" style="margin-bottom: 16px;">
+              <label>💄 ไอเดียแต่งหน้าทำผม (Makeup Look)</label>
+              <input type="text" class="form-control" placeholder="เช่น แต่งหน้าคลีนๆ สีนู้ดพีช หรือรวบผมมวยต่ำ">
+            </div>
+            <div class="form-group">
+              <label>📸 โลเคชัน/มุมถ่ายรูปปังๆ (Photo Spots)</label>
+              <input type="text" class="form-control" placeholder="เช่น ถ่ายริมทะเลแสงเย็น หรือเปิดแฟลชหน้ากระจก">
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn" id="submitBtn">ส่งให้ทีมงานประเมินราคา ✨</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUCCESS MODAL -->
+  <div class="modal-overlay" id="successModal">
+    <div class="modal-content">
+      <span class="success-icon">🎉</span>
+      <h3>ขอบคุณที่สนใจฝากชุดเช่า!</h3>
+      <p>ระบบได้รับภาพและรายละเอียดชุดของคุณเรียบร้อยแล้ว<br><br>แอดมินกำลังทำการประเมินราคาและจะทำการติดต่อกลับไปหาคุณผ่าน ช่องทางแชท ภายใน 24 ชั่วโมงครับ 💖</p>
+      <div style="display:flex; flex-direction:column; gap:12px; margin-top:10px;">
+        <a href="lender.html?tab=evaluated" class="submit-btn" style="text-decoration:none; display:inline-block; box-sizing:border-box; margin:0;">ดูสถานะประเมินชุด</a>
+        <a href="index.html" style="color:#777; text-decoration:underline; font-size:0.95rem;">กลับหน้าแรก</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">ATE<span>.Rental</span></a>
+          <p>Fashion Sharing Community — แชร์ชุดสวย ส่งต่อความมั่นใจ ทุกชุดมีเรื่องเล่า</p>
+        </div>
+        <div class="footer-col">
+          <h4>บริการ</h4>
+          <ul>
+            <li><a href="rental.html">เช่ารายครั้ง</a></li>
+            <li><a href="consign.html">ฝากชุดเช่า</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>เกี่ยวกับเรา</h4>
+          <ul>
+            <li><a href="#">เกี่ยวกับ ATE.Rental</a></li>
+            <li><a href="index.html#policy">นโยบาย</a></li>
+            <li><a href="index.html#faq">คำถามที่พบบ่อย</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>ติดต่อเรา</h4>
+          <ul>
+            <li><a href="#">Line: @aterental</a></li>
+            <li><a href="#">Tel: 02-xxx-xxxx</a></li>
+            <li><a href="#">info@aterental.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 ATE.Rental — All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="admin-toggle.js"></script>
+  <script src="chat.js"></script>
+  <script>
+    // File Upload Preview Mockup
+    const fileInput = document.getElementById('fileInput');
+    const previewGrid = document.getElementById('previewGrid');
+
+    fileInput.addEventListener('change', function(e) {
+      const files = Array.from(e.target.files);
+      files.forEach(file => {
+        if (!file.type.match('image.*')) return;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const div = document.createElement('div');
+          div.className = 'preview-box';
+          div.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
+          previewGrid.appendChild(div);
+        }
+        reader.readAsDataURL(file);
+      });
+    });
+
+    // Modal Logic
+    function showSuccessModal() {
+      const btn = document.getElementById('submitBtn');
+      btn.innerHTML = 'กำลังส่งข้อมูล... ⏳';
+      btn.style.opacity = '0.8';
+      
+      setInterval(() => {
+        document.getElementById('successModal').classList.add('show');
+        btn.innerHTML = 'ส่งให้ทีมงานประเมินราคา ✨';
+        btn.style.opacity = '1';
+      }, 1000);
+    }
+
+    // Scroll Navbar Setup
+    window.addEventListener('scroll', () => { 
+        document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Mobile menu
+    document.getElementById('menuToggle').addEventListener('click', () => {
+      const links = document.querySelector('.nav-links');
+      links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+      links.style.flexDirection = 'column'; links.style.position = 'absolute';
+      links.style.top = '100%'; links.style.left = '0'; links.style.width = '100%';
+      links.style.background = 'rgba(26,26,26,0.98)'; links.style.padding = '20px';
+      links.style.gap = '16px'; links.style.borderRadius = '0 0 16px 16px';
+    });
+  </script>
+</body>
+</html>

@@ -266,9 +266,19 @@
             <a href="index.html" class="logo">ATE<span>.Rental</span></a>
             <ul class="nav-links">
                 <li><a href="index.html">หน้าแรก</a></li>
+                <li><a href="lookbook.html" style="font-weight: 500; color: var(--primary);">Lookbook ✨</a></li>
                 <li><a href="rental.html">บริการเช่าชุด</a></li>
-                <li><a href="lender.html" style="color:var(--primary); font-weight: 600;">รายได้ผู้ปล่อยเช่า</a></li>
-                <li><a href="index.html#faq">FAQ</a></li>
+                <li><a href="second_hand.html">ซื้อชุดมือสอง</a></li>
+                <li><a href="accessories.html">Accessories 🛍️</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropbtn">สำหรับผู้ปล่อยเช่า</a>
+                  <div class="dropdown-content">
+                    <a href="consign.html">ฝากชุดเช่า</a>
+                    <a href="lender.html">แดชบอร์ดรายได้</a>
+                  </div>
+                </li>
+                <li><a href="profile.html">โปรไฟล์</a></li>
+                <li><a href="rental.html" class="nav-cta">เช่าเลย</a></li>
             </ul>
             <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
         </div>
@@ -279,7 +289,10 @@
         <div class="container">
             
             <div class="dashboard-header animate">
-                <h1>แดชบอร์ดรายได้ของคุณ</h1>
+                <div>
+                   <h1>แดชบอร์ดรายได้จากการแชร์ชุด</h1>
+                   <p style="color: var(--text-light); margin-top: 8px; font-size: 1.1rem;">Track Your Style Impact: ดูผลตอบแทนความสำเร็จจากรสนิยมและการแชร์สไตล์ของคุณ</p>
+                </div>
                 <div class="lender-profile">
                     <div class="lender-avatar">👤</div>
                     <div class="lender-info">
@@ -304,19 +317,131 @@
                 <div class="stat-card tertiary animate" style="transition-delay: 0.2s;">
                     <div class="stat-title">จำนวนครั้งที่ถูกเช่า</div>
                     <div class="stat-value">22 ครั้ง</div>
-                    <div class="stat-sub">จากชุดทั้งหมด 3 ชุด</div>
+                    <div class="stat-sub">จากชุดทั้งหมด 4 ชุด (ขายมือสอง 1 ชุด)</div>
                 </div>
             </div>
 
             <!-- TAB -->
             <div class="lender-tabs animate">
-                <button class="lender-tab active">ชุดของคุณ</button>
+                <button class="lender-tab active" id="tabRented" onclick="switchTab('rented')">ชุดที่ปล่อยเช่า</button>
+                <button class="lender-tab" id="tabEvaluated" onclick="switchTab('evaluated')">สถานะประเมินชุด</button>
                 <button class="lender-tab">ประวัติรายได้</button>
-                <button class="lender-tab">ถอนเงิน (เร็วๆ นี้)</button>
+            </div>
+
+            <!-- STATUS LIST -->
+            <div class="dresses-list" id="evaluatedList" style="display:none;">
+                <div class="dress-row animate">
+                    <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=300" alt="White Dress" class="dress-img" style="object-position: top;">
+                    <div class="dress-main">
+                        <h3 class="dress-name">Ribbed Knit Midi Dress</h3>
+                        <div class="dress-meta">
+                            <span style="color:#2e7d32; font-weight:600;">✅ ประเมินเสร็จสิ้น คอนเฟิร์มปล่อยเช่าได้เลย</span>
+                        </div>
+                        <div style="margin-top: 12px; font-size: 0.95rem; color: #444; line-height: 1.6;">
+                            <div><strong>มูลค่าย้อนหลังหักค่าเสื่อม (Current Value):</strong> ฿1,200 <span style="text-decoration:line-through; color:#aaa; font-size:0.8rem;">(อ้างอิงราคาป้าย ฿2,500)</span></div>
+                            <div><strong>ราคาปล่อยเช่าที่แอดมินแนะนำ:</strong> <span style="color:var(--primary-dark); font-weight:bold; font-size:1.1rem;">฿490 / 3 วัน</span></div>
+                        </div>
+                        
+                        <!-- Revenue Model Box -->
+                        <div style="margin-top: 16px; background: #fbf9f6; padding: 16px; border-radius: 12px; border: 1px solid #eee;">
+                            <div style="font-weight: 600; font-size: 0.95rem; margin-bottom: 8px; color:#2a201b;">คำนวณรายได้ต่อการเช่า 1 ครั้ง (โมเดลส่วนแบ่ง 60:40)</div>
+                            <div style="display:flex; justify-content:space-between; font-size:0.9rem; margin-bottom:4px;">
+                                <span>ส่วนแบ่ง 60% ของราคาเช่า ฿490</span>
+                                <span>+฿294</span>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; font-size:0.9rem; margin-bottom:4px; color:#c2185b;">
+                                <span>หักค่าทำความสะอาดสำหรับชุดปกติ (ผู้ปล่อยเช่าชำระ)</span>
+                                <span>-฿80</span>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; font-size:1rem; font-weight:bold; margin-top:8px; padding-top:8px; border-top:1px dashed #ddd; color:#2e7d32;">
+                                <span>รายได้สุทธิที่คุณจะได้รับเข้ากระเป๋า</span>
+                                <span>฿214</span>
+                            </div>
+                        </div>
+                        <!-- Terms & Conditions -->
+                        <div style="margin-top: 16px; background: #fffcf5; border: 1px solid #f2e6d9; padding: 12px 16px; border-radius: 8px; font-size: 0.85rem; color: #555;">
+                            <strong style="color: #2a201b; margin-bottom: 6px; display: block;">📌 เงื่อนไขการปล่อยเช่าร่วมกับ ATE.Rental:</strong>
+                            <ul style="padding-left: 20px; margin-bottom: 12px; line-height: 1.6;">
+                                <li>กรณีชุดมีตำหนิชำรุด หรือซักคราบฝังลึกไม่ออก ทางเรายินดีชดเชยค่าเสียหาย <strong style="color:#c2185b;">จุดละ 150 บาท</strong></li>
+                                <li>กรณีชุดสูญหาย ทางเรายินดีชดเชยค่าชุดคืนให้ตาม <strong style="color:var(--primary-dark);">มูลค่าชุดปัจจุบัน</strong></li>
+                                <li>ระบบจะเคลียร์ยอดและโอนรายได้ทั้งหมดให้ท่านผู้ปล่อยเช่า <strong style="color:#2e7d32;">ทุกวันที่ 15 และ 30</strong> ของเดือน</li>
+                            </ul>
+                            <label style="display:flex; align-items:center; gap:8px; cursor:pointer; color:#2a201b; font-weight:600; font-size:0.9rem;">
+                                <input type="checkbox" style="width:16px; height:16px; cursor:pointer;">
+                                ฉันได้อ่านและยอมรับเงื่อนไขการปล่อยเช่า
+                            </label>
+                        </div>
+                        <div style="margin-top: 16px; display:flex; gap:10px;">
+                            <button class="btn btn-primary" style="padding: 8px 16px; font-size:0.9rem;" onclick="if(this.parentElement.previousElementSibling.querySelector('input').checked){alert('ขอบคุณที่ไว้วางใจให้ ATE.Rental ดูแลชุดสวยของคุณครับ 🎉 แอดมินจะดำเนินการนำชุดขึ้นระบบให้ทันที!'); this.parentElement.parentElement.parentElement.style.opacity='0.5'; this.innerText='ยอมรับสำเร็จ'; this.disabled=true;}else{alert('กรุณากดยอมรับเงื่อนไขการปล่อยเช่าก่อนดำเนินการต่อครับ');}">ยอมรับราคาและปล่อยเช่าเลย</button>
+                            <button class="btn btn-outline" style="padding: 8px 16px; font-size:0.9rem;">คุยกับแอดมินเพิ่มเติม/ยกเลิก</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dress-row animate">
+                    <img src="https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=300" alt="Pink Silk Dress" class="dress-img" style="object-position: top;">
+                    <div class="dress-main">
+                        <h3 class="dress-name">Pink Silk Slip Dress</h3>
+                        <div class="dress-meta">
+                            <span style="color:#2e7d32; font-weight:600;">✅ ประเมินเสร็จสิ้น คอนเฟิร์มปล่อยเช่าได้เลย</span>
+                        </div>
+                        <div style="margin-top: 12px; font-size: 0.95rem; color: #444; line-height: 1.6;">
+                            <div><strong>มูลค่าย้อนหลังหักค่าเสื่อม (Current Value):</strong> ฿2,500 <span style="text-decoration:line-through; color:#aaa; font-size:0.8rem;">(อ้างอิงราคาป้าย ฿4,900)</span></div>
+                            <div><strong>ราคาปล่อยเช่าที่แอดมินแนะนำ:</strong> <span style="color:var(--primary-dark); font-weight:bold; font-size:1.1rem;">฿890 / 3 วัน</span></div>
+                        </div>
+                        
+                        <!-- Revenue Model Box -->
+                        <div style="margin-top: 16px; background: #fbf9f6; padding: 16px; border-radius: 12px; border: 1px solid #eee;">
+                            <div style="font-weight: 600; font-size: 0.95rem; margin-bottom: 8px; color:#2a201b;">คำนวณรายได้ต่อการเช่า 1 ครั้ง (โมเดลส่วนแบ่ง 60:40)</div>
+                            <div style="display:flex; justify-content:space-between; font-size:0.9rem; margin-bottom:4px;">
+                                <span>ส่วนแบ่ง 60% ของราคาเช่า ฿890</span>
+                                <span>+฿534</span>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; font-size:0.9rem; margin-bottom:4px; color:#c2185b;">
+                                <span>หักค่าทำความสะอาด <strong style="color:#c2185b;">(ชุดดูแลพิเศษ Sensitive)</strong></span>
+                                <span>-฿120</span>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; font-size:1rem; font-weight:bold; margin-top:8px; padding-top:8px; border-top:1px dashed #ddd; color:#2e7d32;">
+                                <span>รายได้สุทธิที่คุณจะได้รับเข้ากระเป๋า</span>
+                                <span>฿414</span>
+                            </div>
+                        </div>
+                        <!-- Terms & Conditions -->
+                        <div style="margin-top: 16px; background: #fffcf5; border: 1px solid #f2e6d9; padding: 12px 16px; border-radius: 8px; font-size: 0.85rem; color: #555;">
+                            <strong style="color: #2a201b; margin-bottom: 6px; display: block;">📌 เงื่อนไขการปล่อยเช่าร่วมกับ ATE.Rental:</strong>
+                            <ul style="padding-left: 20px; margin-bottom: 12px; line-height: 1.6;">
+                                <li>กรณีชุดมีตำหนิชำรุด หรือซักคราบฝังลึกไม่ออก ทางเรายินดีชดเชยค่าเสียหาย <strong style="color:#c2185b;">จุดละ 150 บาท</strong></li>
+                                <li>กรณีชุดสูญหาย ทางเรายินดีชดเชยค่าชุดคืนให้ตาม <strong style="color:var(--primary-dark);">มูลค่าชุดปัจจุบัน</strong></li>
+                                <li>ระบบจะเคลียร์ยอดและโอนรายได้ทั้งหมดให้ท่านผู้ปล่อยเช่า <strong style="color:#2e7d32;">ทุกวันที่ 15 และ 30</strong> ของเดือน</li>
+                            </ul>
+                            <label style="display:flex; align-items:center; gap:8px; cursor:pointer; color:#2a201b; font-weight:600; font-size:0.9rem;">
+                                <input type="checkbox" style="width:16px; height:16px; cursor:pointer;">
+                                ฉันได้อ่านและยอมรับเงื่อนไขการปล่อยเช่า
+                            </label>
+                        </div>
+                        <div style="margin-top: 16px; display:flex; gap:10px;">
+                            <button class="btn btn-primary" style="padding: 8px 16px; font-size:0.9rem;" onclick="if(this.parentElement.previousElementSibling.querySelector('input').checked){alert('ขอบคุณที่ไว้วางใจให้ ATE.Rental ดูแลชุดสวยของคุณครับ 🎉 แอดมินจะดำเนินการนำชุดขึ้นระบบให้ทันที!'); this.parentElement.parentElement.parentElement.style.opacity='0.5'; this.innerText='ยอมรับสำเร็จ'; this.disabled=true;}else{alert('กรุณากดยอมรับเงื่อนไขการปล่อยเช่าก่อนดำเนินการต่อครับ');}">ยอมรับราคาและปล่อยเช่าเลย</button>
+                            <button class="btn btn-outline" style="padding: 8px 16px; font-size:0.9rem;">คุยกับแอดมินเพิ่มเติม/ยกเลิก</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dress-row animate">
+                    <div class="dress-img" style="background:#eee; display:flex; align-items:center; justify-content:center; font-size:24px;">⏳</div>
+                    <div class="dress-main">
+                        <h3 class="dress-name">Zara Floral Mini Dress</h3>
+                        <div class="dress-meta">
+                            <span style="color:#ef6c00; font-weight:600;">⏳ กำลังอยู่ระหว่างการประเมินราคา</span>
+                        </div>
+                        <div style="margin-top: 8px; font-size: 0.9rem; color: #777;">
+                            แอดมินกำลังตรวจสอบความเรียบร้อยและประเมินมูลค่าชุดตามสภาพปัจจุบัน จะแจ้งผลให้ทราบผ่านช่องทางแชทและอัปเดตสถานะในระบบภายใน 24 ชม.
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- DRESSES LIST -->
-            <div class="dresses-list">
+            <div class="dresses-list" id="rentedList">
                 
                 <!-- Dress 1 -->
                 <div class="dress-row animate">
@@ -384,6 +509,29 @@
                     <div class="dress-stats">
                         <div class="dress-stats-label">รายได้สะสม (60%)</div>
                         <div class="dress-stats-value money">฿702</div>
+                    </div>
+                </div>
+
+                <!-- Dress 4 (Sold) -->
+                <div class="dress-row animate">
+                    <img src="dress4.png" alt="Black Sequin Mini" class="dress-img">
+                    <div class="dress-main">
+                        <h3 class="dress-name">Black Sequin Mini</h3>
+                        <div class="dress-meta">
+                            <span>ไซส์: XS</span>
+                            <span>สี: ดำ</span>
+                        </div>
+                    </div>
+                    <div class="dress-stats">
+                        <span class="dress-status" style="background: #fce4ec; color: #c2185b;">ขายมือสองแล้ว</span>
+                    </div>
+                    <div class="dress-stats">
+                        <div class="dress-stats-label">ปล่อยเช่าครบ</div>
+                        <div class="dress-stats-value">15 ครั้ง</div>
+                    </div>
+                    <div class="dress-stats">
+                        <div class="dress-stats-label">รายได้รวม (เช่า+ขาย)</div>
+                        <div class="dress-stats-value money">฿4,704</div>
                     </div>
                 </div>
 
@@ -514,6 +662,31 @@
         }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
         document.querySelectorAll('.animate').forEach(el => observer.observe(el));
 
+        function switchTab(tabId) {
+            document.getElementById('tabRented').classList.remove('active');
+            document.getElementById('tabEvaluated').classList.remove('active');
+            
+            document.getElementById('rentedList').style.display = 'none';
+            document.getElementById('evaluatedList').style.display = 'none';
+            
+            if(tabId === 'rented') {
+                document.getElementById('tabRented').classList.add('active');
+                document.getElementById('rentedList').style.display = 'flex';
+            } else {
+                document.getElementById('tabEvaluated').classList.add('active');
+                document.getElementById('evaluatedList').style.display = 'flex';
+            }
+        }
+
+        // Tab URL parameter parser
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const activeTab = urlParams.get('tab');
+            if (activeTab === 'evaluated') {
+                switchTab('evaluated');
+            }
+        });
+
         // Mobile menu
         document.getElementById('menuToggle').addEventListener('click', () => {
             const links = document.querySelector('.nav-links');
@@ -544,5 +717,7 @@
     <span>ติดต่อแอดมิน</span>
   </a>
 
+    <script src="admin-toggle.js"></script>
+    <script src="chat.js"></script>
 </body>
 </html>

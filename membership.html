@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ATE.Rental Membership — สะสมแต้ม เช่าชุดฟรี โปรวันเกิด และกิจกรรมสุดเอ็กซ์คลูซีฟ">
+  <title>Membership — ATE.Rental Fashion Sharing Community</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .membership-hero {
+      padding: 120px 0 60px;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2c1810 50%, #1a1a1a 100%);
+      text-align: center;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .membership-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at center, rgba(212,184,150,0.15) 0%, transparent 70%);
+    }
+    .membership-hero h1 {
+      font-size: 3rem;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .membership-hero h1 span {
+      background: linear-gradient(135deg, #d4b896, #f0d78c, #d4b896);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .membership-hero p {
+      color: rgba(255,255,255,0.75);
+      font-size: 1.1rem;
+      max-width: 500px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* Membership Card */
+    .member-card-section {
+      padding: 80px 0 60px;
+      background: #fff;
+    }
+    .member-card-wrapper {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .member-card {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2c2018 60%, #1a1a1a 100%);
+      border-radius: 20px;
+      padding: 36px 32px;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    .member-card::before {
+      content: '';
+      position: absolute;
+      top: -50%; right: -50%;
+      width: 100%; height: 100%;
+      background: radial-gradient(circle, rgba(212,184,150,0.1) 0%, transparent 60%);
+    }
+    .card-logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 28px;
+      position: relative;
+    }
+    .card-logo span { color: #d4b896; }
+    .card-tier {
+      position: absolute;
+      top: 0; right: 0;
+      background: linear-gradient(135deg, #d4b896, #f0d78c);
+      color: #1a1a1a;
+      padding: 4px 16px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .card-name {
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+      position: relative;
+    }
+    .card-member-id {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 24px;
+      position: relative;
+    }
+    .card-points-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      position: relative;
+    }
+    .card-points-label {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .card-points-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #d4b896;
+      line-height: 1;
+      margin-top: 4px;
+    }
+    .card-points-unit {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+    }
+    .card-next-reward {
+      text-align: right;
+    }
+    .card-next-reward .card-points-label { margin-bottom: 4px; }
+
+    /* Progress Bar */
+    .points-progress {
+      margin-top: 30px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 10px;
+    }
+    .progress-bar-bg {
+      height: 8px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #d4b896, #f0d78c);
+      border-radius: 10px;
+      transition: width 1s ease;
+    }
+
+    /* Benefits Grid */
+    .benefits-section {
+      padding: 80px 0;
+      background: var(--light);
+    }
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .benefit-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 32px 24px;
+      text-align: center;
+      border: 1px solid #eee;
+      transition: all 0.3s ease;
+    }
+    .benefit-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+    }
+    .benefit-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin: 0 auto 20px;
+    }
+    .benefit-card h3 {
+      font-size: 1.15rem;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+    .benefit-card p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+    .benefit-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-top: 12px;
+    }
+
+    /* How Points Work */
+    .points-how-section {
+      padding: 80px 0;
+      background: #fff;
+    }
+    .points-flow {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+    .points-step {
+      text-align: center;
+      flex: 0 0 180px;
+    }
+    .points-step-circle {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #faf8f5, #f3ece1);
+      border: 2px solid #e8d5bf;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 12px;
+    }
+    .points-step h4 {
+      font-size: 0.95rem;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+    .points-step p {
+      font-size: 0.8rem;
+      color: var(--text-light);
+    }
+    .points-arrow {
+      font-size: 1.5rem;
+      color: #d4b896;
+      flex-shrink: 0;
+    }
+
+    /* Activities Section */
+    .activities-section {
+      padding: 80px 0;
+      background: linear-gradient(180deg, var(--light) 0%, #fff 100%);
+    }
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .activity-card {
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid #eee;
+      transition: all 0.3s ease;
+    }
+    .activity-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+    }
+    .activity-img {
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+    }
+    .activity-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .activity-card:hover .activity-img img {
+      transform: scale(1.06);
+    }
+    .activity-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(26,26,26,0.85);
+      color: #fff;
+      padding: 5px 14px;
+      border-radius: 50px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      backdrop-filter: blur(4px);
+    }
+    .activity-content {
+      padding: 20px;
+    }
+    .activity-content h3 {
+      font-size: 1.1rem;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+    .activity-content p {
+      font-size: 0.88rem;
+      color: var(--text-light);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .activity-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 16px;
+      border-top: 1px solid #eee;
+      font-size: 0.82rem;
+      color: var(--text-light);
+    }
+    .activity-meta .spots {
+      color: #27ae60;
+      font-weight: 600;
+    }
+
+    /* Birthday Banner */
+    .birthday-banner {
+      padding: 60px 0;
+      background: linear-gradient(135deg, #fff5f5, #fff0eb, #fff8f0);
+      text-align: center;
+    }
+    .birthday-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .birthday-inner h2 {
+      font-size: 2rem;
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+    .birthday-discount {
+      display: inline-block;
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #e74c3c, #c0392b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 16px 0;
+    }
+
+    /* CTA */
+    .membership-cta {
+      padding: 80px 0;
+      background: var(--dark);
+      color: #fff;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .benefits-grid, .activities-grid {
+        grid-template-columns: 1fr;
+      }
+      .membership-hero h1 { font-size: 2.2rem; }
+      .points-flow { flex-direction: column; }
+      .points-arrow { transform: rotate(90deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav id="navbar" class="scrolled">
+    <div class="container">
+      <a href="index.html" class="logo">ATE<span>.Rental</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">หน้าแรก</a></li>
+        <li><a href="lookbook.html" style="font-weight: 500; color: var(--primary);">Lookbook ✨</a></li>
+        <li><a href="rental.html">บริการเช่าชุด</a></li>
+        <li><a href="second_hand.html">ซื้อชุดมือสอง</a></li>
+        <li><a href="accessories.html">Accessories 🛍️</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropbtn">สำหรับผู้ปล่อยเช่า</a>
+          <div class="dropdown-content">
+            <a href="consign.html">ฝากชุดเช่า</a>
+            <a href="lender.html">แดชบอร์ดรายได้</a>
+          </div>
+        </li>
+        <li><a href="profile.html">โปรไฟล์</a></li>
+        <li><a href="rental.html" class="nav-cta">เช่าเลย</a></li>
+      </ul>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="membership-hero">
+    <div class="container" style="position:relative;">
+      <div style="display:inline-block; background:rgba(212,184,150,0.15); border:1px solid rgba(212,184,150,0.3); color:#d4b896; padding:8px 24px; border-radius:50px; font-size:0.8rem; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:20px;">✦ Loyalty Program</div>
+      <h1><span>ATE.Bestie</span><br>Membership</h1>
+      <p>เช่าชุดสะสมแต้ม รับสิทธิพิเศษ โปรวันเกิด และกิจกรรมเอ็กซ์คลูซีฟที่มีแค่สำหรับเพื่อนสาว ATE</p>
+    </div>
+  </section>
+
+  <!-- MEMBER CARD -->
+  <section class="member-card-section">
+    <div class="container">
+      <div class="member-card-wrapper">
+        <div class="member-card">
+          <div class="card-logo">ATE<span>.Rental</span>
+            <div class="card-tier">BESTIE MEMBER</div>
+          </div>
+          <div class="card-name">NUTNAREE WONGSAWANG</div>
+          <div class="card-member-id">Member ID: ATE-2026-00123</div>
+          <div class="card-points-row">
+            <div>
+              <div class="card-points-label">Points สะสม</div>
+              <div class="card-points-value">8</div>
+            </div>
+            <div class="card-next-reward">
+              <div class="card-points-label">เช่าอีก</div>
+              <div style="font-size:1.5rem; font-weight:700; color:#f0d78c;">7 <span class="card-points-unit">ครั้ง</span></div>
+              <div style="font-size:0.75rem; color:rgba(255,255,255,0.5);">= เช่าฟรี 1 ชุด!</div>
+            </div>
+          </div>
+          <div class="points-progress">
+            <div class="progress-info">
+              <span>8 / 15 ครั้ง</span>
+              <span>🎁 เช่าฟรี 1 ชุด</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" style="width: 53%;"></div>
+            </div>
+          </div>
+        </div>
+        <p style="text-align:center; margin-top:20px; font-size:0.88rem; color:var(--text-light);">
+          สมัครสมาชิกฟรี! ทุกการเช่า = 1 แต้ม สะสมครบ 15 แต้ม เช่าฟรีเลย 🎉
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW POINTS WORK -->
+  <section class="points-how-section">
+    <div class="container">
+      <div style="text-align:center;">
+        <div class="section-tag">Point System</div>
+        <h2 style="font-size:2rem; color:var(--dark);">สะสมแต้มยังไง?</h2>
+      </div>
+      <div class="points-flow">
+        <div class="points-step">
+          <div class="points-step-circle">👗</div>
+          <h4>เช่าชุด</h4>
+          <p>ทุกการเช่า 1 ครั้ง<br>= ได้ 1 แต้ม</p>
+        </div>
+        <div class="points-arrow">→</div>
+        <div class="points-step">
+          <div class="points-step-circle">⭐</div>
+          <h4>สะสมแต้ม</h4>
+          <p>สะสมให้ครบ<br>15 แต้ม</p>
+        </div>
+        <div class="points-arrow">→</div>
+        <div class="points-step">
+          <div class="points-step-circle">🎁</div>
+          <h4>เช่าฟรี!</h4>
+          <p>เลือกเช่าชุดไหนก็ได้<br>ฟรี 1 ชุด</p>
+        </div>
+        <div class="points-arrow">→</div>
+        <div class="points-step">
+          <div class="points-step-circle">🔄</div>
+          <h4>เริ่มสะสมใหม่</h4>
+          <p>แต้มรีเซ็ต<br>สะสมต่อรอบใหม่</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="benefits-section">
+    <div class="container">
+      <div style="text-align:center;">
+        <div class="section-tag">Bestie Benefits</div>
+        <h2 style="font-size:2rem; color:var(--dark);">สิทธิพิเศษสำหรับสมาชิก</h2>
+      </div>
+      <div class="benefits-grid">
+
+        <div class="benefit-card">
+          <div class="benefit-icon" style="background:linear-gradient(135deg, #fff0f0, #ffe8e8);">🎁</div>
+          <h3>เช่า 15 ฟรี 1</h3>
+          <p>ทุกการเช่า 1 ครั้ง สะสม 1 แต้ม เช่าครบ 15 ครั้ง เลือกเช่าชุดไหนก็ได้ ฟรี 1 ชุดเลย!</p>
+          <span class="benefit-badge" style="background:#fff0f0; color:#e74c3c;">Free Rental</span>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon" style="background:linear-gradient(135deg, #fff5eb, #ffe8d5);">🎂</div>
+          <h3>โปรวันเกิด 50% OFF</h3>
+          <p>เดือนเกิดของคุณ เช่าชุดลดราคา 50% ตลอดทั้งเดือน ให้คุณสวยจัดเต็มในวันพิเศษ</p>
+          <span class="benefit-badge" style="background:#fff5eb; color:#e67e22;">Birthday Special</span>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon" style="background:linear-gradient(135deg, #f0f5ff, #e0ecff);">🎪</div>
+          <h3>กิจกรรมเอ็กซ์คลูซีฟ</h3>
+          <p>เช่าครบ 5 ครั้ง ปลดล็อกสิทธิ์เข้าร่วมกิจกรรมสุดพิเศษ Workshop แต่งหน้า, Pilates และอีกมากมาย</p>
+          <span class="benefit-badge" style="background:#f0f5ff; color:#2471a3;">เช่าครบ 5 ครั้ง</span>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon" style="background:linear-gradient(135deg, #f0fff5, #e0ffe8);">📸</div>
+          <h3>แชร์ลุค ลด 5%</h3>
+          <p>แชร์ลุคสวยๆ จากชุดที่เคยเช่า รับส่วนลด 5% สำหรับเช่าชุดนี้ซ้ำในครั้งต่อไป</p>
+          <span class="benefit-badge" style="background:#f0fff5; color:#27ae60;">Style Sharing</span>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon" style="background:linear-gradient(135deg, #faf5ff, #f0e8ff);">👑</div>
+          <h3>สิทธิ์จองชุดก่อน</h3>
+          <p>สมาชิกได้สิทธิ์จองชุดเข้าใหม่ก่อนใคร 24 ชั่วโมง ไม่พลาดชุดที่อยากได้</p>
+          <span class="benefit-badge" style="background:#faf5ff; color:#8e44ad;">Early Access</span>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon" style="background:linear-gradient(135deg, #fff8f0, #f5ece0);">💌</div>
+          <h3>Personal Stylist</h3>
+          <p>รับคำแนะนำเลือกชุดจาก Personal Stylist ตาม Personal Color และสัดส่วนของคุณ</p>
+          <span class="benefit-badge" style="background:#fff8f0; color:#c9a87c;">Styling Tips</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- BIRTHDAY PROMO -->
+  <section class="birthday-banner">
+    <div class="container">
+      <div class="birthday-inner">
+        <span style="font-size:3rem;">🎂</span>
+        <h2>โปรวันเกิด<br>เพื่อนสาว ATE</h2>
+        <div class="birthday-discount">50% OFF</div>
+        <p style="color:var(--text-light); font-size:1rem; line-height:1.6;">
+          สมาชิกทุกคนรับส่วนลด <strong>50%</strong> สำหรับการเช่าชุดตลอดเดือนเกิดของคุณ<br>
+          แค่แจ้งวันเกิดในโปรไฟล์ ระบบจะส่งคูปองให้อัตโนมัติทาง LINE! 🎀
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXCLUSIVE ACTIVITIES -->
+  <section class="activities-section">
+    <div class="container">
+      <div style="text-align:center;">
+        <div class="section-tag">Exclusive Activities</div>
+        <h2 style="font-size:2rem; color:var(--dark);">กิจกรรมสุดเอ็กซ์คลูซีฟ</h2>
+        <p style="color:var(--text-light); max-width:500px; margin:12px auto 0;">เช่าครบ 5 ครั้ง ปลดล็อกสิทธิ์เข้าร่วมกิจกรรมพิเศษที่เราคัดสรรมาเพื่อเพื่อนสาว ATE โดยเฉพาะ</p>
+      </div>
+      <div class="activities-grid">
+
+        <div class="activity-card">
+          <div class="activity-img">
+            <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&auto=format&fit=crop&q=80" alt="Makeup Workshop">
+            <div class="activity-badge">🔓 เช่าครบ 5 ครั้ง</div>
+          </div>
+          <div class="activity-content">
+            <h3>💄 Workshop แต่งหน้า</h3>
+            <p>เรียนรู้เทคนิคแต่งหน้าจากช่างแต่งหน้ามืออาชีพ ทั้ง Everyday Look, Party Look และ Bridal Look</p>
+            <div class="activity-meta">
+              <span>📍 สยามพารากอน</span>
+              <span class="spots">เหลือ 8 ที่นั่ง</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="activity-card">
+          <div class="activity-img">
+            <img src="https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=400&auto=format&fit=crop&q=80" alt="Personal Color Test">
+            <div class="activity-badge">🔓 เช่าครบ 5 ครั้ง</div>
+          </div>
+          <div class="activity-content">
+            <h3>🎨 Personal Color Test</h3>
+            <p>ค้นหาโทนสีที่เข้ากับคุณที่สุด ทั้ง Spring, Summer, Autumn, Winter พร้อมแนะนำชุดที่เหมาะกับคุณ</p>
+            <div class="activity-meta">
+              <span>📍 Central World</span>
+              <span class="spots">เหลือ 12 ที่นั่ง</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="activity-card">
+          <div class="activity-img">
+            <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&auto=format&fit=crop&q=80" alt="Pilates">
+            <div class="activity-badge">🔓 เช่าครบ 5 ครั้ง</div>
+          </div>
+          <div class="activity-content">
+            <h3>🧘‍♀️ กิจกรรมพิลาทิส</h3>
+            <p>ดูแลหุ่นสวยยืดหยุ่นกับคลาสพิลาทิสสุดชิล สวมชุดสวยได้ทุกแบบไม่ต้องกังวลเรื่องไซส์</p>
+            <div class="activity-meta">
+              <span>📍 ทองหล่อ</span>
+              <span class="spots">เหลือ 15 ที่นั่ง</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="membership-cta">
+    <div class="container">
+      <h2 style="font-size: 2.2rem; margin-bottom: 16px;">พร้อมเป็นเพื่อนสาว ATE แล้วหรือยัง?</h2>
+      <p style="color: rgba(255,255,255,0.7); margin-bottom: 30px; font-size: 1.1rem; max-width: 500px; margin-left: auto; margin-right: auto;">
+        สมัครฟรี ไม่มีค่าธรรมเนียม เริ่มสะสมแต้มได้ทันทีตั้งแต่การเช่าครั้งแรก
+      </p>
+      <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+        <a href="profile.html" class="btn btn-primary" style="background:#fff; color:var(--dark); padding:14px 36px; font-size:1rem;">สมัครสมาชิกฟรี</a>
+        <a href="rental.html" class="btn btn-outline" style="border-color:rgba(255,255,255,0.3); color:#fff; padding:14px 36px; font-size:1rem;">เริ่มเช่าเลย →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="padding: 40px 0; background: #fff; text-align: center; border-top: 1px solid #eee;">
+    <div class="container">
+      <a href="index.html" class="logo" style="color: var(--dark);">ATE<span style="color: var(--primary);">.Rental</span></a>
+      <p style="margin-top: 20px; color: var(--text-light); font-size: 0.9rem;">© 2026 ATE.Rental Fashion Sharing Community.</p>
+    </div>
+  </footer>
+
+  <script src="admin-toggle.js"></script>
+  <script src="chat.js"></script>
+  <script>
+    document.getElementById('menuToggle').addEventListener('click', () => {
+      const links = document.querySelector('.nav-links');
+      links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+      links.style.flexDirection = 'column'; links.style.position = 'absolute';
+      links.style.top = '100%'; links.style.left = '0'; links.style.width = '100%';
+      links.style.background = 'rgba(26,26,26,0.98)'; links.style.padding = '20px';
+      links.style.gap = '16px'; links.style.borderRadius = '0 0 16px 16px';
+    });
+
+    // Animate progress bar on scroll
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.querySelector('.progress-bar-fill').style.width = '53%';
+        }
+      });
+    });
+    const pb = document.querySelector('.points-progress');
+    if (pb) {
+      pb.querySelector('.progress-bar-fill').style.width = '0%';
+      observer.observe(pb);
+    }
+  </script>
+</body>
+</html>

@@ -18,9 +18,19 @@
             <a href="index.html" class="logo">ATE<span>.Rental</span></a>
             <ul class="nav-links">
                 <li><a href="index.html">หน้าแรก</a></li>
+                <li><a href="lookbook.html" style="font-weight: 500; color: var(--primary);">Lookbook ✨</a></li>
                 <li><a href="rental.html">บริการเช่าชุด</a></li>
-                <li><a href="lender.html">รายได้ผู้ปล่อยเช่า</a></li>
-                <li><a href="index.html#faq">FAQ</a></li>
+                <li><a href="second_hand.html">ซื้อชุดมือสอง</a></li>
+                <li><a href="accessories.html">Accessories 🛍️</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropbtn">สำหรับผู้ปล่อยเช่า</a>
+                  <div class="dropdown-content">
+            <a href="consign.html">ฝากชุดเช่า</a>
+            <a href="lender.html">แดชบอร์ดรายได้</a>
+          </div>
+                </li>
+                <li><a href="profile.html">โปรไฟล์</a></li>
+                <li><a href="rental.html" class="nav-cta">เช่าเลย</a></li>
             </ul>
             <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
         </div>
@@ -70,10 +80,14 @@
                                     <span>📐 ไซส์: <strong id="orderSize">M</strong></span>
                                     <span>🎨 สี: <strong id="orderColor">กรม</strong></span>
                                 </div>
-                                <div class="order-story">
+                                <div class="order-story" style="margin-bottom: 12px;">
                                     <span class="story-tag">📖</span>
                                     <span id="orderStory">พี่เมย์ — "เดรสตัวนี้ใส่ไปงานดินเนอร์มาครั้งเดียว
                                         แนะนำทำผมแบบรวบขึ้นจะดูเพรียว"</span>
+                                </div>
+                                <div class="order-inspiration" style="background: #faf8f5; border-radius: 8px; padding: 12px; font-size: 0.85rem; border: 1px dashed #e8c4a0; margin-top: 10px;">
+                                    <strong>💡 Mix & Match Idea:</strong> กระเป๋าคลัชใบเล็กสีเงิน + ต่างหูเพชรระย้า 
+                                    <a href="lookbook.html" style="display: block; margin-top: 6px; color: var(--primary); font-weight: 600; text-decoration: none;">ดูรูปสไตล์การแต่งตัวลุคนี้ใน Lookbook →</a>
                                 </div>
                             </div>
                         </div>
@@ -159,6 +173,18 @@
                             </div>
                         </div>
 
+                        <!-- Value Edit Consent (Hidden by default) -->
+                        <div class="value-edit-consent hidden" id="valueEditConsent">
+                            <h3>⚠️ ยืนยันการเช่าชุด Value Edit</h3>
+                            <div class="defect-note-box">
+                                <p><strong>ตำหนิที่พบ:</strong> <span id="defectNoteDisplay"></span></p>
+                            </div>
+                            <label class="consent-checkbox">
+                                <input type="checkbox" id="defectConsent">
+                                <span>ฉันรับทราบและยอมรับตำหนิของชุดนี้ตามที่แจ้งไว้</span>
+                            </label>
+                        </div>
+
                         <button class="btn btn-primary checkout-next" onclick="goToStep(2)">ถัดไป — กรอกข้อมูลลูกค้า
                             →</button>
                     </div>
@@ -223,6 +249,64 @@
                 <div class="checkout-step hidden" id="step3">
                     <div class="checkout-card">
                         <h2>💳 เลือกวิธีชำระเงิน</h2>
+
+                        <!-- Accessory Add-ons -->
+                        <div style="background:#fff; border:1.5px solid #e8d5bf; border-radius:14px; padding:20px; margin-bottom:24px;">
+                            <h3 style="font-size:1.1rem; color:var(--dark); margin-bottom:4px;">🛍️ เพิ่มอุปกรณ์เสริม (ไม่บังคับ)</h3>
+                            <p style="font-size:0.82rem; color:var(--text-light); margin-bottom:16px;">เลือกซื้อเพิ่มได้ จะรวมในยอดชำระเงินให้อัตโนมัติ</p>
+
+                            <div style="display:flex; flex-direction:column; gap:12px;">
+                                <label style="display:flex; align-items:center; gap:14px; padding:14px 16px; background:#faf8f5; border-radius:12px; cursor:pointer; border:1.5px solid #eee; transition:all 0.2s;" onmouseover="this.style.borderColor='#d4b896'" onmouseout="this.style.borderColor=this.querySelector('input').checked?'#d4b896':'#eee'">
+                                    <input type="checkbox" class="addon-check" data-price="89" data-name="บราปีกนก (Nu Bra)" onchange="updateAddons()" style="width:20px; height:20px; accent-color:#c9a87c;">
+                                    <div style="flex:1;">
+                                        <div style="font-weight:600; color:var(--dark); font-size:0.95rem;">👙 บราปีกนก (Nu Bra)</div>
+                                        <div style="font-size:0.8rem; color:var(--text-light);">ซิลิโคนเกรดพรีเมียม ซักได้ ใช้ซ้ำได้</div>
+                                    </div>
+                                    <div style="font-weight:700; color:var(--primary-dark); font-size:1rem; white-space:nowrap;">฿89</div>
+                                </label>
+
+                                <label style="display:flex; align-items:center; gap:14px; padding:14px 16px; background:#faf8f5; border-radius:12px; cursor:pointer; border:1.5px solid #eee; transition:all 0.2s;" onmouseover="this.style.borderColor='#d4b896'" onmouseout="this.style.borderColor=this.querySelector('input').checked?'#d4b896':'#eee'">
+                                    <input type="checkbox" class="addon-check" data-price="39" data-name="ปิดจุก (Nipple Cover)" onchange="updateAddons()" style="width:20px; height:20px; accent-color:#c9a87c;">
+                                    <div style="flex:1;">
+                                        <div style="font-weight:600; color:var(--dark); font-size:0.95rem;">🩹 ปิดจุก (Nipple Cover)</div>
+                                        <div style="font-size:0.8rem; color:var(--text-light);">ซิลิโคนบางเบา กันน้ำ ใช้ซ้ำได้หลายครั้ง</div>
+                                    </div>
+                                    <div style="font-weight:700; color:var(--primary-dark); font-size:1rem; white-space:nowrap;">฿39</div>
+                                </label>
+
+                                <label style="display:flex; align-items:center; gap:14px; padding:14px 16px; background:#faf8f5; border-radius:12px; cursor:pointer; border:1.5px solid #eee; transition:all 0.2s;" onmouseover="this.style.borderColor='#d4b896'" onmouseout="this.style.borderColor=this.querySelector('input').checked?'#d4b896':'#eee'">
+                                    <input type="checkbox" class="addon-check" data-price="59" data-name="ขนตาปลอม (False Lashes)" onchange="updateAddons()" style="width:20px; height:20px; accent-color:#c9a87c;">
+                                    <div style="flex:1;">
+                                        <div style="font-weight:600; color:var(--dark); font-size:0.95rem;">👁️ ขนตาปลอม (False Lashes)</div>
+                                        <div style="font-size:0.8rem; color:var(--text-light);">แบบธรรมชาติ 3 คู่ พร้อมกาว มีให้เลือกหลายแบบ</div>
+                                    </div>
+                                    <div style="font-weight:700; color:var(--primary-dark); font-size:1rem; white-space:nowrap;">฿59</div>
+                                </label>
+                            </div>
+
+                            <div id="addonSummary" style="display:none; margin-top:14px; padding:12px 16px; background:linear-gradient(135deg,#f3ece1,#faf8f5); border-radius:10px;">
+                                <div style="display:flex; justify-content:space-between; align-items:center;">
+                                    <span style="font-size:0.88rem; color:var(--text);">🛒 อุปกรณ์เสริมที่เลือก:</span>
+                                    <strong id="addonTotal" style="color:var(--primary-dark); font-size:1.05rem;">฿0</strong>
+                                </div>
+                                <div id="addonList" style="font-size:0.82rem; color:var(--text-light); margin-top:4px;"></div>
+                            </div>
+                        </div>
+
+                        <!-- Rental Conditions Section -->
+                        <div class="rental-conditions-box" style="background: #faf8f5; border: 1px solid #e8c4a0; border-radius: 12px; padding: 20px; margin-bottom: 24px;">
+                            <h3 style="font-size: 1.1rem; color: var(--dark); margin-bottom: 12px;">📌 เงื่อนไขการเช่าชุด (โปรดอ่านก่อนยืนยันเช่า)</h3>
+                            <ul style="padding-left: 20px; color: #555; font-size: 0.95rem; line-height: 1.6; margin-bottom: 16px;">
+                                <li><strong>การยกเลิก/เปลี่ยนชุด:</strong> ทำได้แต่ต้องแจ้งล่วงหน้า 7 วัน (ค่าชุดเก็บเป็นเครดิตไว้ได้)</li>
+                                <li><strong>กรณีชุดเปื้อนซักไม่ออก/ชำรุด อะไหล่หลุด:</strong> ขอค่าฮีลใจเพื่อนสาว 300 บาท/จุด</li>
+                                <li><strong>ชุดเสียหาย:</strong> เพื่อนคนอื่นยืมต่อไม่ได้ ขอส่งต่อคนสวยเท่ามูลค่าชุดปัจจุบัน</li>
+                                <li><strong>คืนชุดล่าช้า:</strong> คิดค่าเช่าชุด 100 บาท/วัน</li>
+                            </ul>
+                            <label class="consent-checkbox" style="display: flex; gap: 10px; align-items: flex-start; cursor: pointer;">
+                                <input type="checkbox" id="rentalTermsConsent">
+                                <span style="font-weight: 500; color: var(--dark); font-size: 0.95rem;">ฉันได้อ่านและยอมรับเงื่อนไขการเช่าชุดทั้งหมด</span>
+                            </label>
+                        </div>
 
                         <!-- Payment Method Tabs -->
                         <div class="payment-tabs">
@@ -389,7 +473,7 @@
                             <h4>📦 ขั้นตอนถัดไป</h4>
                             <ol>
                                 <li>ทีมงานจะยืนยันคำสั่งเช่าผ่าน Line: <strong>@aterental</strong></li>
-                                <li>ส่งชุดให้คุณตามวันที่กำหนด (ค่าจัดส่งชำระปลายทาง)</li>
+                                <li>ส่งชุดให้คุณตามวันที่กำหนด</li>
                                 <li>สวมใส่ชุดสวย 3 วัน 🎀</li>
                                 <li>ส่งคืนชุดผ่านขนส่ง ไม่ต้องซัก ไม่ต้องรีด</li>
                             </ol>
@@ -486,9 +570,9 @@
         <div class="mock-line-body">
             <img id="mockNotifImg" src="" alt="Dress">
             <div class="mock-line-text">
-                <strong>🎉 เย้! ชุดของคุณถูกเช่าแล้ว</strong>
+                <strong id="mockNotifTitle">🎉 เย้! ชุดของคุณถูกเช่าแล้ว</strong>
                 <p id="mockNotifDress">Dress Name</p>
-                <p id="mockNotifRev" style="color: #06C755; font-weight: 600;">รับรายได้ทันที: ฿0 (60%)</p>
+                <p id="mockNotifDesc" style="color: #06C755; font-weight: 600;">รับรายได้ทันที: ฿0 (60%)</p>
             </div>
         </div>
     </div>
@@ -503,6 +587,7 @@
 
         // Parse URL params for dress info
         const params = new URLSearchParams(window.location.search);
+        const orderType = params.get('type') || 'rent';
         const dressInfo = {
             name: params.get('name') || 'Navy Velvet Evening Gown',
             brand: params.get('brand') || 'ATE Original',
@@ -526,6 +611,20 @@
             document.getElementById('sideName').textContent = dressInfo.name;
             document.getElementById('sideBrand').textContent = dressInfo.brand;
             document.getElementById('sidePrice').textContent = `฿${dressInfo.price}`;
+
+            // Adjust texts if it's a purchase
+            if (orderType === 'buy') {
+                document.querySelector('#step1 h2').innerHTML = '📋 สรุปคำสั่งซื้อ (ชุดมือสอง)';
+                document.querySelector('.rental-dates').style.display = 'none';
+                document.querySelector('.breakdown-row span:first-child').textContent = 'ราคาชุด';
+                document.querySelectorAll('.breakdown-row')[2].style.display = 'none'; // deposit
+                document.querySelector('.sidebar-row span:first-child').textContent = 'ราคาชุด';
+                document.querySelectorAll('.sidebar-row')[2].style.display = 'none'; // deposit
+            } else if (orderType === 'value_edit') {
+                document.querySelector('#step1 h2').innerHTML = '📋 สรุปคำสั่งเช่า (Value Edit)';
+                document.getElementById('valueEditConsent').classList.remove('hidden');
+                document.getElementById('defectNoteDisplay').textContent = params.get('defect') || 'มีตำหนิตามการใช้งาน ลายละเอียดเพิ่มเติมตามที่ระบุในรูป';
+            }
 
             // Set min date to tomorrow
             const tomorrow = new Date();
@@ -615,16 +714,22 @@
         // ===== STEP NAVIGATION =====
         function goToStep(step) {
             // Validate messenger time before leaving step 1
-            if (currentStep === 1 && step > 1 && selectedShipping === 'messenger') {
-                const mDate = document.getElementById('messengerDate').value;
-                const mTime = document.getElementById('messengerTime').value;
-                if (!mDate || !mTime) {
-                    alert('กรุณาระบุวันที่และเวลาจัดส่งสำหรับแมสเซนเจอร์');
+            if (currentStep === 1 && step > 1) {
+                if (orderType === 'value_edit' && !document.getElementById('defectConsent').checked) {
+                    alert('กรุณากดยอมรับเงื่อนไขรูปลักษณ์/ตำหนิของชุดก่อนดำเนินการต่อ');
                     return;
                 }
-                if (!validateMessengerTime()) {
-                    alert('เวลาจัดส่งต้องไม่น้อยกว่า 2 ชั่วโมงนับจากเวลาปัจจุบัน');
-                    return;
+                if (selectedShipping === 'messenger') {
+                    const mDate = document.getElementById('messengerDate').value;
+                    const mTime = document.getElementById('messengerTime').value;
+                    if (!mDate || !mTime) {
+                        alert('กรุณาระบุวันที่และเวลาจัดส่งสำหรับแมสเซนเจอร์');
+                        return;
+                    }
+                    if (!validateMessengerTime()) {
+                        alert('เวลาจัดส่งต้องไม่น้อยกว่า 2 ชั่วโมงนับจากเวลาปัจจุบัน');
+                        return;
+                    }
                 }
             }
 
@@ -650,6 +755,33 @@
 
             // Start QR timer on step 3
             if (step === 3 && selectedPayment === 'qr') startQRTimer();
+        }
+
+        // Addon accessories
+        function updateAddons() {
+            const checks = document.querySelectorAll('.addon-check');
+            let total = 0;
+            let items = [];
+            checks.forEach(cb => {
+                const label = cb.closest('label');
+                if (cb.checked) {
+                    total += parseInt(cb.dataset.price);
+                    items.push(cb.dataset.name + ' ฿' + cb.dataset.price);
+                    label.style.borderColor = '#d4b896';
+                    label.style.background = '#f5efe6';
+                } else {
+                    label.style.borderColor = '#eee';
+                    label.style.background = '#faf8f5';
+                }
+            });
+            const summary = document.getElementById('addonSummary');
+            if (total > 0) {
+                summary.style.display = 'block';
+                document.getElementById('addonTotal').textContent = '฿' + total;
+                document.getElementById('addonList').textContent = items.join(' · ');
+            } else {
+                summary.style.display = 'none';
+            }
         }
 
         function validateAndGoStep3() {
@@ -771,13 +903,20 @@
 
         // ===== SIMULATE PAYMENT =====
         function simulatePayment() {
+            // Check rental terms consent
+            const termsBox = document.getElementById('rentalTermsConsent');
+            if (termsBox && !termsBox.checked && orderType !== 'buy') {
+                alert('กรุณากดยอมรับเงื่อนไขการเช่าชุดก่อนชำระเงินค่ะ');
+                return;
+            }
+
             const overlay = document.getElementById('processingOverlay');
             overlay.classList.remove('hidden');
 
             // Simulate processing
             setTimeout(() => {
                 overlay.classList.add('hidden');
-                showLenderNotificationMock();
+                startRenterNotificationsSequence();
                 // Fill confirmation
                 const now = new Date();
                 const orderId = `ATE-${now.getFullYear()}${(now.getMonth() + 1).toString().padStart(2, '0')}${now.getDate().toString().padStart(2, '0')}-${Math.floor(Math.random() * 999).toString().padStart(3, '0')}`;
@@ -796,6 +935,19 @@
                 } else {
                     document.getElementById('confirmShipping').textContent = 'Flash / Kerry / ไปรษณีย์ (฿50)';
                     document.getElementById('confirmTotal').textContent = `฿${dressInfo.price + 50}`;
+                }
+
+                if (orderType === 'buy') {
+                    document.getElementById('confirmOrderId').textContent = orderId.replace('ATE', 'BUY');
+                    document.querySelector('.confirm-subtitle').textContent = 'ขอบคุณที่ซื้อชุดมือสองกับ ATE.Rental';
+                    document.getElementById('confirmPickup').parentElement.style.display = 'none';
+                    document.getElementById('confirmReturn').parentElement.style.display = 'none';
+                    document.querySelector('.confirm-next-steps ol').innerHTML = `
+                        <li>ทีมงานจะยืนยันคำสั่งซื้อผ่าน Line: <strong>@aterental</strong></li>
+                        <li>จัดส่งชุดให้คุณตามที่อยู่ที่ระบุ (หรือมารับเองตามตกลง)</li>
+                        <li>ชุดนี้เป็นของคุณเรียบร้อยแล้ว! ขอบคุณที่ร่วมส่งต่อแฟชั่นอย่างยั่งยืน ♻️</li>
+                    `;
+                    document.querySelector('.mock-line-text strong').textContent = '🎉 เย้! ชุดมือสองของคุณถูกขายแล้ว';
                 }
 
                 goToStep(4);
@@ -865,18 +1017,56 @@
         generateQR();
 
         // ===== NOTIFICATION MOCK =====
-        function showLenderNotificationMock() {
-            const price = dressInfo.price;
-            const revenue = Math.floor(price * 0.6);
-            document.getElementById('mockNotifDress').textContent = dressInfo.name;
-            document.getElementById('mockNotifImg').src = dressInfo.image;
-            document.getElementById('mockNotifRev').textContent = `รับรายได้ทันที: ฿${revenue} (60%)`;
+        function showLineNotification(title, dress, desc, img, color) {
+            document.getElementById('mockNotifTitle').textContent = title;
+            document.getElementById('mockNotifDress').textContent = dress;
+            document.getElementById('mockNotifDesc').textContent = desc;
+            document.getElementById('mockNotifDesc').style.color = color || '#06C755';
+            document.getElementById('mockNotifImg').src = img;
+            
             const notif = document.getElementById('mockLineNotif');
             notif.classList.add('show');
             setTimeout(() => {
                 notif.classList.remove('show');
             }, 6000);
         }
+
+        // Trigger notifications sequence
+        function startRenterNotificationsSequence() {
+            // 1. Order confirmed
+            setTimeout(() => {
+                showLineNotification(
+                    '🎉 เช่าชุดสำเร็จ!',
+                    dressInfo.name,
+                    'รอรับชุดสวยๆ ได้เลย 💖',
+                    dressInfo.image,
+                    '#06C755'
+                );
+            }, 1500);
+
+            // 2. Order Shipped
+            setTimeout(() => {
+                showLineNotification(
+                    '📦 จัดส่งชุดแล้ว',
+                    dressInfo.name,
+                    'กำลังเดินทางไปหาคุณ Track: FL1234TH',
+                    dressInfo.image,
+                    '#e67e22'
+                );
+            }, 9000);
+
+            // 3. Return Reminder
+            setTimeout(() => {
+                showLineNotification(
+                    '⏰ ใกล้ถึงเวลาคืนชุดแล้ว',
+                    dressInfo.name,
+                    'อย่าลืมเตรียมชุดส่งคืนพรุ่งนี้นะคะ ✨',
+                    dressInfo.image,
+                    '#e74c3c'
+                );
+            }, 16500);
+        }
+
         function closeNotif() {
             document.getElementById('mockLineNotif').classList.remove('show');
         }
@@ -888,7 +1078,8 @@
     </svg>
     <span>ส่งรูปประเมิน / สอบถาม</span>
   </a>
-
+  <script src="admin-toggle.js"></script>
+  <script src="chat.js"></script>
 </body>
 
 </html>

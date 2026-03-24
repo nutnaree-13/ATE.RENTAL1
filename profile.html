@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="ATE.Rental Profile - จัดการข้อมูลส่วนตัวและดูชุดที่คัดสรรพิเศษสำหรับคุณ">
+  <title>โปรไฟล์ของคุณ — ATE.Rental</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="profile.css">
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <nav id="navbar" class="scrolled">
+    <div class="container">
+      <a href="index.html" class="logo">ATE<span>.Rental</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">หน้าแรก</a></li>
+        <li><a href="lookbook.html" style="font-weight: 500; color: var(--primary);">Lookbook ✨</a></li>
+        <li><a href="rental.html">บริการเช่าชุด</a></li>
+        <li><a href="second_hand.html">ซื้อชุดมือสอง</a></li>
+        <li><a href="accessories.html">Accessories 🛍️</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropbtn">สำหรับผู้ปล่อยเช่า</a>
+          <div class="dropdown-content">
+            <a href="consign.html">ฝากชุดเช่า</a>
+            <a href="lender.html">แดชบอร์ดรายได้</a>
+          </div>
+        </li>
+        <li><a href="profile.html">โปรไฟล์</a></li>
+        <li><a href="rental.html" class="nav-cta">เช่าเลย</a></li>
+      </ul>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- PROFILE HEADER -->
+  <header class="profile-header">
+    <div class="container">
+      <div class="profile-user">
+        <div class="profile-avatar">
+          <span>NT</span>
+        </div>
+        <div class="profile-greeting">
+          <h1>ยินดีต้อนรับกลับมา, <span>ณัฐนรี</span></h1>
+          <p>สมาชิก ATE.Rental Premium • เข้าร่วมเมื่อ มกราคม 2025</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="profile-main container">
+    <!-- SIDEBAR / SETTINGS -->
+    <aside class="profile-sidebar">
+      <section class="settings-card animate">
+        <h2>ข้อมูลส่วนตัว</h2>
+        <form class="profile-form">
+          <div class="form-group">
+            <label>ชื่อ-นามสกุล</label>
+            <input type="text" value="ณัฐนรี วงศ์สว่าง" disabled>
+          </div>
+          <div class="form-group">
+            <label>อีเมล</label>
+            <input type="email" value="nutnaree@example.com" disabled>
+          </div>
+          <div class="form-group">
+            <label>เบอร์โทรศัพท์</label>
+            <input type="tel" value="081-234-5678" disabled>
+          </div>
+          <div class="form-group">
+            <label>วันเกิด</label>
+            <input type="text" value="15 เมษายน 1995" disabled>
+          </div>
+          
+          <h3 style="margin-top:20px; margin-bottom:12px; font-size:1.1rem; color:var(--dark);">สัดส่วนของคุณ</h3>
+          <div class="form-row" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;">
+            <div class="form-group">
+              <label>อก (นิ้ว)</label>
+              <input type="number" value="32" disabled>
+            </div>
+            <div class="form-group">
+              <label>เอว (นิ้ว)</label>
+              <input type="number" value="25" disabled>
+            </div>
+            <div class="form-group">
+              <label>สะโพก (นิ้ว)</label>
+              <input type="number" value="35" disabled>
+            </div>
+          </div>
+          <div class="form-row" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;">
+            <div class="form-group">
+              <label>น้ำหนัก (กก.)</label>
+              <input type="number" value="48" disabled>
+            </div>
+            <div class="form-group">
+              <label>ส่วนสูง (ซม.)</label>
+              <input type="number" value="162" disabled>
+            </div>
+            <div class="form-group">
+              <label>รองเท้า (EU)</label>
+              <input type="number" value="37" disabled>
+            </div>
+          </div>
+          
+          <div class="form-group" style="margin-top:10px;">
+            <label>Personal Color</label>
+            <select disabled style="width:100%; padding:10px; border-radius:8px; border:1px solid #ddd; background:#f5f5f5; color:#555; font-family:'Inter',sans-serif;">
+              <option value="spring">Spring (สปริง) - โทนสว่าง อบอุ่น</option>
+              <option value="summer" selected>Summer (ซัมเมอร์) - โทนเย็น สว่าง</option>
+              <option value="autumn">Autumn (ออทัมน์) - โทนเข้ม อบอุ่น</option>
+              <option value="winter">Winter (วินเทอร์) - โทนเย็น สีชัดเจน</option>
+              <option value="unknown">ยังไม่ทราบ</option>
+            </select>
+          </div>
+
+          <button type="button" class="btn btn-outline" style="color:var(--dark); border-color:var(--dark); width: 100%; margin-top: 10px;">แก้ไขข้อมูล</button>
+        </form>
+      </section>
+
+      <section class="settings-card animate">
+        <h2>ที่อยู่จัดส่งเริ่มต้น</h2>
+        <div class="address-box">
+          <p><strong>ณัฐนรี วงศ์สว่าง</strong></p>
+          <p>123/45 คอนโดสกายไลท์ ชั้น 12 ถนนสุขุมวิท<br>แขวงคลองตันเหนือ เขตวัฒนา<br>กรุงเทพมหานคร 10110</p>
+          <p>โทร: 081-234-5678</p>
+        </div>
+        <button type="button" class="btn btn-outline" style="color:var(--dark); border-color:var(--dark); width: 100%; margin-top: 16px;">จัดการที่อยู่</button>
+      </section>
+
+      <section class="settings-card animate" style="background: linear-gradient(135deg, #1a1a1a 0%, #2c1810 60%, #1a1a1a 100%); color:#fff; border:none;">
+        <h2 style="color:#d4b896;">⭐ ATE.Bestie Membership</h2>
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:12px;">
+          <div>
+            <div style="font-size:0.75rem; color:rgba(255,255,255,0.5); text-transform:uppercase; letter-spacing:1px;">Points สะสม</div>
+            <div style="font-size:2rem; font-weight:700; color:#d4b896;">8</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:0.75rem; color:rgba(255,255,255,0.5);">เช่าอีก</div>
+            <div style="font-size:1.2rem; font-weight:700; color:#f0d78c;">7 <span style="font-size:0.8rem; color:rgba(255,255,255,0.5);">ครั้ง</span></div>
+            <div style="font-size:0.7rem; color:rgba(255,255,255,0.5);">= เช่าฟรี 1 ชุด!</div>
+          </div>
+        </div>
+        <div style="height:6px; background:rgba(255,255,255,0.1); border-radius:10px; overflow:hidden; margin-bottom:16px;">
+          <div style="height:100%; width:53%; background:linear-gradient(90deg, #d4b896, #f0d78c); border-radius:10px;"></div>
+        </div>
+        <a href="membership.html" class="btn btn-outline" style="width:100%; border-color:rgba(255,255,255,0.3); color:#fff; text-align:center;">ดูสิทธิพิเศษทั้งหมด →</a>
+      </section>
+
+      <section class="settings-card animate" id="adminSection" style="display:none; border: 1.5px solid #e74c3c;">
+        <h2 style="color:#e74c3c;">🔧 Admin Mode</h2>
+        <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:12px;">คุณมีสิทธิ์ผู้ดูแลระบบ</p>
+        <a href="admin.html" class="btn btn-outline" style="width:100%; border-color:#e74c3c; color:#e74c3c; text-align:center; margin-bottom:8px;">เข้าหน้า Admin Dashboard</a>
+        <button type="button" class="btn btn-outline" style="width:100%; border-color:#ddd; color:var(--text-light); font-size:0.82rem;" onclick="toggleAdminMode()">ออกจาก Admin Mode</button>
+      </section>
+
+      <section class="settings-card animate" id="loginAdminSection" style="display:none; border: 1px dashed #ddd;">
+        <p style="font-size:0.85rem; color:var(--text-light); text-align:center; margin-bottom:12px;">ทีมงาน ATE?</p>
+        <button type="button" class="btn btn-outline" style="width:100%; border-color:#ddd; color:var(--text-light); font-size:0.82rem;" onclick="toggleAdminMode()">🔐 เข้าสู่ระบบ Admin</button>
+      </section>
+
+      <script>
+        // Show/hide admin section based on mode
+        if (typeof isAdminMode === 'function' && isAdminMode()) {
+          document.getElementById('adminSection').style.display = 'block';
+        } else {
+          document.getElementById('loginAdminSection').style.display = 'block';
+        }
+      </script>
+    </aside>
+
+    <!-- PERSONALIZED RECOMMENDATIONS -->
+    <div class="profile-content">
+      
+      <!-- SHARE YOUR LOOK -->
+      <section class="share-look-section animate" style="background:#fff; padding:24px; border-radius:var(--radius); margin-bottom: 24px; border: 1px solid #eee;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px;">
+          <div>
+            <h2 style="font-size:1.4rem; color:var(--dark); margin-bottom:8px;">📸 แชร์ลุคจากชุดที่คุณเคยเช่า</h2>
+            <p style="font-size:0.9rem; color:var(--text-light); max-width:400px;">
+              อัปโหลดรูปที่คุณใส่ชุดเช่าจากเรา พร้อมบอกทริคการแต่งตัว เพื่อรับส่วนลด 5% สำหรับลดราคาชุดตัวนี้ในการเช่าครั้งต่อไป!
+            </p>
+          </div>
+          <div style="background:var(--primary); color:#fff; padding:4px 12px; border-radius:50px; font-size:0.8rem; font-weight:600;">🎁 5% OFF Re-Rent</div>
+        </div>
+        
+        <form style="display:flex; flex-direction:column; gap:16px;">
+          <div class="form-group">
+            <label style="font-size:0.9rem; font-weight:600; color:var(--dark);">เลือกชุดที่คุณเคยเช่า:</label>
+            <select style="width:100%; padding:10px; border-radius:8px; border:1px solid #ddd; font-family:'Inter',sans-serif;">
+              <option>White Ruffle Mini Dress (เช่าเมื่อ 10 มี.ค. 2026)</option>
+              <option>Navy Velvet Evening Gown (เช่าเมื่อ 15 ก.พ. 2026)</option>
+            </select>
+          </div>
+          <div style="display:flex; gap:16px; align-items:flex-start;">
+            <div style="width:100px; height:100px; background:#f9f9f9; border:1px dashed #ccc; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0; cursor:pointer;" onclick="document.getElementById('lookInput').click()">
+              <span style="font-size:1.5rem; color:#aaa;">+</span>
+              <input type="file" id="lookInput" hidden accept="image/*">
+            </div>
+            <div style="flex:1;">
+              <textarea placeholder="เคล็ดลับการแต่งตัวของคุณ (เช่น แมตช์กับสร้อยไข่มุก รวบผมครึ่งหัว)..." style="width:100%; height:100px; padding:12px; border:1px solid #ddd; border-radius:8px; font-family:'Inter',sans-serif; resize:none; font-size:0.9rem;" required></textarea>
+            </div>
+          </div>
+          <button type="button" class="btn btn-dark" style="align-self:flex-end;" onclick="alert('ขอบคุณที่แชร์ลุคสวยๆ! คูปองส่วนลด 5% สำหรับเช่าชุดนี้ซ้ำ ถูกส่งเข้าบัญชีของคุณแล้ว')">อัปโหลดลุคของคุณ</button>
+        </form>
+      </section>
+      
+      <!-- BIRTHDAY REC -->
+      <section class="rec-section animate">
+        <div class="rec-header">
+          <div class="rec-icon">🎁</div>
+          <div class="rec-title">
+            <h2>ใกล้ถึงวันเกิดของคุณแล้ว!</h2>
+            <p>เราคัดชุด Party & Premium สุดพิเศษ เพื่อให้คุณเฉิดฉายในวันสำคัญของคุณ</p>
+          </div>
+        </div>
+        <div class="catalog-grid">
+          <div class="product-card">
+            <div class="product-img"><img src="dress3.png" alt="Emerald Satin Cocktail" loading="lazy">
+              <span class="product-badge party">Party</span>
+              <span class="product-days birthday-badge">แนะนำสำหรับวันเกิด</span>
+            </div>
+            <div class="product-info">
+              <h3>Emerald Satin Cocktail</h3>
+              <p class="product-size">Size: S, M, L</p>
+              <div class="product-price">฿490 <span>/ 3 วัน</span></div>
+              <a href="#" class="btn btn-dark" onclick="goToCheckout(this); return false;">เช่าชุดนี้</a>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-img"><img src="dress6.png" alt="Champagne Silk Maxi" loading="lazy">
+              <span class="product-badge premium">Premium</span>
+            </div>
+            <div class="product-info">
+              <h3>Champagne Silk Maxi</h3>
+              <p class="product-size">Size: S, M, L</p>
+              <div class="product-price">฿590 <span>/ 3 วัน</span></div>
+              <a href="#" class="btn btn-dark" onclick="goToCheckout(this); return false;">เช่าชุดนี้</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SIZE REC -->
+      <section class="rec-section animate">
+        <div class="rec-header">
+          <div class="rec-icon">👗</div>
+          <div class="rec-title">
+            <h2>ชุดเข้าใหม่ในไซส์ของคุณ (Size M)</h2>
+            <p>พอดีเป๊ะ ไม่ต้องเผื่อไซส์ อัปเดตคอลเลกชันใหม่ล่าสุด</p>
+          </div>
+        </div>
+        <div class="catalog-grid">
+          <div class="product-card">
+            <div class="product-img"><img src="dress1.png" alt="White Ruffle Mini Dress" loading="lazy">
+              <span class="product-badge casual">Casual</span>
+              <span class="product-days new-badge">NEW</span>
+            </div>
+            <div class="product-info">
+              <h3>White Ruffle Mini Dress</h3>
+              <p class="product-size">Size: S, <strong>M</strong>, L</p>
+              <div class="product-price">฿390 <span>/ 3 วัน</span></div>
+              <a href="#" class="btn btn-dark" onclick="goToCheckout(this); return false;">เช่าชุดนี้</a>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-img"><img src="dress5.png" alt="Navy Velvet Evening Gown" loading="lazy">
+              <span class="product-badge premium">Premium</span>
+            </div>
+            <div class="product-info">
+              <h3>Navy Velvet Evening Gown</h3>
+              <p class="product-size">Size: S, <strong>M</strong></p>
+              <div class="product-price">฿590 <span>/ 3 วัน</span></div>
+              <a href="#" class="btn btn-dark" onclick="goToCheckout(this); return false;">เช่าชุดนี้</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STYLE REC -->
+      <section class="rec-section animate">
+        <div class="rec-header">
+          <div class="rec-icon">✨</div>
+          <div class="rec-title">
+            <h2>สไตล์ที่คุณหลงรัก</h2>
+            <p>อ้างอิงจากประวัติการเช่าของคุณ: ค้นพบชุดสไตล์ Premium และ Elegant</p>
+          </div>
+        </div>
+        <div class="catalog-grid">
+          <div class="product-card">
+            <div class="product-img"><img src="dress4.png" alt="Black Sequin Mini" loading="lazy">
+              <span class="product-badge party">Party</span>
+            </div>
+            <div class="product-info">
+              <h3>Black Sequin Mini</h3>
+              <p class="product-size">Size: XS, S, M</p>
+              <div class="product-price">฿490 <span>/ 3 วัน</span></div>
+              <a href="#" class="btn btn-dark" onclick="goToCheckout(this); return false;">เช่าชุดนี้</a>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-img"><img src="dress2.png" alt="Beige Linen Wrap Dress" loading="lazy">
+              <span class="product-badge casual">Casual</span>
+            </div>
+            <div class="product-info">
+              <h3>Beige Linen Wrap Dress</h3>
+              <p class="product-size">Size: S, M, L</p>
+              <div class="product-price">฿390 <span>/ 3 วัน</span></div>
+              <a href="#" class="btn btn-dark" onclick="goToCheckout(this); return false;">เช่าชุดนี้</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">ATE<span>.Rental</span></a>
+          <p>แพลตฟอร์มเช่าชุดออนไลน์ ชุดสวยตามเทรนด์ ราคาดี ส่งตรงถึงบ้านคุณ</p>
+        </div>
+        <div class="footer-col">
+          <h4>บริการ</h4>
+          <ul>
+            <li><a href="rental.html">เช่ารายครั้ง</a></li>
+            <li><a href="index.html#consign">ฝากชุดเช่า</a></li>
+            <li><a href="second_hand.html">ซื้อชุดมือสอง</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>เกี่ยวกับเรา</h4>
+          <ul>
+            <li><a href="#">เกี่ยวกับ ATE.Rental</a></li>
+            <li><a href="index.html#policy">นโยบาย</a></li>
+            <li><a href="index.html#faq">คำถามที่พบบ่อย</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>ติดต่อเรา</h4>
+          <ul>
+            <li><a href="#">Line: @aterental</a></li>
+            <li><a href="#">Tel: 02-xxx-xxxx</a></li>
+            <li><a href="#">info@aterental.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 ATE.Rental — All rights reserved.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="Instagram">ig</a>
+          <a href="#" aria-label="Line">L</a>
+          <a href="#" aria-label="TikTok">Tk</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ===== Checkout Navigation =====
+    function goToCheckout(btn) {
+      const card = btn.closest('.wishlist-card') || btn.closest('.history-card') || btn.closest('.product-card');
+      if (!card) return;
+      
+      const name = card.querySelector('h4') ? card.querySelector('h4').textContent.trim() : 
+                   (card.querySelector('h3') ? card.querySelector('h3').textContent.trim() : '');
+                   
+      const priceText = card.querySelector('.product-price') ? card.querySelector('.product-price').textContent : 
+                        (card.querySelector('p') ? card.querySelector('p').textContent : '');
+                        
+      const price = priceText.match(/\d+/) ? priceText.match(/\d+/)[0] : '';
+      const img = card.querySelector('img') ? card.querySelector('img').getAttribute('src') : '';
+      
+      const params = new URLSearchParams({
+        name, price, image: img
+      });
+      window.location.href = `checkout.html?${params.toString()}`;
+    }
+
+    // Navigation toggle
+    document.getElementById('menuToggle').addEventListener('click', () => {
+      const links = document.querySelector('.nav-links');
+      links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+      links.style.flexDirection = 'column'; links.style.position = 'absolute';
+      links.style.top = '100%'; links.style.left = '0'; links.style.width = '100%';
+      links.style.background = 'rgba(26,26,26,0.98)'; links.style.padding = '20px';
+      links.style.gap = '16px'; links.style.borderRadius = '0 0 16px 16px';
+    });
+
+    // Scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target) } })
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.animate').forEach(el => observer.observe(el));
+  </script>
+
+  <script src="admin-toggle.js"></script>
+</body>
+</html>

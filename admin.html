@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — ATE.Rental</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dark: #1a1a1a;
+      --primary: #c9a87c;
+      --primary-dark: #a18259;
+      --text: #333;
+      --text-light: #888;
+      --light: #f8f5f0;
+      --radius: 16px;
+      --green: #27ae60;
+      --orange: #e67e22;
+      --red: #e74c3c;
+      --blue: #2471a3;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: 'Inter', sans-serif; background: #f4f1ed; color: var(--text); }
+
+    /* Sidebar */
+    .admin-layout { display: flex; min-height: 100vh; }
+    .sidebar {
+      width: 260px; background: var(--dark); color: #fff; padding: 24px 0;
+      position: fixed; top: 0; left: 0; height: 100vh; z-index: 100;
+      display: flex; flex-direction: column;
+    }
+    .sidebar-logo { padding: 0 24px 24px; font-size: 1.4rem; font-weight: 700; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .sidebar-logo span { color: var(--primary); }
+    .sidebar-label { font-size: 0.7rem; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 1.5px; padding: 20px 24px 8px; }
+    .sidebar-nav { list-style: none; flex: 1; }
+    .sidebar-nav a {
+      display: flex; align-items: center; gap: 12px; padding: 12px 24px;
+      color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.9rem;
+      transition: all 0.2s; border-left: 3px solid transparent;
+    }
+    .sidebar-nav a:hover, .sidebar-nav a.active {
+      background: rgba(255,255,255,0.05); color: #fff; border-left-color: var(--primary);
+    }
+    .sidebar-nav a.active { font-weight: 600; }
+    .sidebar-footer { padding: 16px 24px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+
+    /* Main */
+    .main-content { margin-left: 260px; flex: 1; padding: 24px 32px; }
+    .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; }
+    .page-header h1 { font-size: 1.8rem; color: var(--dark); }
+    .page-header p { color: var(--text-light); font-size: 0.9rem; }
+
+    /* Stats Cards */
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 28px; }
+    .stat-card {
+      background: #fff; border-radius: var(--radius); padding: 24px;
+      border: 1px solid #eee; position: relative; overflow: hidden;
+    }
+    .stat-card::after {
+      content: ''; position: absolute; top: 0; right: 0; width: 80px; height: 80px;
+      border-radius: 0 0 0 80px; opacity: 0.1;
+    }
+    .stat-label { font-size: 0.82rem; color: var(--text-light); margin-bottom: 8px; }
+    .stat-value { font-size: 2rem; font-weight: 800; color: var(--dark); }
+    .stat-change { font-size: 0.78rem; margin-top: 8px; font-weight: 600; }
+    .stat-change.up { color: var(--green); }
+    .stat-change.down { color: var(--red); }
+
+    /* Chart */
+    .chart-section {
+      background: #fff; border-radius: var(--radius); padding: 24px;
+      border: 1px solid #eee; margin-bottom: 28px;
+    }
+    .chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .chart-header h3 { font-size: 1.1rem; color: var(--dark); }
+    .chart-bar-container { display: flex; align-items: flex-end; gap: 8px; height: 180px; padding-top: 10px; }
+    .chart-bar-wrapper { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .chart-bar {
+      width: 100%; border-radius: 6px 6px 0 0; transition: height 0.6s ease;
+      position: relative; min-height: 4px;
+    }
+    .chart-bar:hover { opacity: 0.85; }
+    .chart-bar-label { font-size: 0.7rem; color: var(--text-light); }
+    .chart-bar-value { font-size: 0.68rem; color: var(--text); font-weight: 600; }
+
+    /* Table */
+    .table-section {
+      background: #fff; border-radius: var(--radius); border: 1px solid #eee; margin-bottom: 28px; overflow: hidden;
+    }
+    .table-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid #eee; }
+    .table-header h3 { font-size: 1.1rem; color: var(--dark); }
+    .admin-table { width: 100%; border-collapse: collapse; }
+    .admin-table th {
+      text-align: left; padding: 14px 20px; font-size: 0.78rem; color: var(--text-light);
+      text-transform: uppercase; letter-spacing: 0.5px; background: #faf8f5; border-bottom: 1px solid #eee;
+    }
+    .admin-table td { padding: 16px 20px; font-size: 0.88rem; border-bottom: 1px solid #f5f5f5; vertical-align: middle; }
+    .admin-table tr:hover { background: #fdfcfa; }
+    .admin-table img { width: 48px; height: 48px; object-fit: cover; border-radius: 10px; }
+
+    /* Status Badges */
+    .status-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 600;
+    }
+    .status-badge.available { background: #e8f5e9; color: #2e7d32; }
+    .status-badge.rented { background: #fff3e0; color: #e65100; }
+    .status-badge.shipped { background: #e3f2fd; color: #1565c0; }
+    .status-badge.cleaning { background: #fce4ec; color: #c62828; }
+    .status-badge.returned { background: #f3e5f5; color: #7b1fa2; }
+
+    /* Buttons */
+    .btn-admin {
+      padding: 8px 16px; border-radius: 10px; border: none;
+      font-size: 0.82rem; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif;
+      transition: all 0.2s;
+    }
+    .btn-admin.primary { background: var(--dark); color: #fff; }
+    .btn-admin.primary:hover { background: #333; }
+    .btn-admin.outline { background: transparent; border: 1.5px solid #ddd; color: var(--text); }
+    .btn-admin.outline:hover { border-color: var(--primary); color: var(--primary); }
+    .btn-admin.small { padding: 5px 12px; font-size: 0.75rem; }
+
+    /* Status Dropdown */
+    .status-select {
+      padding: 6px 10px; border-radius: 8px; border: 1.5px solid #ddd; font-size: 0.82rem;
+      font-family: 'Inter', sans-serif; cursor: pointer; background: #fff;
+    }
+    .status-select:focus { outline: none; border-color: var(--primary); }
+
+    /* Modal */
+    .admin-modal-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5); z-index: 1000;
+      display: none; align-items: center; justify-content: center;
+    }
+    .admin-modal-overlay.show { display: flex; }
+    .admin-modal {
+      background: #fff; border-radius: 20px; width: 560px; max-height: 90vh;
+      overflow-y: auto; padding: 32px; position: relative;
+    }
+    .admin-modal h2 { font-size: 1.3rem; margin-bottom: 20px; color: var(--dark); }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 10px 14px; border: 1.5px solid #ddd; border-radius: 10px;
+      font-size: 0.9rem; font-family: 'Inter', sans-serif;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none; border-color: var(--primary);
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .modal-close {
+      position: absolute; top: 16px; right: 16px; background: #f5f5f5; border: none;
+      width: 32px; height: 32px; border-radius: 50%; font-size: 1.1rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* Tabs */
+    .tab-nav { display: flex; gap: 4px; background: #f5f0eb; border-radius: 12px; padding: 4px; margin-bottom: 24px; width: fit-content; }
+    .tab-btn {
+      padding: 10px 20px; border: none; background: transparent; border-radius: 8px;
+      font-size: 0.88rem; font-weight: 500; cursor: pointer; font-family: 'Inter', sans-serif;
+      color: var(--text-light); transition: all 0.2s;
+    }
+    .tab-btn.active { background: #fff; color: var(--dark); font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+    /* Revenue breakdown */
+    .revenue-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
+    .revenue-item { padding: 16px; background: #faf8f5; border-radius: 12px; text-align: center; }
+    .revenue-item .rev-label { font-size: 0.78rem; color: var(--text-light); margin-bottom: 4px; }
+    .revenue-item .rev-value { font-size: 1.3rem; font-weight: 700; color: var(--dark); }
+
+    @media (max-width: 1024px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .sidebar { display: none; }
+      .main-content { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">ATE<span>.Rental</span></div>
+      <div class="sidebar-label">เมนูหลัก</div>
+      <ul class="sidebar-nav">
+        <li><a href="#" class="active" onclick="showTab('dashboard')">📊 แดชบอร์ด</a></li>
+        <li><a href="#" onclick="showTab('dresses')">👗 จัดการชุด</a></li>
+        <li><a href="#" onclick="showTab('orders')">📦 ออเดอร์ / สถานะ</a></li>
+      </ul>
+      <div class="sidebar-label">ลิงก์ด่วน</div>
+      <ul class="sidebar-nav">
+        <li><a href="index.html">🏠 กลับหน้าเว็บ</a></li>
+        <li><a href="lender.html">💰 แดชบอร์ดผู้ปล่อยเช่า</a></li>
+      </ul>
+      <div class="sidebar-footer">ATE.Rental Admin v1.0<br>© 2026</div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+      <!-- ===== TAB: DASHBOARD ===== -->
+      <div id="tab-dashboard">
+        <div class="page-header">
+          <div>
+            <h1>📊 แดชบอร์ดรายได้ ATE</h1>
+            <p>ภาพรวมรายได้และสถิติของแพลตฟอร์ม</p>
+          </div>
+          <div style="font-size:0.85rem; color:var(--text-light);">อัปเดตล่าสุด: 24 มี.ค. 2026</div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">รายได้รวมทั้งหมด</div>
+            <div class="stat-value" style="color:var(--green);">฿128,450</div>
+            <div class="stat-change up">↑ 18% จากเดือนก่อน</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">รายได้เดือนนี้ (มี.ค.)</div>
+            <div class="stat-value">฿32,890</div>
+            <div class="stat-change up">↑ 12% จากเดือนก่อน</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">จำนวนออเดอร์ทั้งหมด</div>
+            <div class="stat-value">247</div>
+            <div class="stat-change up">↑ 24 ออเดอร์ใหม่เดือนนี้</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">ชุดทั้งหมดในระบบ</div>
+            <div class="stat-value">38</div>
+            <div class="stat-change" style="color:var(--blue);">+ 3 ชุดเข้าใหม่สัปดาห์นี้</div>
+          </div>
+        </div>
+
+        <!-- Revenue Chart -->
+        <div class="chart-section">
+          <div class="chart-header">
+            <h3>📈 รายได้ 6 เดือนย้อนหลัง</h3>
+          </div>
+          <div class="chart-bar-container">
+            <div class="chart-bar-wrapper">
+              <div class="chart-bar-value">฿15.2k</div>
+              <div class="chart-bar" style="height:48%; background:linear-gradient(to top, #d4b896, #e8d5bf);"></div>
+              <div class="chart-bar-label">ต.ค.</div>
+            </div>
+            <div class="chart-bar-wrapper">
+              <div class="chart-bar-value">฿18.7k</div>
+              <div class="chart-bar" style="height:58%; background:linear-gradient(to top, #d4b896, #e8d5bf);"></div>
+              <div class="chart-bar-label">พ.ย.</div>
+            </div>
+            <div class="chart-bar-wrapper">
+              <div class="chart-bar-value">฿28.5k</div>
+              <div class="chart-bar" style="height:85%; background:linear-gradient(to top, #d4b896, #e8d5bf);"></div>
+              <div class="chart-bar-label">ธ.ค.</div>
+            </div>
+            <div class="chart-bar-wrapper">
+              <div class="chart-bar-value">฿22.3k</div>
+              <div class="chart-bar" style="height:68%; background:linear-gradient(to top, #d4b896, #e8d5bf);"></div>
+              <div class="chart-bar-label">ม.ค.</div>
+            </div>
+            <div class="chart-bar-wrapper">
+              <div class="chart-bar-value">฿29.4k</div>
+              <div class="chart-bar" style="height:88%; background:linear-gradient(to top, #d4b896, #e8d5bf);"></div>
+              <div class="chart-bar-label">ก.พ.</div>
+            </div>
+            <div class="chart-bar-wrapper">
+              <div class="chart-bar-value">฿32.9k</div>
+              <div class="chart-bar" style="height:100%; background:linear-gradient(to top, var(--green), #6dd5a0);"></div>
+              <div class="chart-bar-label" style="font-weight:700; color:var(--dark);">มี.ค.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Revenue Breakdown -->
+        <div class="chart-section">
+          <h3 style="margin-bottom:4px;">💰 แหล่งรายได้</h3>
+          <p style="font-size:0.82rem; color:var(--text-light); margin-bottom:12px;">สัดส่วนรายได้จากแต่ละช่องทาง (เดือนนี้)</p>
+          <div class="revenue-grid">
+            <div class="revenue-item">
+              <div class="rev-label">👗 ค่าเช่าชุด (ส่วนแบ่ง 40%)</div>
+              <div class="rev-value">฿19,734</div>
+            </div>
+            <div class="revenue-item">
+              <div class="rev-label">🛍️ ขายชุดมือสอง</div>
+              <div class="rev-value">฿8,960</div>
+            </div>
+            <div class="revenue-item">
+              <div class="rev-label">📦 ค่าจัดส่ง</div>
+              <div class="rev-value">฿4,196</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== TAB: DRESSES ===== -->
+      <div id="tab-dresses" style="display:none;">
+        <div class="page-header">
+          <div>
+            <h1>👗 จัดการชุด</h1>
+            <p>เพิ่ม แก้ไข อัปเดตชุดทั้งหมดในระบบ</p>
+          </div>
+          <button class="btn-admin primary" onclick="openAddDressModal()">+ เพิ่มชุดใหม่</button>
+        </div>
+
+        <div class="table-section">
+          <div class="table-header">
+            <h3>ชุดทั้งหมด (38 ชุด)</h3>
+            <input type="text" placeholder="🔍 ค้นหาชุด..." style="padding:8px 16px; border-radius:10px; border:1.5px solid #ddd; font-size:0.85rem; width:220px; font-family:'Inter',sans-serif;">
+          </div>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>ชุด</th>
+                <th>ชื่อ</th>
+                <th>แบรนด์</th>
+                <th>ราคาเช่า</th>
+                <th>สถานะ</th>
+                <th>เช่าแล้ว</th>
+                <th>จัดการ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><img src="dress1.png" alt=""></td>
+                <td><strong>White Ruffle Mini Dress</strong><br><span style="font-size:0.75rem;color:var(--text-light);">S, M, L · ขาว</span></td>
+                <td>ATE Original</td>
+                <td>฿390 / 3 วัน</td>
+                <td><span class="status-badge available">● ว่าง</span></td>
+                <td>13 ครั้ง</td>
+                <td><button class="btn-admin outline small" onclick="openAddDressModal()">แก้ไข</button></td>
+              </tr>
+              <tr>
+                <td><img src="dress2.png" alt=""></td>
+                <td><strong>Chiness Cream Dress</strong><br><span style="font-size:0.75rem;color:var(--text-light);">S · ครีม</span></td>
+                <td>iamcoco</td>
+                <td>฿550 / 3 วัน</td>
+                <td><span class="status-badge rented">● กำลังเช่า</span></td>
+                <td>8 ครั้ง</td>
+                <td><button class="btn-admin outline small" onclick="openAddDressModal()">แก้ไข</button></td>
+              </tr>
+              <tr>
+                <td><img src="dress3.png" alt=""></td>
+                <td><strong>Emerald Satin Cocktail</strong><br><span style="font-size:0.75rem;color:var(--text-light);">S, M, L · เขียว</span></td>
+                <td>ATE Original</td>
+                <td>฿490 / 3 วัน</td>
+                <td><span class="status-badge cleaning">● กำลังซัก</span></td>
+                <td>11 ครั้ง</td>
+                <td><button class="btn-admin outline small" onclick="openAddDressModal()">แก้ไข</button></td>
+              </tr>
+              <tr>
+                <td><img src="dress4.png" alt=""></td>
+                <td><strong>Black Sequin Mini</strong><br><span style="font-size:0.75rem;color:var(--text-light);">XS, S · ดำ</span></td>
+                <td>Zara</td>
+                <td>฿450 / 3 วัน</td>
+                <td><span class="status-badge shipped">● จัดส่งแล้ว</span></td>
+                <td>15 ครั้ง</td>
+                <td><button class="btn-admin outline small" onclick="openAddDressModal()">แก้ไข</button></td>
+              </tr>
+              <tr>
+                <td><img src="dress5.png" alt=""></td>
+                <td><strong>Navy Velvet Evening Gown</strong><br><span style="font-size:0.75rem;color:var(--text-light);">S, M · กรม</span></td>
+                <td>ATE Original</td>
+                <td>฿590 / 3 วัน</td>
+                <td><span class="status-badge available">● ว่าง</span></td>
+                <td>15 ครั้ง</td>
+                <td><button class="btn-admin outline small" onclick="openAddDressModal()">แก้ไข</button></td>
+              </tr>
+              <tr>
+                <td><img src="dress6.png" alt=""></td>
+                <td><strong>Champagne Silk Maxi</strong><br><span style="font-size:0.75rem;color:var(--text-light);">S, M, L · ทอง</span></td>
+                <td>ATE Original</td>
+                <td>฿590 / 3 วัน</td>
+                <td><span class="status-badge returned">● คืนชุดแล้ว</span></td>
+                <td>9 ครั้ง</td>
+                <td><button class="btn-admin outline small" onclick="openAddDressModal()">แก้ไข</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ===== TAB: ORDERS ===== -->
+      <div id="tab-orders" style="display:none;">
+        <div class="page-header">
+          <div>
+            <h1>📦 ออเดอร์ / อัปเดตสถานะ</h1>
+            <p>ติดตามและอัปเดตสถานะออเดอร์ทั้งหมด</p>
+          </div>
+        </div>
+
+        <div class="table-section">
+          <div class="table-header">
+            <h3>ออเดอร์ล่าสุด</h3>
+            <div style="display:flex; gap:8px;">
+              <select class="status-select" id="filterStatus" onchange="filterOrders()">
+                <option value="all">ทุกสถานะ</option>
+                <option value="pending">รอยืนยัน</option>
+                <option value="confirmed">ยืนยันแล้ว</option>
+                <option value="shipped">จัดส่งแล้ว</option>
+                <option value="cleaning">กำลังซัก</option>
+                <option value="returned">คืนชุดแล้ว</option>
+              </select>
+            </div>
+          </div>
+          <table class="admin-table" id="ordersTable">
+            <thead>
+              <tr>
+                <th>ออเดอร์</th>
+                <th>ลูกค้า</th>
+                <th>ชุด</th>
+                <th>วันเช่า</th>
+                <th>ยอดเงิน</th>
+                <th>สถานะ</th>
+                <th>อัปเดต</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-status="pending">
+                <td><strong>ATE-20260324-001</strong></td>
+                <td>คุณณัฐนรี ว.<br><span style="font-size:0.75rem;color:var(--text-light);">081-234-5678</span></td>
+                <td><div style="display:flex;align-items:center;gap:10px;"><img src="dress1.png" alt=""> White Ruffle Mini</div></td>
+                <td>24–26 มี.ค.</td>
+                <td>฿440</td>
+                <td><span class="status-badge rented">● รอยืนยัน</span></td>
+                <td>
+                  <select class="status-select" onchange="updateOrderStatus(this)">
+                    <option value="pending" selected>รอยืนยัน</option>
+                    <option value="confirmed">ยืนยันแล้ว</option>
+                    <option value="shipped">จัดส่งแล้ว</option>
+                    <option value="returned">คืนชุดแล้ว</option>
+                    <option value="cleaning">กำลังซัก</option>
+                  </select>
+                </td>
+              </tr>
+              <tr data-status="shipped">
+                <td><strong>ATE-20260322-015</strong></td>
+                <td>คุณปิยะดา ส.<br><span style="font-size:0.75rem;color:var(--text-light);">089-876-5432</span></td>
+                <td><div style="display:flex;align-items:center;gap:10px;"><img src="dress3.png" alt=""> Emerald Satin</div></td>
+                <td>22–24 มี.ค.</td>
+                <td>฿540</td>
+                <td><span class="status-badge shipped">● จัดส่งแล้ว</span></td>
+                <td>
+                  <select class="status-select" onchange="updateOrderStatus(this)">
+                    <option value="pending">รอยืนยัน</option>
+                    <option value="confirmed">ยืนยันแล้ว</option>
+                    <option value="shipped" selected>จัดส่งแล้ว</option>
+                    <option value="returned">คืนชุดแล้ว</option>
+                    <option value="cleaning">กำลังซัก</option>
+                  </select>
+                </td>
+              </tr>
+              <tr data-status="returned">
+                <td><strong>ATE-20260320-012</strong></td>
+                <td>คุณสุชาดา ล.<br><span style="font-size:0.75rem;color:var(--text-light);">062-111-2222</span></td>
+                <td><div style="display:flex;align-items:center;gap:10px;"><img src="dress5.png" alt=""> Navy Velvet</div></td>
+                <td>20–22 มี.ค.</td>
+                <td>฿640</td>
+                <td><span class="status-badge returned">● คืนชุดแล้ว</span></td>
+                <td>
+                  <select class="status-select" onchange="updateOrderStatus(this)">
+                    <option value="pending">รอยืนยัน</option>
+                    <option value="confirmed">ยืนยันแล้ว</option>
+                    <option value="shipped">จัดส่งแล้ว</option>
+                    <option value="returned" selected>คืนชุดแล้ว</option>
+                    <option value="cleaning">กำลังซัก</option>
+                  </select>
+                </td>
+              </tr>
+              <tr data-status="cleaning">
+                <td><strong>ATE-20260318-009</strong></td>
+                <td>คุณชนัญชิดา พ.<br><span style="font-size:0.75rem;color:var(--text-light);">095-333-4444</span></td>
+                <td><div style="display:flex;align-items:center;gap:10px;"><img src="dress4.png" alt=""> Black Sequin Mini</div></td>
+                <td>18–20 มี.ค.</td>
+                <td>฿500</td>
+                <td><span class="status-badge cleaning">● กำลังซัก</span></td>
+                <td>
+                  <select class="status-select" onchange="updateOrderStatus(this)">
+                    <option value="pending">รอยืนยัน</option>
+                    <option value="confirmed">ยืนยันแล้ว</option>
+                    <option value="shipped">จัดส่งแล้ว</option>
+                    <option value="returned">คืนชุดแล้ว</option>
+                    <option value="cleaning" selected>กำลังซัก</option>
+                  </select>
+                </td>
+              </tr>
+              <tr data-status="confirmed">
+                <td><strong>ATE-20260324-002</strong></td>
+                <td>คุณอารียา ก.<br><span style="font-size:0.75rem;color:var(--text-light);">088-555-6666</span></td>
+                <td><div style="display:flex;align-items:center;gap:10px;"><img src="dress6.png" alt=""> Champagne Silk Maxi</div></td>
+                <td>25–27 มี.ค.</td>
+                <td>฿640</td>
+                <td><span class="status-badge available">● ยืนยันแล้ว</span></td>
+                <td>
+                  <select class="status-select" onchange="updateOrderStatus(this)">
+                    <option value="pending">รอยืนยัน</option>
+                    <option value="confirmed" selected>ยืนยันแล้ว</option>
+                    <option value="shipped">จัดส่งแล้ว</option>
+                    <option value="returned">คืนชุดแล้ว</option>
+                    <option value="cleaning">กำลังซัก</option>
+                  </select>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ADD/EDIT DRESS MODAL -->
+  <div class="admin-modal-overlay" id="dressModal">
+    <div class="admin-modal">
+      <button class="modal-close" onclick="closeDressModal()">✕</button>
+      <h2>👗 เพิ่ม / แก้ไขชุด</h2>
+      <form onsubmit="saveDress(event)">
+        <div class="form-group">
+          <label>ชื่อชุด</label>
+          <input type="text" placeholder="เช่น White Ruffle Mini Dress" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>แบรนด์</label>
+            <input type="text" placeholder="เช่น ATE Original, Zara" required>
+          </div>
+          <div class="form-group">
+            <label>ราคาเช่า (บาท / 3 วัน)</label>
+            <input type="number" placeholder="390" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>ไซส์</label>
+            <input type="text" placeholder="S, M, L">
+          </div>
+          <div class="form-group">
+            <label>สี</label>
+            <input type="text" placeholder="ขาว, ดำ, ครีม">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>หมวดหมู่</label>
+            <select>
+              <option>Casual</option>
+              <option>Party</option>
+              <option>Premium</option>
+              <option>Diner</option>
+              <option>Chinese</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>สถานะ</label>
+            <select>
+              <option>ว่าง</option>
+              <option>กำลังเช่า</option>
+              <option>กำลังซัก</option>
+              <option>จัดส่งแล้ว</option>
+              <option>คืนชุดแล้ว</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>อัปโหลดรูปชุด</label>
+          <input type="file" accept="image/*">
+        </div>
+        <div class="form-group">
+          <label>ทริคแต่งตัว (Style Tips)</label>
+          <textarea rows="3" placeholder="เช่น แมทช์กับรองเท้าส้นเปลือยสีดำ..."></textarea>
+        </div>
+        <div style="display:flex; gap:12px; margin-top:20px;">
+          <button type="submit" class="btn-admin primary" style="flex:1;">💾 บันทึก</button>
+          <button type="button" class="btn-admin outline" style="flex:1;" onclick="closeDressModal()">ยกเลิก</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Tab switching
+    function showTab(tab) {
+      document.querySelectorAll('[id^="tab-"]').forEach(el => el.style.display = 'none');
+      document.getElementById('tab-' + tab).style.display = 'block';
+      document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+      event.target.closest('a').classList.add('active');
+    }
+
+    // Modal
+    function openAddDressModal() {
+      document.getElementById('dressModal').classList.add('show');
+    }
+    function closeDressModal() {
+      document.getElementById('dressModal').classList.remove('show');
+    }
+    document.getElementById('dressModal').addEventListener('click', function(e) {
+      if (e.target === this) closeDressModal();
+    });
+
+    // Save dress (mock)
+    function saveDress(e) {
+      e.preventDefault();
+      alert('✅ บันทึกข้อมูลชุดเรียบร้อยแล้ว!');
+      closeDressModal();
+    }
+
+    // Update order status
+    function updateOrderStatus(select) {
+      const row = select.closest('tr');
+      const badge = row.querySelector('.status-badge');
+      const statusMap = {
+        'pending': { text: '● รอยืนยัน', class: 'rented' },
+        'confirmed': { text: '● ยืนยันแล้ว', class: 'available' },
+        'shipped': { text: '● จัดส่งแล้ว', class: 'shipped' },
+        'returned': { text: '● คืนชุดแล้ว', class: 'returned' },
+        'cleaning': { text: '● กำลังซัก', class: 'cleaning' }
+      };
+      const status = statusMap[select.value];
+      badge.className = 'status-badge ' + status.class;
+      badge.textContent = status.text;
+      row.setAttribute('data-status', select.value);
+
+      // Flash confirmation
+      row.style.background = '#f0fff0';
+      setTimeout(() => { row.style.background = ''; }, 1500);
+    }
+
+    // Filter orders
+    function filterOrders() {
+      const filter = document.getElementById('filterStatus').value;
+      document.querySelectorAll('#ordersTable tbody tr').forEach(row => {
+        if (filter === 'all' || row.getAttribute('data-status') === filter) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

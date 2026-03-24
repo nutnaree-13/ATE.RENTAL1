@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ATE.Rental — ซื้อชุดสวยมือสองที่ปล่อยเช่าครบจำนวนแล้ว ในราคาสุดคุ้ม คุณภาพดี สภาพนางฟ้า">
+  <title>Pre-loved Shop — ซื้อชุดมือสอง ATE.Rental</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="rental.css">
+  <style>
+    .secondhand-hero {
+      padding: 140px 0 60px;
+      background: linear-gradient(135deg, #2d2420 0%, #3e322b 50%, #2d2420 100%);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      color: #fff;
+    }
+    .secondhand-hero h1 span { color: #d4b896; font-style: italic; }
+    .condition-badge {
+      position: absolute;
+      bottom: 14px;
+      left: 14px;
+      padding: 5px 12px;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      background: #333;
+      color: #ffd700;
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,215,0,0.3);
+    }
+    .old-price {
+      text-decoration: line-through;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      font-weight: normal;
+      margin-right: 8px;
+    }
+    /* Override rental.css: show full story text, no truncation */
+    .card-story {
+      max-height: none;
+      cursor: default;
+    }
+    .card-story::after {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav id="navbar" class="scrolled">
+    <div class="container">
+      <a href="index.html" class="logo">ATE<span>.Rental</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">หน้าแรก</a></li>
+        <li><a href="lookbook.html" style="font-weight: 500; color: var(--primary);">Lookbook ✨</a></li>
+        <li><a href="rental.html">บริการเช่าชุด</a></li>
+        <li><a href="second_hand.html">ซื้อชุดมือสอง</a></li>
+        <li><a href="accessories.html">Accessories 🛍️</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropbtn">สำหรับผู้ปล่อยเช่า</a>
+          <div class="dropdown-content">
+            <a href="consign.html">ฝากชุดเช่า</a>
+            <a href="lender.html">แดชบอร์ดรายได้</a>
+          </div>
+        </li>
+        <li><a href="profile.html">โปรไฟล์</a></li>
+        <li><a href="rental.html" class="nav-cta">เช่าเลย</a></li>
+      </ul>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="secondhand-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html">หน้าแรก</a>
+        <span>›</span>
+        <span class="current" style="color: #d4b896;">Pre-loved Shop</span>
+      </div>
+      <div class="community-badge" style="background: rgba(212,184,150,0.2); color:#d4b896; border-color: rgba(212,184,150,0.4);">✦ Fashion Sharing Loop</div>
+      <h1>รับไม้ต่อ<span>ความสวย</span><br>ชุดสภาพนางฟ้า</h1>
+      <p>เมื่อชุดได้รับการแชร์และส่งต่อในคอมมูนิตี้จนครบวงจร เรานำมาให้คุณซื้อขาดในราคาสุดคุ้ม เพื่อให้นำไปแมตช์ลุคใหม่ๆ ในแบบของคุณ</p>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <section class="rental-main">
+    <div class="container">
+      <button class="mobile-filter-toggle" id="mobileFilterToggle">
+        🔍 กรองชุด <span class="filter-count-badge" id="filterCountBadge">0</span>
+      </button>
+
+      <div class="active-filters" id="activeFilters"></div>
+
+      <div class="rental-layout">
+        <!-- FILTER SIDEBAR -->
+        <aside class="filter-sidebar" id="filterSidebar">
+          <div class="filter-header">
+            <h3>ตัวกรอง</h3>
+            <button class="close-filter-btn" id="closeFilter">✕</button>
+            <button class="clear-filters-btn" id="clearAll">ล้างทั้งหมด</button>
+          </div>
+
+          <!-- Condition Filter -->
+          <div class="filter-group">
+            <div class="filter-group-title">✨ สภาพชุด</div>
+            <div class="brand-options">
+              <label class="brand-check">
+                <input type="checkbox" name="condition" value="95">
+                <span>สภาพ 95% (เหมือนใหม่)</span>
+              </label>
+              <label class="brand-check">
+                <input type="checkbox" name="condition" value="90">
+                <span>สภาพ 90% (ดีมาก)</span>
+              </label>
+              <label class="brand-check">
+                <input type="checkbox" name="condition" value="85">
+                <span>สภาพ 85% (มีตำหนิเล็กน้อย)</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Color Filter -->
+          <div class="filter-group">
+            <div class="filter-group-title">🎨 สีชุด</div>
+            <div class="color-swatches">
+              <label class="color-swatch"><input type="checkbox" name="color" value="white"><div class="swatch swatch-white"></div><span class="swatch-label">ขาว</span></label>
+              <label class="color-swatch"><input type="checkbox" name="color" value="black"><div class="swatch swatch-black"></div><span class="swatch-label">ดำ</span></label>
+              <label class="color-swatch"><input type="checkbox" name="color" value="red"><div class="swatch swatch-red"></div><span class="swatch-label">แดง</span></label>
+              <label class="color-swatch"><input type="checkbox" name="color" value="pink"><div class="swatch swatch-pink"></div><span class="swatch-label">ชมพู</span></label>
+              <label class="color-swatch"><input type="checkbox" name="color" value="blue"><div class="swatch swatch-blue"></div><span class="swatch-label">น้ำเงิน</span></label>
+              <label class="color-swatch"><input type="checkbox" name="color" value="green"><div class="swatch swatch-green"></div><span class="swatch-label">เขียว</span></label>
+            </div>
+          </div>
+
+          <button class="apply-filter-btn" id="applyFilter">ดูผลลัพธ์</button>
+        </aside>
+
+        <!-- PRODUCT AREA -->
+        <div class="product-area">
+          <div class="result-bar">
+            <div class="result-count" id="resultCount">แสดง <strong>4</strong> ชุด</div>
+            <select class="sort-select" id="sortSelect">
+              <option value="recommended">แนะนำ</option>
+              <option value="price-low">ราคาต่ำ → สูง</option>
+              <option value="price-high">ราคาสูง → ต่ำ</option>
+            </select>
+          </div>
+
+          <!-- Product Grid -->
+          <div class="rental-grid" id="rentalGrid">
+
+            <!-- Card 1 -->
+            <div class="rental-card" data-color="blue" data-condition="95" data-price="890">
+              <div class="product-img">
+                <img src="dress5.png" alt="Navy Velvet Evening Gown" loading="lazy">
+                <span class="product-badge premium" style="background:#555;color:#fff;">Pre-loved</span>
+              </div>
+              <div class="card-info">
+                <h3>Navy Velvet Evening Gown</h3>
+                <div class="card-brand">ATE Original</div>
+                <div class="card-meta">
+                  <span>ไซส์: M</span>
+                  <span>สี: กรม</span>
+                </div>
+                <div class="card-story">
+                  <div class="story-avatar">✨</div>
+                  <div class="story-text">
+                    <span class="story-name">สภาพ 95%</span> — "ผ่านการเช่ามา 15 ครั้ง สภาพยังดีมาก ผ้ากำมะหยี่ยังสวย ซักอบแห้งฆ่าเชื้อแล้ว"
+                  </div>
+                </div>
+                <div class="card-bottom">
+                  <div class="card-price"><span class="old-price">฿3,500</span>฿890</div>
+                </div>
+                <a href="checkout.html?type=buy&name=Navy+Velvet+Evening+Gown&price=890&image=dress5.png&color=กรม&size=M" class="btn btn-dark" style="background:#3e322b;">ซื้อชุดนี้</a>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="rental-card" data-color="white" data-condition="90" data-price="590">
+              <div class="product-img">
+                <img src="dress1.png" alt="White Ruffle Mini Dress" loading="lazy">
+                <span class="product-badge casual" style="background:#555;color:#fff;">Pre-loved</span>
+              </div>
+              <div class="card-info">
+                <h3>White Ruffle Mini Dress</h3>
+                <div class="card-brand">ATE Original</div>
+                <div class="card-meta">
+                  <span>ไซส์: M</span>
+                  <span>สี: ขาว</span>
+                </div>
+                <div class="card-story">
+                  <div class="story-avatar">✨</div>
+                  <div class="story-text">
+                    <span class="story-name">สภาพ 90%</span> — "ผ่านการเช่ามา 20 ครั้ง มีขนแมวเล็กน้อยมองไม่เห็นชัด ซักทำความสะอาดพร้อมส่ง"
+                  </div>
+                </div>
+                <div class="card-bottom">
+                  <div class="card-price"><span class="old-price">฿1,890</span>฿590</div>
+                </div>
+                <a href="checkout.html?type=buy&name=White+Ruffle+Mini+Dress&price=590&image=dress1.png&color=ขาว&size=M" class="btn btn-dark" style="background:#3e322b;">ซื้อชุดนี้</a>
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="rental-card" data-color="green" data-condition="95" data-price="790">
+              <div class="product-img">
+                <img src="dress3.png" alt="Emerald Satin Cocktail" loading="lazy">
+                <span class="product-badge party" style="background:#555;color:#fff;">Pre-loved</span>
+              </div>
+              <div class="card-info">
+                <h3>Emerald Satin Cocktail</h3>
+                <div class="card-brand">ATE Original</div>
+                <div class="card-meta">
+                  <span>ไซส์: S</span>
+                  <span>สี: เขียว</span>
+                </div>
+                <div class="card-story">
+                  <div class="story-avatar">✨</div>
+                  <div class="story-text">
+                    <span class="story-name">สภาพ 95%</span> — "สภาพเหมือนใหม่ ไม่มีรอยเกี่ยว ซักแห้งแล้วพร้อมใส่ไปงานต่อเลย"
+                  </div>
+                </div>
+                <div class="card-bottom">
+                  <div class="card-price"><span class="old-price">฿2,500</span>฿790</div>
+                </div>
+                <a href="checkout.html?type=buy&name=Emerald+Satin+Cocktail&price=790&image=dress3.png&color=เขียว&size=S" class="btn btn-dark" style="background:#3e322b;">ซื้อชุดนี้</a>
+              </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="rental-card" data-color="black" data-condition="85" data-price="490">
+              <div class="product-img">
+                <img src="dress4.png" alt="Black Sequin Mini" loading="lazy">
+                <span class="product-badge party" style="background:#555;color:#fff;">Pre-loved</span>
+              </div>
+              <div class="card-info">
+                <h3>Black Sequin Mini</h3>
+                <div class="card-brand">Zara</div>
+                <div class="card-meta">
+                  <span>ไซส์: XS</span>
+                  <span>สี: ดำ</span>
+                </div>
+                <div class="card-story">
+                  <div class="story-avatar">✨</div>
+                  <div class="story-text">
+                    <span class="story-name">สภาพ 85%</span> — "เลื่อมหลุดประมาณ 5% บริเวณชายกระโปรง ขอดูรูปเพิ่มเติมได้ทาง Line"
+                  </div>
+                </div>
+                <div class="card-bottom">
+                  <div class="card-price"><span class="old-price">฿2,290</span>฿490</div>
+                </div>
+                <a href="checkout.html?type=buy&name=Black+Sequin+Mini&price=490&image=dress4.png&color=ดำ&size=XS" class="btn btn-dark" style="background:#3e322b;">ซื้อชุดนี้</a>
+              </div>
+            </div>
+
+            <div class="empty-state" id="emptyState">
+              <div class="empty-state-icon">👗</div>
+              <h3>ไม่พบชุดที่ตรงกับตัวกรอง</h3>
+              <button class="btn btn-primary" onclick="clearAllFilters()">ล้างตัวกรองทั้งหมด</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-bottom">
+        <p>© 2026 ATE.Rental — All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const cards = document.querySelectorAll('.rental-card');
+    const rentalGrid = document.getElementById('rentalGrid');
+    const resultCount = document.getElementById('resultCount');
+    const emptyState = document.getElementById('emptyState');
+    
+    document.querySelectorAll('input[name="color"], input[name="condition"]').forEach(input => {
+      input.addEventListener('change', applyFilters);
+    });
+    document.getElementById('sortSelect').addEventListener('change', applyFilters);
+
+    function getSelectedValues(name) {
+      return [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(i => i.value);
+    }
+
+    function applyFilters() {
+      const selectedColors = getSelectedValues('color');
+      const selectedConditions = getSelectedValues('condition');
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const cardColor = card.dataset.color;
+        const cardCondition = card.dataset.condition;
+        let show = true;
+        if (selectedColors.length > 0 && !selectedColors.includes(cardColor)) show = false;
+        if (selectedConditions.length > 0 && !selectedConditions.includes(cardCondition)) show = false;
+
+        card.style.display = show ? '' : 'none';
+        if (show) visibleCount++;
+      });
+
+      resultCount.innerHTML = `แสดง <strong>${visibleCount}</strong> ชุด`;
+      emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+
+    // Scroll
+    window.addEventListener('scroll', () => { document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50) });
+    document.getElementById('menuToggle').addEventListener('click', () => {
+      const links = document.querySelector('.nav-links');
+      links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+      if(links.style.display === 'flex') {
+        links.style.flexDirection = 'column'; links.style.position = 'absolute';
+        links.style.top = '100%'; links.style.left = '0'; links.style.width = '100%';
+        links.style.background = 'rgba(26,26,26,0.98)'; links.style.padding = '20px';
+      }
+    });
+  </script>
+  <script src="admin-toggle.js"></script>
+</body>
+</html>
